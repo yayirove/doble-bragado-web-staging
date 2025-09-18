@@ -9,3 +9,4 @@ dist
 *.log
 src/_backup
 _backup/
+_backup/
