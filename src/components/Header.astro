@@ -11,7 +11,12 @@ const navLinks = [
   { href: "/#contacto", label: "Contacto" },
 ];
 
-const isActive = (href: string) => pathname === href;
+// ⭐️ Nueva lógica: exacto para "/", empieza-con para las demás, ignora hash en SSR
+const isActive = (href: string) => {
+  if (href === "/#contacto") return false;        // el hash se maneja en el JS del header
+  if (href === "/") return pathname === "/";
+  return pathname.startsWith(href);
+};
 ---
 
 <header 
