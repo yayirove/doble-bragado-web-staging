@@ -8,3 +8,4 @@ dist
 .DS_Store
 *.log
 src/_backup
+_backup/
