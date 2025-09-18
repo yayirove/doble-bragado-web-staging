@@ -1,0 +1,44 @@
+---
+export interface Props {
+  src: string; // URL público del juego (repl.dev o repl.co)
+  title?: string;
+}
+const { src, title = "Bragado Rush (MVP)" } = Astro.props;
+---
+
+<div class="max-w-6xl mx-auto px-4">
+  <div class="aspect-video rounded-2xl overflow-hidden ring-2 ring-celeste">
+    <iframe
+      src={src}
+      title={title}
+      loading="lazy"
+      allow="gamepad *; fullscreen; autoplay"
+      sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-popups allow-forms"
+      class="w-full h-full border-0"></iframe>
+  </div>
+
+  <div id="game-fallback" class="mt-4 hidden text-sm">
+    No pudimos embeber el juego.
+    <a href={src} class="underline font-semibold" target="_blank" rel="noopener"
+      >Abrir juego en una pestaña nueva</a
+    >.
+  </div>
+</div>
+
+<script>
+  // Fallback si el host bloquea el iframe
+  document.addEventListener("DOMContentLoaded", () => {
+    const iframe = document.querySelector('iframe[title="Bragado Rush (MVP)"]');
+    const fallback = document.getElementById("game-fallback");
+    if (!iframe || !fallback) return;
+
+    let t = setTimeout(() => {
+      try {
+        void iframe.contentDocument;
+      } catch (_e) {
+        fallback.classList.remove("hidden");
+      }
+    }, 1200);
+    iframe.addEventListener("load", () => clearTimeout(t), { once: true });
+  });
+</script>

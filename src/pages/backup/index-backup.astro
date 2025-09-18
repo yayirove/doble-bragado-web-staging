@@ -1,0 +1,1297 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// SEO optimizado por página
+const pageTitle =
+  "La Doble Bragado 2025 - Carrera de Ciclismo Histórica Argentina";
+const pageDescription =
+  "La clásica del oeste bonaerense. 500km de Bragado a Chivilcoy Chacabuco 25 de mayo. La carrera de ciclismo más antigua de Argentina. Inscripciones abiertas 3° femenina. 21 de noviembre 2025.";
+const pageKeywords =
+  "la doble bragado 2025, carrera ciclismo argentina, bragado chivilcoy, 200km ciclismo, competencia ciclística, inscripciones ciclismo, oeste bonaerense";
+const pageOgImage = "/images/hero-bg.jpg";
+
+// Structured Data para SEO avanzado
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  name: "La Doble Bragado 2025",
+  description:
+    "Carrera de ciclismo de 500km desde Bragado hasta Chivilcoy, Argentina",
+  startDate: "2025-11-21T06:00:00-03:00",
+  endDate: "2025-11-21T18:00:00-03:00",
+  eventStatus: "https://schema.org/EventScheduled",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  location: {
+    "@type": "Place",
+    name: "Bragado, Buenos Aires",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bragado",
+      addressRegion: "Buenos Aires",
+      addressCountry: "AR",
+    },
+  },
+  organizer: {
+    "@type": "Organization",
+    name: "La Doble Bragado",
+    url: "https://ladoblebragado.com.ar",
+  },
+  sport: "Cycling",
+  competitor: [
+    {
+      "@type": "Person",
+      name: "Nicolás Traico",
+      description: "Campeón masculino 2025",
+    },
+    {
+      "@type": "Person",
+      name: "Maribel Aguirre",
+      description: "Campeona femenina 2024",
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  ogImage={pageOgImage}
+  structuredData={structuredData}
+>
+  <!-- Header Navigation - VERSIÓN MINIMALISTA OPTIMIZADA -->
+  <header
+    class="fixed top-0 w-full bg-celeste/90 backdrop-blur-lg z-50 border-b border-amarillo/30"
+    role="banner"
+  >
+    <nav
+      class="max-w-6xl mx-auto flex justify-center items-center py-3 px-6"
+      role="navigation"
+      aria-label="Navegación principal"
+    >
+      <!-- Logo posicionado absolutamente a la izquierda -->
+      <a
+        href="/"
+        class="absolute left-6 flex items-center"
+        aria-label="Ir a inicio de La Doble Bragado"
+      >
+        <img
+          src="/images/ldb-logo-v2.svg"
+          alt="Logo La Doble Bragado - Carrera de Ciclismo Histórica"
+          class="h-10 w-auto"
+          width="40"
+          height="40"
+        />
+      </a>
+
+      <!-- Desktop Menu Centrado -->
+      <ul class="hidden lg:flex space-x-12">
+        <li>
+          <a
+            href="/"
+            class="text-amarillo font-medium text-base relative"
+            aria-label="Inicio - Página actual"
+          >
+            Inicio
+            <span
+              class="absolute bottom-[-4px] left-0 w-full h-0.5 bg-amarillo"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/historia"
+            class="text-white font-medium text-base relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Conocé la historia de La Doble Bragado"
+          >
+            Historia
+            <span
+              class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/campeones"
+            class="text-white font-medium text-base relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ver palmarés histórico completo"
+          >
+            Campeones
+            <span
+              class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/recorrido"
+            class="text-white font-medium text-base relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ver el recorrido completo"
+          >
+            Recorrido
+            <span
+              class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#contacto"
+            class="text-white font-medium text-base relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ir a formulario de contacto"
+          >
+            Contacto
+            <span
+              class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-button"
+        class="lg:hidden absolute right-6 flex flex-col justify-center items-center w-7 h-7 space-y-1 group"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span
+          class="w-5 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo transform group-data-[state=open]:rotate-45 group-data-[state=open]:translate-y-1.5"
+          aria-hidden="true"></span>
+        <span
+          class="w-5 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo group-data-[state=open]:opacity-0"
+          aria-hidden="true"></span>
+        <span
+          class="w-5 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo transform group-data-[state=open]:-rotate-45 group-data-[state=open]:-translate-y-1.5"
+          aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="lg:hidden fixed inset-0 bg-celeste/95 backdrop-blur-lg transform translate-x-full transition-transform duration-300 ease-in-out z-40"
+      aria-hidden="true"
+    >
+      <div class="flex flex-col h-full pt-20 px-6">
+        <nav
+          class="flex-1 flex flex-col space-y-6"
+          role="navigation"
+          aria-label="Navegación móvil"
+        >
+          <a
+            href="/"
+            class="text-amarillo text-xl font-semibold bg-amarillo/20 px-4 py-3 rounded-xl border-b border-white/20 pb-3 flex items-center gap-2"
+            aria-label="Inicio - Página actual"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+              ></path>
+            </svg>
+            Inicio
+          </a>
+          <a
+            href="/historia"
+            class="text-white text-xl font-medium hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-3"
+            aria-label="Conocé la historia de La Doble Bragado"
+          >
+            Historia
+          </a>
+          <a
+            href="/campeones"
+            class="text-white text-xl font-medium hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-3"
+            aria-label="Ver palmarés histórico completo"
+          >
+            Campeones
+          </a>
+          <a
+            href="/recorrido"
+            class="text-white text-xl font-medium hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-3"
+            aria-label="Ver el recorrido completo"
+          >
+            Recorrido
+          </a>
+          <a
+            href="#contacto"
+            class="text-white text-xl font-medium hover:text-amarillo transition-colors duration-300"
+            aria-label="Ir a formulario de contacto"
+          >
+            Contacto
+          </a>
+        </nav>
+
+        <!-- Mobile Social Links -->
+        <div class="py-6 border-t border-white/20">
+          <p class="text-white/80 text-sm mb-3">Seguinos en:</p>
+          <div class="flex space-x-3">
+            <a
+              href="https://youtube.com/@ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-rosa rounded-xl flex items-center justify-center text-white hover:bg-amarillo hover:text-oscuro transition-colors duration-300"
+              aria-label="YouTube"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="https://instagram.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-rosa rounded-xl flex items-center justify-center text-white hover:bg-amarillo hover:text-oscuro transition-colors duration-300"
+              aria-label="Instagram"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main role="main">
+    <!-- Hero Section -->
+    <section
+      id="inicio"
+      class="h-screen flex items-center justify-center relative text-center"
+      aria-labelledby="hero-title"
+    >
+      <!-- Background Image -->
+      <div
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('/images/hero-bg.jpg');"
+        role="img"
+        aria-label="Ciclistas compitiendo en La Doble Bragado"
+      >
+      </div>
+      <!-- Overlay for better text readability -->
+      <div class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
+
+      <div class="text-white z-10 max-w-4xl px-8">
+        <h1
+          id="hero-title"
+          class="font-display font-black text-6xl md:text-7xl lg:text-8xl mb-4 leading-tight text-amarillo"
+        >
+          LA DOBLE<br />BRAGADO
+        </h1>
+        <p
+          class="text-xl md:text-3xl mb-12 opacity-90 font-semibold max-w-3xl mx-auto"
+        >
+          La clásica del oeste bonaerense
+        </p>
+      </div>
+    </section>
+
+    <!-- Current Champions Section -->
+    <section
+      id="campeones"
+      class="bg-grisclaro py-20"
+      aria-labelledby="campeones-title"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="campeones-title"
+            class="font-display font-black text-5xl md:text-5xl text-oscuro mb-4 uppercase"
+          >
+            Campeones Actuales
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Ya son parte de la historia
+          </p>
+        </header>
+
+        <div
+          class="flex items-center justify-center gap-8 max-w-7xl mx-auto flex-wrap xl:flex-nowrap"
+        >
+          <!-- Champion Maribel Info -->
+          <div class="text-right flex-shrink-0 w-64">
+            <div class="font-sans font-black text-5xl text-celeste mb-3">
+              2024
+            </div>
+            <h3 class="text-2xl font-bold text-oscuro mb-3">Maribel Aguirre</h3>
+            <div
+              class="font-sans text-2xl font-black text-rosa mb-2"
+              style="font-family: 'Audiowide', sans-serif;"
+            >
+              <time datetime="PT7H42M15S">7:42:15</time>
+            </div>
+            <div
+              class="text-sm text-oscuro/60 font-semibold uppercase tracking-wider"
+            >
+              Ganadora<br />2° edición Femenina
+            </div>
+          </div>
+
+          <!-- Champion Maribel Photo -->
+          <div
+            class="w-[267px] h-[400px] rounded-3xl overflow-hidden shadow-2xl hover:-translate-y-4 transition-transform duration-300 bg-cover bg-center bg-no-repeat border-4 border-amarillo"
+            style="background-image: url('/winners/maribel-aguirre.jpg');"
+            role="img"
+            aria-label="Maribel Aguirre, campeona femenina 2024 de La Doble Bragado"
+          >
+          </div>
+
+          <!-- Champion Nicolás Photo -->
+          <div
+            class="w-[267px] h-[400px] rounded-3xl overflow-hidden shadow-2xl hover:-translate-y-4 transition-transform duration-300 bg-cover bg-center bg-no-repeat border-4 border-amarillo"
+            style="background-image: url('/winners/nicolas-traico.jpg');"
+            role="img"
+            aria-label="Nicolás Traico, campeón masculino 2025 de La Doble Bragado"
+          >
+          </div>
+
+          <!-- Champion Nicolás Info -->
+          <div class="text-left flex-shrink-0 w-64">
+            <div class="font-sans font-black text-5xl text-celeste mb-3">
+              2025
+            </div>
+            <h3 class="text-2xl font-bold text-oscuro mb-3">Nicolás Traico</h3>
+            <div
+              class="font-sans text-2xl font-black text-rosa mb-2"
+              style="font-family: 'Audiowide', sans-serif;"
+            >
+              <time datetime="PT7H58M33S">7:58:33</time>
+            </div>
+            <div
+              class="text-sm text-oscuro/60 font-semibold uppercase tracking-wider"
+            >
+              Ganador<br />88° edición Masculina
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section
+      id="countdown"
+      class="py-20 relative flex items-center justify-center"
+      aria-labelledby="countdown-title"
+    >
+      <!-- Background Image -->
+      <div
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('/images/img-countdown.jpg');"
+        role="img"
+        aria-label="Ciclistas preparándose para la largada de La Doble Bragado"
+      >
+      </div>
+
+      <!-- Overlay para contraste del texto -->
+      <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
+
+      <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
+        <header class="mb-16">
+          <h2
+            id="countdown-title"
+            class="font-display font-black text-5xl md:text-5xl text-white mb-4 uppercase"
+          >
+            Próximo evento
+          </h2>
+          <p class="text-xl text-amarillo font-semibold">
+            <time datetime="2025-11-21">21 de noviembre 2025</time> - 3° edición
+            femenina
+          </p>
+        </header>
+
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+          role="timer"
+          aria-label="Cuenta regresiva para La Doble Bragado 2025"
+        >
+          <div
+            class="bg-gradient-to-br from-celeste to-rosa p-12 rounded-3xl text-center text-white relative overflow-hidden group"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent transform rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+              aria-hidden="true"
+            >
+            </div>
+            <span
+              id="days"
+              class="font-black text-5xl md:text-6xl block mb-2 relative z-10"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-label="Días restantes">--</span
+            >
+            <span class="font-bold uppercase tracking-wider relative z-10"
+              >Días</span
+            >
+          </div>
+          <div
+            class="bg-gradient-to-br from-celeste to-rosa p-12 rounded-3xl text-center text-white relative overflow-hidden group"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent transform rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+              aria-hidden="true"
+            >
+            </div>
+            <span
+              id="hours"
+              class="font-black text-5xl md:text-6xl block mb-2 relative z-10"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-label="Horas restantes">--</span
+            >
+            <span class="font-bold uppercase tracking-wider relative z-10"
+              >Horas</span
+            >
+          </div>
+          <div
+            class="bg-gradient-to-br from-celeste to-rosa p-12 rounded-3xl text-center text-white relative overflow-hidden group"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent transform rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+              aria-hidden="true"
+            >
+            </div>
+            <span
+              id="minutes"
+              class="font-black text-5xl md:text-6xl block mb-2 relative z-10"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-label="Minutos restantes">--</span
+            >
+            <span class="font-bold uppercase tracking-wider relative z-10"
+              >Minutos</span
+            >
+          </div>
+          <div
+            class="bg-gradient-to-br from-celeste to-rosa p-12 rounded-3xl text-center text-white relative overflow-hidden group"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent transform rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+              aria-hidden="true"
+            >
+            </div>
+            <span
+              id="seconds"
+              class="font-black text-5xl md:text-6xl block mb-2 relative z-10"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-label="Segundos restantes">--</span
+            >
+            <span class="font-bold uppercase tracking-wider relative z-10"
+              >Segundos</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="bg-white py-20" aria-labelledby="videos-title">
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="videos-title"
+            class="font-display font-black text-5xl md:text-5xl text-oscuro mb-4 uppercase"
+          >
+            Revive la Épica
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Los momentos más intensos de La Doble
+          </p>
+        </header>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <article
+            class="relative rounded-3xl overflow-hidden h-80 bg-gradient-to-br from-celeste to-rosa cursor-pointer group"
+            role="button"
+            tabindex="0"
+            aria-label="Ver video: Resumen 2024 - Duración 12 minutos 45 segundos"
+            onkeydown="if(event.key==='Enter'||event.key===' ') this.click()"
+          >
+            <div
+              class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-300 flex flex-col items-center justify-center text-white"
+            >
+              <div
+                class="w-20 h-20 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-3xl mb-8 group-hover:scale-110 transition-transform duration-300"
+                aria-hidden="true"
+              >
+                ▶
+              </div>
+              <h3 class="text-2xl font-bold text-center mb-4">Resumen 2024</h3>
+              <span class="font-sans font-semibold opacity-90">
+                <time datetime="PT12M45S">12:45</time>
+              </span>
+            </div>
+          </article>
+
+          <article
+            class="relative rounded-3xl overflow-hidden h-80 bg-gradient-to-br from-celeste to-rosa cursor-pointer group"
+            role="button"
+            tabindex="0"
+            aria-label="Ver video: Entrenamiento Extremo - Duración 8 minutos 32 segundos"
+            onkeydown="if(event.key==='Enter'||event.key===' ') this.click()"
+          >
+            <div
+              class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-300 flex flex-col items-center justify-center text-white"
+            >
+              <div
+                class="w-20 h-20 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-3xl mb-8 group-hover:scale-110 transition-transform duration-300"
+                aria-hidden="true"
+              >
+                ▶
+              </div>
+              <h3 class="text-2xl font-bold text-center mb-4">
+                Entrenamiento Extremo
+              </h3>
+              <span class="font-sans font-semibold opacity-90">
+                <time datetime="PT8M32S">8:32</time>
+              </span>
+            </div>
+          </article>
+
+          <article
+            class="relative rounded-3xl overflow-hidden h-80 bg-gradient-to-br from-celeste to-rosa cursor-pointer group"
+            role="button"
+            tabindex="0"
+            aria-label="Ver video: 25 Años de Historia - Duración 15 minutos 20 segundos"
+            onkeydown="if(event.key==='Enter'||event.key===' ') this.click()"
+          >
+            <div
+              class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-300 flex flex-col items-center justify-center text-white"
+            >
+              <div
+                class="w-20 h-20 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-3xl mb-8 group-hover:scale-110 transition-transform duration-300"
+                aria-hidden="true"
+              >
+                ▶
+              </div>
+              <h3 class="text-2xl font-bold text-center mb-4">
+                25 Años de Historia
+              </h3>
+              <span class="font-sans font-semibold opacity-90">
+                <time datetime="PT15M20S">15:20</time>
+              </span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- YouTube Stats Section -->
+    <section
+      id="estadisticas"
+      class="bg-oscuro py-20 border-t-4 border-amarillo border-b-4 border-rosa"
+      aria-labelledby="stats-title"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="stats-title"
+            class="font-display font-black text-5xl md:text-5xl text-white mb-4 uppercase"
+          >
+            Nuestro Canal
+          </h2>
+          <p class="text-xl text-amarillo font-semibold">
+            Las mejores historias del ciclismo argentino
+          </p>
+        </header>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center mb-16">
+          <div class="text-white">
+            <span
+              class="font-sans font-black text-5xl text-amarillo block mb-2"
+              aria-label="2500 suscriptores">2.5K+</span
+            >
+            <span class="text-lg font-semibold uppercase tracking-wider"
+              >Suscriptores</span
+            >
+          </div>
+          <div class="text-white">
+            <span
+              class="font-sans font-black text-5xl text-amarillo block mb-2"
+              aria-label="Más de 150 videos">150+</span
+            >
+            <span class="text-lg font-semibold uppercase tracking-wider"
+              >Videos</span
+            >
+          </div>
+          <div class="text-white">
+            <span
+              class="font-sans font-black text-5xl text-amarillo block mb-2"
+              aria-label="500 mil visualizaciones">500K+</span
+            >
+            <span class="text-lg font-semibold uppercase tracking-wider"
+              >Visualizaciones</span
+            >
+          </div>
+          <div class="text-white">
+            <span
+              class="font-sans font-black text-5xl text-amarillo block mb-2"
+              aria-label="25 años online">25</span
+            >
+            <span class="text-lg font-semibold uppercase tracking-wider"
+              >Años Online</span
+            >
+          </div>
+        </div>
+
+        <!-- Call to Action YouTube -->
+        <div class="text-center">
+          <a
+            href="https://youtube.com/@ladoblebragado?si=XEhc375650BaR5al"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-4 bg-gradient-to-r from-rosa to-celeste hover:from-celeste hover:to-rosa text-white px-12 py-6 rounded-3xl font-bold text-xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group"
+            aria-label="Suscribirse al canal de YouTube de La Doble Bragado"
+          >
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+              ></path>
+            </svg>
+            <span>Suscribite al Canal</span>
+            <span
+              class="text-2xl group-hover:translate-x-2 transition-transform duration-300"
+              aria-hidden="true">→</span
+            >
+          </a>
+          <p class="text-white/80 mt-6 text-lg">
+            No te pierdas ninguna carrera, entrevista exclusiva y los mejores
+            momentos
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sponsors Section - VERSIÓN CONSOLIDADA -->
+    <section
+      id="sponsors"
+      class="bg-grisclaro py-20"
+      aria-labelledby="sponsors-title"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="sponsors-title"
+            class="font-display font-black text-5xl md:text-5xl text-oscuro mb-4 uppercase"
+          >
+            Nuestros Sponsors
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Los aliados que hacen posible el desafío
+          </p>
+        </header>
+
+        <!-- Sponsor Principal destacado -->
+        <div class="max-w-2xl mx-auto mb-16">
+          <article
+            class="bg-white p-16 rounded-3xl text-center shadow-2xl border-4 border-amarillo hover:-translate-y-3 hover:shadow-3xl transition-all duration-300 relative overflow-hidden group"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-amarillo/5 via-transparent to-amarillo/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              aria-hidden="true"
+            >
+            </div>
+            <div
+              class="w-full h-40 bg-grisclaro rounded-2xl flex items-center justify-center text-celeste text-2xl font-bold uppercase tracking-wider border-2 border-dashed border-celeste relative z-10"
+              role="img"
+              aria-label="Espacio para sponsor principal"
+            >
+              Sponsor Principal
+            </div>
+            <h3
+              class="font-sans text-xl font-bold text-oscuro mt-8 uppercase tracking-wider relative z-10"
+            >
+              Patrocinador Principal
+            </h3>
+          </article>
+        </div>
+
+        <!-- Sponsors Oro, Plata y Bronce -->
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <article
+            class="bg-white p-12 rounded-3xl text-center shadow-xl border-2 border-transparent hover:border-amarillo hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+          >
+            <div
+              class="w-full h-32 bg-grisclaro rounded-2xl flex items-center justify-center text-celeste text-xl font-bold uppercase tracking-wider border-2 border-dashed border-celeste"
+              role="img"
+              aria-label="Espacio para sponsor oro"
+            >
+              Sponsor Oro
+            </div>
+            <h3
+              class="font-sans text-lg font-bold text-oscuro mt-6 uppercase tracking-wider"
+            >
+              Patrocinador Oro
+            </h3>
+          </article>
+
+          <article
+            class="bg-white p-12 rounded-3xl text-center shadow-xl border-2 border-transparent hover:border-amarillo hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+          >
+            <div
+              class="w-full h-32 bg-grisclaro rounded-2xl flex items-center justify-center text-celeste text-xl font-bold uppercase tracking-wider border-2 border-dashed border-celeste"
+              role="img"
+              aria-label="Espacio para sponsor plata"
+            >
+              Sponsor Plata
+            </div>
+            <h3
+              class="font-sans text-lg font-bold text-oscuro mt-6 uppercase tracking-wider"
+            >
+              Patrocinador Plata
+            </h3>
+          </article>
+
+          <article
+            class="bg-white p-12 rounded-3xl text-center shadow-xl border-2 border-transparent hover:border-amarillo hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+          >
+            <div
+              class="w-full h-32 bg-grisclaro rounded-2xl flex items-center justify-center text-celeste text-xl font-bold uppercase tracking-wider border-2 border-dashed border-celeste"
+              role="img"
+              aria-label="Espacio para sponsor bronce"
+            >
+              Sponsor Bronce
+            </div>
+            <h3
+              class="font-sans text-lg font-bold text-oscuro mt-6 uppercase tracking-wider"
+            >
+              Patrocinador Bronce
+            </h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section - VERSIÓN SIMPLIFICADA -->
+    <section
+      id="contacto"
+      class="bg-white py-20"
+      aria-labelledby="contacto-title"
+    >
+      <div class="max-w-4xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="contacto-title"
+            class="font-display font-black text-5xl md:text-5xl text-oscuro mb-4 uppercase"
+          >
+            Contacto
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            ¿Listo para el desafío? Conectate con nosotros
+          </p>
+        </header>
+
+        <!-- Formulario centrado full-width -->
+        <div class="bg-grisclaro p-12 rounded-3xl">
+          <form class="space-y-6 font-sans" aria-label="Formulario de contacto">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="nombre" class="block font-semibold mb-2 text-oscuro"
+                  >Nombre Completo *</label
+                >
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  required
+                  class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20 font-sans"
+                  placeholder="Tu nombre"
+                  aria-describedby="nombre-error"
+                />
+              </div>
+              <div>
+                <label for="email" class="block font-semibold mb-2 text-oscuro"
+                  >Email *</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20 font-sans"
+                  placeholder="tu@email.com"
+                  aria-describedby="email-error"
+                />
+              </div>
+            </div>
+            <div>
+              <label for="telefono" class="block font-semibold mb-2 text-oscuro"
+                >Teléfono</label
+              >
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20 font-sans"
+                placeholder="+54 9 11 1234-5678"
+              />
+            </div>
+            <div>
+              <label for="mensaje" class="block font-semibold mb-2 text-oscuro"
+                >Mensaje *</label
+              >
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                required
+                class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20 min-h-[160px] resize-y font-sans"
+                placeholder="Contanos sobre tu experiencia ciclística y por qué querés participar en La Doble Bragado..."
+                aria-describedby="mensaje-error"></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-rosa to-celeste text-white p-4 rounded-3xl font-bold text-lg hover:-translate-y-1 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-celeste focus:ring-offset-2 font-sans"
+              aria-describedby="submit-info"
+            >
+              Enviar Mensaje
+            </button>
+            <p
+              id="submit-info"
+              class="text-sm text-oscuro/60 text-center font-sans"
+            >
+              Al enviar este formulario aceptas que podamos contactarte para
+              brindarte información sobre La Doble Bragado.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer optimizado - Contacto, Newsletter, Redes, Copyright -->
+  <footer
+    class="bg-oscuro text-white py-12 text-center border-t-4 border-amarillo"
+    role="contentinfo"
+  >
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid md:grid-cols-3 gap-12 mb-8">
+        <!-- Contacto -->
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold text-xl">Contacto Directo</h3>
+          <div class="space-y-3">
+            <div class="flex items-center justify-center mb-4">
+              <svg
+                class="w-5 h-5 text-amarillo mr-2"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                ></path>
+              </svg>
+              <a
+                href="mailto:info@ladoblebragado.com.ar"
+                class="text-white hover:text-amarillo transition-colors"
+              >
+                info@ladoblebragado.com.ar
+              </a>
+            </div>
+            <div class="flex items-center justify-center">
+              <svg
+                class="w-5 h-5 text-amarillo mr-2"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                ></path>
+              </svg>
+              <a
+                href="tel:+5492346123456"
+                class="text-white hover:text-amarillo transition-colors"
+              >
+                +54 9 2346 123456
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold text-xl">Newsletter</h3>
+          <p class="text-grisclaro text-sm mb-4">
+            Recibí las últimas noticias y actualizaciones
+          </p>
+          <div class="flex">
+            <input
+              type="email"
+              placeholder="tu@email.com"
+              class="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-l-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amarillo"
+              aria-label="Email para newsletter"
+            />
+            <button
+              class="bg-amarillo text-oscuro px-4 py-2 rounded-r-lg hover:bg-white transition-colors font-semibold"
+              aria-label="Suscribirse"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold text-xl">Seguinos</h3>
+          <div
+            class="flex justify-center gap-4"
+            role="list"
+            aria-label="Redes sociales"
+          >
+            <a
+              href="https://instagram.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Seguinos en Instagram"
+              role="listitem"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                ></path>
+              </svg>
+            </a>
+            <!-- YouTube -->
+            <a
+              href="https://www.youtube.com/@ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Seguinos en YouTube"
+              role="listitem"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M23.498 6.186a2.997 2.997 0 0 0-2.115-2.12C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.383.566A2.997 2.997 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a2.997 2.997 0 0 0 2.115 2.12C4.495 20.5 12 20.5 12 20.5s7.505 0 9.383-.566a2.997 2.997 0 0 0 2.115-2.12C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.75 15.5v-7l6 3.5-6 3.5z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-white/70 text-sm">
+        © {new Date().getFullYear()} La Doble Bragado – Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* Variables CSS */
+  :root {
+    --yellow: #f8e300;
+    --blue: #254fa3;
+    --pink: #db5da2;
+    --gray: #f1f2f2;
+    --dark: #161443;
+    --white: #ffffff;
+  }
+
+  /* Clases Tailwind personalizadas */
+  .bg-oscuro {
+    background-color: var(--dark);
+  }
+  .bg-celeste {
+    background-color: var(--blue);
+  }
+  .bg-rosa {
+    background-color: var(--pink);
+  }
+  .bg-amarillo {
+    background-color: var(--yellow);
+  }
+  .bg-grisclaro {
+    background-color: var(--gray);
+  }
+  .text-oscuro {
+    color: var(--dark);
+  }
+  .text-celeste {
+    color: var(--blue);
+  }
+  .text-rosa {
+    color: var(--pink);
+  }
+  .text-amarillo {
+    color: var(--yellow);
+  }
+  .text-grisclaro {
+    color: var(--gray);
+  }
+  .border-amarillo {
+    border-color: var(--yellow);
+  }
+  .border-rosa {
+    border-color: var(--pink);
+  }
+
+  /* Animación personalizada para el efecto shine */
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+
+  .animate-shine {
+    animation: shine 3s infinite;
+  }
+
+  /* Mejora accesibilidad para usuarios con preferencias de movimiento reducido */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Mejora contraste para usuarios con alta sensibilidad */
+  @media (prefers-contrast: high) {
+    .text-amarillo {
+      color: #ffd700 !important;
+    }
+    .bg-celeste {
+      background-color: #1e40af !important;
+    }
+  }
+
+  /* Animación para el hamburger menu */
+  #mobile-menu-button[data-state="open"] span:first-child {
+    transform: rotate(45deg) translateY(6px);
+  }
+
+  #mobile-menu-button[data-state="open"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #mobile-menu-button[data-state="open"] span:last-child {
+    transform: rotate(-45deg) translateY(-6px);
+  }
+
+  /* Mejora accesibilidad para motion reducida */
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-menu {
+      transition: none !important;
+    }
+
+    #mobile-menu-button span {
+      transition: none !important;
+    }
+  }
+
+  /* Font Display para mejor performance */
+  @font-face {
+    font-family: "Audiowide";
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "gravesend-sans";
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "dazzle-unicase";
+    font-display: swap;
+  }
+
+  /* Focus management para accesibilidad */
+  a:focus,
+  button:focus,
+  input:focus {
+    outline: 2px solid var(--yellow);
+    outline-offset: 2px;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .bg-gradient-to-r {
+      background: var(--blue) !important;
+    }
+    .text-celeste {
+      color: #000080 !important;
+    }
+  }
+
+  /* Newsletter input styling */
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  input:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+</style>
+
+<script>
+  function updateCountdown() {
+    const targetDate = new Date("2025-11-21T06:00:00-03:00").getTime();
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
+    if (difference > 0) {
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      if (daysElement)
+        daysElement.textContent = days.toString().padStart(2, "0");
+      if (hoursElement)
+        hoursElement.textContent = hours.toString().padStart(2, "0");
+      if (minutesElement)
+        minutesElement.textContent = minutes.toString().padStart(2, "0");
+      if (secondsElement)
+        secondsElement.textContent = seconds.toString().padStart(2, "0");
+    } else {
+      // Si la fecha ya pasó, mostrar ceros
+      if (daysElement) daysElement.textContent = "00";
+      if (hoursElement) hoursElement.textContent = "00";
+      if (minutesElement) minutesElement.textContent = "00";
+      if (secondsElement) secondsElement.textContent = "00";
+    }
+  }
+
+  // Actualizar cada segundo con verificación de elementos
+  const countdownInterval = setInterval(() => {
+    try {
+      updateCountdown();
+    } catch (error) {
+      console.warn("Error actualizando countdown:", error);
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
+  // Ejecutar inmediatamente al cargar la página
+  updateCountdown();
+
+  // Smooth scroll para navegación interna
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        const headerOffset = 70; // Altura del header fijo optimizada
+        const elementPosition = target.offsetTop;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
+  // JavaScript para el menú móvil
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener("click", function () {
+        const isOpen = mobileMenuButton.getAttribute("data-state") === "open";
+
+        if (isOpen) {
+          // Cerrar menú
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        } else {
+          // Abrir menú
+          mobileMenuButton.setAttribute("data-state", "open");
+          mobileMenuButton.setAttribute("aria-expanded", "true");
+          mobileMenu.setAttribute("aria-hidden", "false");
+          mobileMenu.classList.remove("translate-x-full");
+          document.body.style.overflow = "hidden";
+        }
+      });
+
+      // Cerrar menú al hacer clic en un enlace
+      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        });
+      });
+
+      // Cerrar menú con ESC
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "Escape" &&
+          mobileMenuButton.getAttribute("data-state") === "open"
+        ) {
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+
+    // Newsletter subscription funcional
+    const newsletterButton = document.querySelector(
+      'button[aria-label="Suscribirse"]'
+    );
+    const newsletterInput = document.querySelector(
+      'input[aria-label="Email para newsletter"]'
+    );
+
+    if (newsletterButton && newsletterInput) {
+      newsletterButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        const email = newsletterInput.value.trim();
+
+        if (email && email.includes("@")) {
+          // Simulate subscription success
+          newsletterButton.textContent = "✓";
+          newsletterButton.style.backgroundColor = "#4ade80";
+          newsletterInput.value = "";
+
+          setTimeout(() => {
+            newsletterButton.textContent = "OK";
+            newsletterButton.style.backgroundColor = "";
+          }, 2000);
+        } else {
+          // Show error state
+          newsletterInput.style.borderColor = "#ef4444";
+          setTimeout(() => {
+            newsletterInput.style.borderColor = "";
+          }, 2000);
+        }
+      });
+
+      // Enter key support
+      newsletterInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          newsletterButton.click();
+        }
+      });
+    }
+
+    // Prefetch de páginas para mejor UX
+    const prefetchLinks = ["/historia", "/campeones", "/recorrido"];
+    prefetchLinks.forEach((url) => {
+      const prefetchLink = document.createElement("link");
+      prefetchLink.rel = "prefetch";
+      prefetchLink.href = url;
+      document.head.appendChild(prefetchLink);
+    });
+  });
+</script>

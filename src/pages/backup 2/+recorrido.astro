@@ -1,0 +1,619 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaButton from "../components/CtaButton.astro";
+import EditionSection from "../components/EditionSection.astro";
+import WinnerCard from "../components/WinnerCard.astro";
+import RouteMap from "../components/RouteMap.astro";
+
+const meta = {
+  title: "Recorrido y Ganadores — La Doble Bragado",
+  description:
+    "Recorrido completo de La Doble Bragado: ediciones masculina y femenina, mapas interactivos por etapa, altimetrías y ganadores por jornada.",
+  ogImage: "/images/og-recorrido.jpg",
+};
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: Astro.site?.origin ?? "/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Recorrido",
+      item: `${Astro.url}`,
+    },
+  ],
+};
+const jsonLdToc = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Edición Masculina",
+      url: "#edicion-masculina",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Edición Femenina",
+      url: "#edicion-femenina",
+    },
+  ],
+};
+
+const videoLinkYT_MASCULINO = "7ezPnkXv67c";
+const videoLinkYT_FEMENINO = "PENDIENTE_VIDEO_FEMENINO";
+
+const stageWinners_MASCULINO = [
+  {
+    stage: 1,
+    name: "Sergio Fredes",
+    team: "City Bikes - Miami",
+    time: "2h 35m 10s",
+    photo: "/winners/masc-1.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+  {
+    stage: 2,
+    name: "Agustín Martínez",
+    team: "Pueblo y Campo",
+    time: "6h 40m 22s",
+    photo: "/winners/masc-2.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+  {
+    stage: 3,
+    name: "Laureano Rosas",
+    team: "Gremios por el Deporte",
+    time: "6h 50m 02s",
+    photo: "/winners/masc-3.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+  {
+    stage: 4,
+    name: "Elbio Alborzen",
+    team: "SAT",
+    time: "9h 22m 45s",
+    photo: "/winners/masc-4.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+  {
+    stage: 5,
+    name: "Franco Buchanan",
+    team: "Pueblo y Campo",
+    time: "11h 58m 30s",
+    photo: "/winners/masc-5.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+];
+const stageWinners_FEMENINO = [
+  {
+    stage: 1,
+    name: "Ganadora 1",
+    team: "Equipo 1",
+    time: "Tiempo 1",
+    photo: "/winners/fem-1.jpg",
+    videoId: videoLinkYT_FEMENINO,
+  },
+  {
+    stage: 2,
+    name: "Ganadora 2",
+    team: "Equipo 2",
+    time: "Tiempo 2",
+    photo: "/winners/fem-2.jpg",
+    videoId: videoLinkYT_FEMENINO,
+  },
+  {
+    stage: 3,
+    name: "Ganadora 3",
+    team: "Equipo 3",
+    time: "Tiempo 3",
+    photo: "/winners/fem-3.jpg",
+    videoId: videoLinkYT_FEMENINO,
+  },
+  {
+    stage: 4,
+    name: "Ganadora 4",
+    team: "Equipo 4",
+    time: "Tiempo 4",
+    photo: "/winners/fem-4.jpg",
+    videoId: videoLinkYT_FEMENINO,
+  },
+];
+const overallWinner_MASC = {
+  nombre: "Laureano Rosas",
+  tiempo: "11h 58m 30s",
+  categoria: "General Masculina",
+  imgSrc: "/winners/rosas.jpg",
+  imgAlt: "Retrato de Laureano Rosas",
+};
+const overallWinner_FEM = {
+  nombre: "Maribel Aguirre",
+  tiempo: "TIEMPO GENERAL FEMENINO",
+  categoria: "General Femenina",
+  imgSrc: "/winners/maribel-aguirre.jpg",
+  imgAlt: "Retrato de Maribel Aguirre",
+};
+---
+
+<BaseLayout {...meta} structuredData={[jsonLdBreadcrumb, jsonLdToc]}>
+  <a href="#contenido" class="sr-only focus:not-sr-only">Saltar al contenido</a>
+
+  <section class="relative">
+    <div
+      class="h-[55vh] md:h-[60vh] lg:h-[70vh] flex items-center justify-center text-center"
+      style='background-image:url("/images/recorrido-hero.jpg"); background-size:cover; background-position:center;'
+      role="img"
+      aria-label="Pelotón en carrera durante La Doble Bragado"
+    >
+      <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
+      <div class="text-white z-10 max-w-5xl px-8">
+        <h1
+          id="recorrido-title"
+          class="font-display font-black text-5xl md:text-6xl lg:text-7xl mb-4 leading-tight text-amarillo"
+        >
+          Recorrido y Ganadores
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+          Explorá mapas interactivos, etapas y resultados destacados de las
+          ediciones masculina y femenina.
+        </p>
+        <nav
+          aria-label="Ediciones"
+          class="flex flex-col sm:flex-row justify-center gap-4 mt-8"
+        >
+          <CtaButton href="#edicion-masculina" label="Edición Masculina" />
+          <CtaButton
+            href="#edicion-femenina"
+            label="Edición Femenina"
+            variant="secondary"
+          />
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <main id="contenido">
+    <EditionSection
+      id="edicion-masculina"
+      title="Edición Masculina"
+      tone="masculina"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div>
+          <h3 class="text-xl font-semibold mb-3">Mapa del Recorrido</h3>
+          <img
+            src="/images/recorrido-masculina.jpg"
+            alt="Mapa del recorrido masculino con puntos clave señalados"
+            width="1280"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="self-start">
+          <WinnerCard
+            imgSrc={overallWinner_MASC.imgSrc}
+            imgAlt={overallWinner_MASC.imgAlt}
+            nombre={overallWinner_MASC.nombre}
+            tiempo={overallWinner_MASC.tiempo}
+            categoria={overallWinner_MASC.categoria}
+          />
+        </div>
+      </div>
+      <div class="relative max-w-3xl mx-auto mt-16">
+        <div
+          class="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-celeste/30"
+          aria-hidden="true"
+        >
+        </div>
+        <div class="timeline-item mb-12">
+          <div class="timeline-icon bg-amarillo text-oscuro">1</div>
+          <div
+            class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-amarillo"
+          >
+            <h3 class="text-2xl font-bold text-celeste my-2">Chivilcoy</h3>
+            <p class="text-oscuro/80">
+              Circuito callejero de <strong>110km</strong>. Apertura veloz y
+              técnica.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item mb-12">
+          <div class="timeline-icon bg-rosa text-white">2</div>
+          <div
+            class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-rosa"
+          >
+            <h3 class="text-2xl font-bold text-celeste my-2">
+              Chivilcoy → Pergamino
+            </h3>
+            <p class="text-oscuro/80">
+              Ruta de <strong>160km</strong> pasando por Chacabuco y Salto. El tramo
+              más largo.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item mb-12">
+          <div class="timeline-icon bg-celeste text-white">3</div>
+          <div
+            class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-celeste"
+          >
+            <h3 class="text-2xl font-bold text-celeste my-2">
+              Pergamino (CRI)
+            </h3>
+            <p class="text-oscuro/80">
+              Contrarreloj individual de <strong>8km</strong>. Potencia pura.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon bg-amarillo text-oscuro">5</div>
+          <div
+            class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-amarillo"
+          >
+            <h3 class="text-2xl font-bold text-celeste my-2">Bragado</h3>
+            <p class="text-oscuro/80">
+              Coronación en circuito callejero de <strong>110km</strong>.
+              Definición final.
+            </p>
+          </div>
+        </div>
+      </div>
+      <section
+        id="mapas-interactivos-masculino"
+        class="bg-oscuro py-20 mt-16 rounded-2xl"
+      >
+        <div class="max-w-7xl mx-auto px-8">
+          <header class="text-center mb-16">
+            <h3
+              class="font-display font-black text-4xl text-white mb-3 uppercase"
+            >
+              Mapas Interactivos
+            </h3>
+            <p class="text-lg text-amarillo font-semibold">
+              Seleccioná una etapa para explorar el recorrido
+            </p>
+          </header>
+          <div>
+            <div
+              class="flex flex-wrap justify-center border-b border-white/20 mb-8"
+              id="map-tabs-masculino"
+            >
+              <button data-tab="1" class="tab-button active">Etapa 1</button>
+              <button data-tab="2" class="tab-button">Etapa 2</button>
+              <button data-tab="3" class="tab-button">Etapa 3</button>
+              <button data-tab="4" class="tab-button">Etapa 4</button>
+              <button data-tab="5" class="tab-button">Etapa 5</button>
+            </div>
+            <div id="map-panels-masculino">
+              <div id="tab-panel-1-masculino" class="tab-panel active">
+                <RouteMap
+                  title="Etapa 1: Chivilcoy (Circuito)"
+                  gpx="/routes/etapa-1-v2.gpx"
+                  tabIndex="1"
+                />
+              </div>
+              <div id="tab-panel-2-masculino" class="tab-panel">
+                <RouteMap
+                  title="Etapa 2: Chivilcoy → Pergamino"
+                  gpx="/routes/etapa-2.gpx"
+                  tabIndex="2"
+                />
+              </div>
+              <div id="tab-panel-3-masculino" class="tab-panel">
+                <RouteMap
+                  title="Etapa 3: Pergamino (CRI)"
+                  gpx="/routes/etapa-3.gpx"
+                  tabIndex="3"
+                />
+              </div>
+              <div id="tab-panel-4-masculino" class="tab-panel">
+                <RouteMap
+                  title="Etapa 4: Pergamino (4 Avenidas)"
+                  gpx="/routes/etapa-4.gpx"
+                  tabIndex="4"
+                />
+              </div>
+              <div id="tab-panel-5-masculino" class="tab-panel">
+                <RouteMap
+                  title="Etapa 5: Bragado (Circuito)"
+                  gpx="/routes/etapa-5.gpx"
+                  tabIndex="5"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="ganadores-etapa-masculino" class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-8">
+          <header class="text-center mb-16">
+            <h3
+              class="font-display font-black text-4xl text-oscuro mb-3 uppercase"
+            >
+              Ganadores de Etapa
+            </h3>
+            <p class="text-lg text-celeste font-semibold">
+              Los protagonistas de cada jornada
+            </p>
+          </header>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+              stageWinners_MASCULINO.map((winner) => (
+                <article class="bg-gradient-to-br from-celeste to-oscuro rounded-3xl overflow-hidden shadow-lg text-center transition-transform hover:-translate-y-2 flex flex-col">
+                  <img
+                    src={winner.photo}
+                    alt={`Foto de ${winner.name}`}
+                    width="400"
+                    height="400"
+                    class="w-full h-64 object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="p-6 flex flex-col flex-grow">
+                    <span class="font-display font-black text-2xl text-amarillo">
+                      ETAPA {winner.stage}
+                    </span>
+                    <h4 class="text-2xl font-bold text-white mt-2">
+                      {winner.name}
+                    </h4>
+                    <p class="font-semibold text-white/80 mt-1">
+                      {winner.team}
+                    </p>
+                    <div class="mt-4 bg-black/20 rounded-xl p-3 flex-grow flex flex-col justify-center">
+                      <span class="text-sm uppercase font-bold text-white/60">
+                        Tiempo
+                      </span>
+                      <p class="text-3xl font-black text-white font-sans">
+                        {winner.time}
+                      </p>
+                    </div>
+                    <button
+                      data-videoid={winner.videoId}
+                      class="open-video-modal inline-flex items-center justify-center gap-2 bg-amarillo text-oscuro px-6 py-3 rounded-xl font-bold mt-4 hover:bg-white transition-colors"
+                    >
+                      <svg
+                        class="w-6 h-6"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                      </svg>
+                      Ver Resumen
+                    </button>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+    </EditionSection>
+    <EditionSection
+      id="edicion-femenina"
+      title="Edición Femenina"
+      tone="femenina"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div>
+          <h3 class="text-xl font-semibold mb-3">Mapa del Recorrido</h3>
+          <img
+            src="/images/recorrido-femenina.jpg"
+            alt="Mapa del recorrido femenino con altimetría"
+            width="1280"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="self-start">
+          <WinnerCard
+            imgSrc={overallWinner_FEM.imgSrc}
+            imgAlt={overallWinner_FEM.imgAlt}
+            nombre={overallWinner_FEM.nombre}
+            tiempo={overallWinner_FEM.tiempo}
+            categoria={overallWinner_FEM.categoria}
+          />
+        </div>
+      </div>
+      <div class="relative max-w-3xl mx-auto mt-16">
+        <div
+          class="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-rosa/30"
+          aria-hidden="true"
+        >
+        </div>
+        <div class="timeline-item mb-12">
+          <div class="timeline-icon bg-amarillo text-oscuro">1</div>
+          <div
+            class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-amarillo"
+          >
+            <h3 class="text-2xl font-bold text-rosa my-2">Etapa 1 Femenina</h3>
+            <p class="text-oscuro/80">Descripción de la etapa 1 femenina.</p>
+          </div>
+        </div>
+        <div class="timeline-item mb-12">
+          <div class="timeline-icon bg-celeste text-white">2</div>
+          <div
+            class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-celeste"
+          >
+            <h3 class="text-2xl font-bold text-rosa my-2">Etapa 2 Femenina</h3>
+            <p class="text-oscuro/80">Descripción de la etapa 2 femenina.</p>
+          </div>
+        </div>
+        <div class="timeline-item mb-12">
+          <div class="timeline-icon bg-amarillo text-oscuro">3</div>
+          <div
+            class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-amarillo"
+          >
+            <h3 class="text-2xl font-bold text-rosa my-2">Etapa 3 Femenina</h3>
+            <p class="text-oscuro/80">Descripción de la etapa 3 femenina.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon bg-celeste text-white">4</div>
+          <div
+            class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-celeste"
+          >
+            <h3 class="text-2xl font-bold text-rosa my-2">Etapa 4 Femenina</h3>
+            <p class="text-oscuro/80">Descripción de la etapa 4 femenina.</p>
+          </div>
+        </div>
+      </div>
+    </EditionSection>
+    <section
+      id="mapas-interactivos-femenino"
+      class="bg-oscuro py-20 rounded-2xl"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h3
+            class="font-display font-black text-4xl text-white mb-3 uppercase"
+          >
+            Mapas Interactivos
+          </h3>
+          <p class="text-lg text-amarillo font-semibold">
+            Seleccioná una etapa para explorar el recorrido
+          </p>
+        </header>
+        <div>
+          <div
+            class="flex flex-wrap justify-center border-b border-white/20 mb-8"
+            id="map-tabs-femenino"
+          >
+            <button data-tab="1" class="tab-button active">Etapa 1</button>
+            <button data-tab="2" class="tab-button">Etapa 2</button>
+            <button data-tab="3" class="tab-button">Etapa 3</button>
+            <button data-tab="4" class="tab-button">Etapa 4</button>
+          </div>
+          <div id="map-panels-femenino">
+            <div id="tab-panel-1-femenino" class="tab-panel active">
+              <RouteMap
+                title="Etapa 1 Femenina"
+                gpx="/routes/etapa-1-fem.gpx"
+                tabIndex="6"
+              />
+            </div>
+            <div id="tab-panel-2-femenino" class="tab-panel">
+              <RouteMap
+                title="Etapa 2 Femenina"
+                gpx="/routes/etapa-2-fem.gpx"
+                tabIndex="7"
+              />
+            </div>
+            <div id="tab-panel-3-femenino" class="tab-panel">
+              <RouteMap
+                title="Etapa 3 Femenina"
+                gpx="/routes/etapa-3-fem.gpx"
+                tabIndex="8"
+              />
+            </div>
+            <div id="tab-panel-4-femenino" class="tab-panel">
+              <RouteMap
+                title="Etapa 4 Femenina"
+                gpx="/routes/etapa-4-fem.gpx"
+                tabIndex="9"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="ganadoras-etapa-femenino" class="bg-white py-20">
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h3 class="font-display font-black text-4xl text-rosa mb-3 uppercase">
+            Ganadoras de Etapa
+          </h3>
+          <p class="text-lg text-celeste font-semibold">
+            Las protagonistas de cada jornada
+          </p>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            stageWinners_FEMENINO.map((winner) => (
+              <article class="bg-gradient-to-br from-rosa to-celeste rounded-3xl overflow-hidden shadow-lg text-center transition-transform hover:-translate-y-2 flex flex-col">
+                <img
+                  src={winner.photo}
+                  alt={`Foto de ${winner.name}`}
+                  width="400"
+                  height="400"
+                  class="w-full h-64 object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="p-6 flex flex-col flex-grow">
+                  <span class="font-display font-black text-2xl text-amarillo">
+                    ETAPA {winner.stage}
+                  </span>
+                  <h4 class="text-2xl font-bold text-white mt-2">
+                    {winner.name}
+                  </h4>
+                  <p class="font-semibold text-white/80 mt-1">{winner.team}</p>
+                  <div class="mt-4 bg-black/20 rounded-xl p-3 flex-grow flex flex-col justify-center">
+                    <span class="text-sm uppercase font-bold text-white/60">
+                      Tiempo
+                    </span>
+                    <p class="text-3xl font-black text-white font-sans">
+                      {winner.time}
+                    </p>
+                  </div>
+                  <button
+                    data-videoid={winner.videoId}
+                    class="open-video-modal inline-flex items-center justify-center gap-2 bg-amarillo text-oscuro px-6 py-3 rounded-xl font-bold mt-4 hover:bg-white transition-colors"
+                  >
+                    <svg
+                      class="w-6 h-6"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                    Ver Resumen
+                  </button>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <div id="video-modal" class="video-modal-overlay hidden">
+      <div class="video-modal-content">
+        <button
+          id="close-video-modal"
+          class="video-modal-close-button"
+          aria-label="Cerrar video">&times;</button
+        >
+        <div class="aspect-video">
+          <iframe
+            id="youtube-iframe"
+            width="560"
+            height="315"
+            src=""
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script type="module">
+  import { setupTabs } from "../scripts/tabs-maps.ts";
+  import { setupVideoModal } from "../scripts/video-modal.ts";
+  function initPageScripts() {
+    setupTabs("map-tabs-masculino", "map-panels-masculino", 0);
+    setupTabs("map-tabs-femenino", "map-panels-femenino", 5);
+    setupVideoModal();
+  }
+  document.addEventListener("astro:page-load", initPageScripts);
+</script>

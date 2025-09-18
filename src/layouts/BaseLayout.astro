@@ -1,0 +1,146 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import NewsletterModal from "../components/NewsletterModal.astro";
+import NewsletterModal from "../components/NewsletterModal.astro";
+
+const {
+  title = "La Doble Bragado - Carrera de Ciclismo Histórica Argentina",
+  description = "La clásica del oeste bonaerense. 500km de Bragado a Chivilcoy Chacabuco 25 de mayo. La carrera de ciclismo más antigua de Argentina. Inscripciones abiertas 3° femenina.",
+  ogImage = "/images/og-image.jpg",
+  keywords = "ciclismo, carrera, bragado, chivilcoy, 25 de mayo, chacabuco, argentina, deporte, competencia, 500km, oeste bonaerense, ciclismo ruta",
+  canonicalURL,
+  structuredData = null,
+  noindex = false
+} = Astro.props;
+
+const baseURL = (Astro.site && Astro.site.href) || "http://localhost:4321/";
+const seoTitle = title.length > 60 ? `${title.slice(0, 57)}...` : title;
+const fullImageURL = new URL(ogImage, baseURL).href;
+const currentCanonicalURL = canonicalURL || new URL(Astro.url.pathname, baseURL).href;
+
+const defaultSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "La Doble Bragado",
+    "url": baseURL,
+    "logo": new URL("/favicon-32x32.png", baseURL).href
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": baseURL,
+    "name": "La Doble Bragado",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": baseURL + "search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+];
+
+const schemasToRender = Array.isArray(structuredData)
+  ? structuredData
+  : (structuredData ? [structuredData] : defaultSchemas);
+
+const jsonLd = JSON.stringify(
+  schemasToRender.length === 1 ? schemasToRender[0] : schemasToRender
+);
+---
+
+<!doctype html>
+<html lang="es-AR" data-theme="masculina">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{seoTitle}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="La Doble Bragado" />
+    <meta
+      name="robots"
+      content={noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+    />
+    <meta
+      name="googlebot"
+      content={noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+    />
+    <link rel="canonical" href={currentCanonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={currentCanonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="La Doble Bragado - Carrera de Ciclismo Histórica" />
+    <meta property="og:site_name" content="La Doble Bragado" />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={currentCanonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImageURL} />
+    <meta name="twitter:image:alt" content="La Doble Bragado - Carrera de Ciclismo Histórica" />
+    <meta name="twitter:site" content="@ladoblebragado" />
+    <meta name="twitter:creator" content="@ladoblebragado" />
+
+    <!-- Favicons / Manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#2650A1" />
+
+       <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Audiowide&display=swap" rel="stylesheet" />
+
+    <!-- Iconos Material -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <!-- Geo -->
+    <meta name="geo.region" content="AR-BA" />
+    <meta name="geo.placename" content="Bragado, Buenos Aires, Argentina" />
+    <meta name="geo.position" content="-35.1167;-60.4833" />
+    <meta name="ICBM" content="-35.1167, -60.4833" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={jsonLd}></script>
+  </head>
+  <body class="font-sans bg-white antialiased">
+    <!-- NEW: enlace de salto accesible -->
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-amarillo text-oscuro px-3 py-2 rounded-lg">
+      Saltar al contenido
+    </a>
+
+    <Header />
+
+    <!-- NEW: landmark principal -->
+    <main id="main" role="main">
+      <slot />
+    </main>
+
+    <Footer />
+    
+    <!-- Newsletter Modal -->
+    <NewsletterModal />
+  </body>
+</html>

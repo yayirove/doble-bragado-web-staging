@@ -1,0 +1,954 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import RouteMap from "../components/RouteMap.astro";
+
+// SEO optimizado
+const pageTitle = "Recorrido y Ganadores Edición 88 y 2 - La Doble Bragado";
+const pageDescription =
+  "Conocé las etapas, los mapas interactivos y los ganadores de la edición 88 (masculina) y 2 (femenina) de La Doble Bragado. Circuitos en Chivilcoy, Pergamino, Bragado y más.";
+const pageKeywords =
+  "recorrido doble bragado, edición 88, ganadores ciclismo masculino, etapas doble bragado, mapa interactivo, gpx ciclismo, recorrido doble bragado femenina, edición 2, ganadoras ciclismo femenino";
+const pageOgImage = "/images/recorrido-hero.jpg";
+
+// Datos de los ganadores MASCULINOS (Edición 88)
+const videoLinkYT_MASCULINO = "7ezPnkXv67c";
+const stageWinners_MASCULINO = [
+  {
+    stage: 1,
+    name: "Sergio Fredes",
+    team: "City Bikes - Miami",
+    time: "2h 35m 10s",
+    photo: "/winners/placeholder-1.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+  {
+    stage: 2,
+    name: "Agustín Martínez",
+    team: "Pueblo y Campo",
+    time: "6h 40m 22s",
+    photo: "/winners/placeholder-2.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+  {
+    stage: 3,
+    name: "Laureano Rosas",
+    team: "Gremios por el Deporte",
+    time: "6h 50m 02s",
+    photo: "/winners/placeholder-3.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+  {
+    stage: 4,
+    name: "Elbio Alborzen",
+    team: "SAT",
+    time: "9h 22m 45s",
+    photo: "/winners/placeholder-4.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+  {
+    stage: 5,
+    name: "Franco Buchanan",
+    team: "Pueblo y Campo",
+    time: "11h 58m 30s",
+    photo: "/winners/placeholder-5.jpg",
+    videoId: videoLinkYT_MASCULINO,
+  },
+];
+const overallWinner_MASCULINO = {
+  name: "Sergio Fredes",
+  team: "City Bikes - Miami",
+  time: "11h 58m 15s",
+  photo: "/winners/sergio-fredes-general.jpg",
+  videoId: videoLinkYT_MASCULINO,
+};
+
+// Datos de los ganadores FEMENINOS (Edición 2)
+const videoLinkYT_FEMENINO = "PENDIENTE_VIDEO_FEMENINO"; // Reemplazar con el ID de video correcto
+const stageWinners_FEMENINO = [
+  {
+    stage: 1,
+    name: "GANADORA 1",
+    team: "EQUIPO 1",
+    time: "TIEMPO 1",
+    photo: "/winners/placeholder-fem-1.jpg",
+    videoId: videoLinkYT_FEMENINO,
+  },
+  {
+    stage: 2,
+    name: "GANADORA 2",
+    team: "EQUIPO 2",
+    time: "TIEMPO 2",
+    photo: "/winners/placeholder-fem-2.jpg",
+    videoId: videoLinkYT_FEMENINO,
+  },
+  {
+    stage: 3,
+    name: "GANADORA 3",
+    team: "EQUIPO 3",
+    time: "TIEMPO 3",
+    photo: "/winners/placeholder-fem-3.jpg",
+    videoId: videoLinkYT_FEMENINO,
+  },
+  {
+    stage: 4,
+    name: "GANADORA 4",
+    team: "EQUIPO 4",
+    time: "TIEMPO 4",
+    photo: "/winners/placeholder-fem-4.jpg",
+    videoId: videoLinkYT_FEMENINO,
+  },
+];
+const overallWinner_FEMENINO = {
+  name: "Maribel Aguirre",
+  team: "Rower San Luis", // Placeholder, reemplazar con el equipo correcto
+  time: "TIEMPO GENERAL FEMENINO", // Placeholder, reemplazar con el tiempo correcto
+  photo: "/winners/maribel-aguirre.jpg", // Asegúrate de tener esta foto
+  videoId: videoLinkYT_FEMENINO,
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  ogImage={pageOgImage}
+>
+  <Header />
+
+  <main role="main">
+    <section
+      id="recorrido-hero"
+      class="h-screen flex items-center justify-center relative text-center"
+      aria-labelledby="recorrido-title"
+    >
+      <div
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('/images/recorrido-hero.jpg');"
+        role="img"
+        aria-label="Vista aérea del recorrido de La Doble Bragado"
+      >
+      </div>
+      <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
+      <div class="text-white z-10 max-w-5xl px-8">
+        <h1
+          id="recorrido-title"
+          class="font-display font-black text-6xl md:text-7xl lg:text-8xl mb-6 leading-tight text-amarillo"
+        >
+          Reviví los Recorridos
+        </h1>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+          <a
+            href="#edicion-masculina"
+            class="bg-celeste text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-amarillo hover:text-oscuro transition-colors"
+            >Edición Masculina</a
+          >
+          <a
+            href="#edicion-femenina"
+            class="bg-celeste text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-amarillo hover:text-oscuro transition-colors"
+            >Edición Femenina</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="edicion-masculina"
+      class="bg-celeste/10 py-20"
+      aria-labelledby="etapas-title-masculina"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="etapas-title-masculina"
+            class="font-display font-black text-5xl text-oscuro mb-4 uppercase"
+          >
+            EDICIÓN 88
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Recorrido y Ganadores - Rama Masculina
+          </p>
+        </header>
+        <div class="relative max-w-3xl mx-auto">
+          <div
+            class="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-celeste/30"
+            aria-hidden="true"
+          >
+          </div>
+          <div class="timeline-item mb-12">
+            <div class="timeline-icon bg-amarillo text-oscuro">1</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-amarillo"
+            >
+              <h3 class="text-2xl font-bold text-celeste my-2">Chivilcoy</h3><p
+                class="text-oscuro/80"
+              >
+                Circuito callejero de <strong>110km</strong>. Una apertura veloz
+                y técnica.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item mb-12">
+            <div class="timeline-icon bg-rosa text-white">2</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-rosa"
+            >
+              <h3 class="text-2xl font-bold text-celeste my-2">
+                Chivilcoy → Pergamino
+              </h3><p class="text-oscuro/80">
+                Etapa de ruta de <strong>160km</strong> pasando por Chacabuco y Salto.
+                El tramo más largo.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item mb-12">
+            <div class="timeline-icon bg-celeste text-white">3</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-celeste"
+            >
+              <h3 class="text-2xl font-bold text-celeste my-2">
+                Pergamino (CRI)
+              </h3><p class="text-oscuro/80">
+                Contrarreloj individual de <strong>8km</strong>. Una prueba de
+                potencia pura.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item mb-12">
+            <div class="timeline-icon bg-rosa text-white">4</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-rosa"
+            >
+              <h3 class="text-2xl font-bold text-celeste my-2">Pergamino</h3><p
+                class="text-oscuro/80"
+              >
+                Circuito de las 4 avenidas, <strong>110km</strong>. Ideal para
+                los sprinters.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon bg-amarillo text-oscuro">5</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-amarillo"
+            >
+              <h3 class="text-2xl font-bold text-celeste my-2">Bragado</h3><p
+                class="text-oscuro/80"
+              >
+                Coronación en el circuito callejero de <strong>110km</strong>.
+                La definición final.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="mapas-interactivos-masculino"
+      class="bg-oscuro py-20"
+      aria-labelledby="mapas-title-masculino"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="mapas-title-masculino"
+            class="font-display font-black text-5xl text-white mb-4 uppercase"
+          >
+            Mapas Interactivos
+          </h2>
+          <p class="text-xl text-amarillo font-semibold">
+            Seleccioná una etapa para explorar el recorrido (Masculino)
+          </p>
+        </header>
+        <div>
+          <div
+            class="flex flex-wrap justify-center border-b border-white/20 mb-8"
+            id="map-tabs-masculino"
+          >
+            <button data-tab="1" class="tab-button active">Etapa 1</button>
+            <button data-tab="2" class="tab-button">Etapa 2</button>
+            <button data-tab="3" class="tab-button">Etapa 3</button>
+            <button data-tab="4" class="tab-button">Etapa 4</button>
+            <button data-tab="5" class="tab-button">Etapa 5</button>
+          </div>
+          <div id="map-panels-masculino">
+            <div id="tab-panel-1-masculino" class="tab-panel active">
+              <RouteMap
+                title="Etapa 1: Chivilcoy (Circuito)"
+                gpx="/routes/etapa-1-v2.gpx"
+                tabIndex="1"
+              />
+            </div>
+            <div id="tab-panel-2-masculino" class="tab-panel">
+              <RouteMap
+                title="Etapa 2: Chivilcoy → Pergamino"
+                gpx="/routes/etapa-2.gpx"
+                tabIndex="2"
+              />
+            </div>
+            <div id="tab-panel-3-masculino" class="tab-panel">
+              <RouteMap
+                title="Etapa 3: Pergamino (CRI)"
+                gpx="/routes/etapa-3.gpx"
+                tabIndex="3"
+              />
+            </div>
+            <div id="tab-panel-4-masculino" class="tab-panel">
+              <RouteMap
+                title="Etapa 4: Pergamino (4 Avenidas)"
+                gpx="/routes/etapa-4.gpx"
+                tabIndex="4"
+              />
+            </div>
+            <div id="tab-panel-5-masculino" class="tab-panel">
+              <RouteMap
+                title="Etapa 5: Bragado (Circuito)"
+                gpx="/routes/etapa-5.gpx"
+                tabIndex="5"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="ganadores-etapa-masculino"
+      class="bg-white py-20"
+      aria-labelledby="ganadores-title-masculino"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="ganadores-title-masculino"
+            class="font-display font-black text-5xl text-oscuro mb-4 uppercase"
+          >
+            Ganadores de Etapa
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Los protagonistas de cada jornada (Masculino)
+          </p>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            stageWinners_MASCULINO.map((winner) => (
+              <article class="bg-gradient-to-br from-celeste to-oscuro rounded-3xl overflow-hidden shadow-lg text-center transition-transform hover:-translate-y-2 flex flex-col">
+                <img
+                  src={winner.photo}
+                  alt={`Foto de ${winner.name}`}
+                  width="400"
+                  height="400"
+                  class="w-full h-64 object-cover object-top"
+                />
+                <div class="p-6 flex flex-col flex-grow">
+                  <span class="font-display font-black text-2xl text-amarillo">
+                    ETAPA {winner.stage}
+                  </span>
+                  <h3 class="text-2xl font-bold text-white mt-2">
+                    {winner.name}
+                  </h3>
+                  <p class="font-semibold text-white/80 mt-1">{winner.team}</p>
+                  <div class="mt-4 bg-black/20 rounded-xl p-3 flex-grow flex flex-col justify-center">
+                    <span class="text-sm uppercase font-bold text-white/60">
+                      Tiempo
+                    </span>
+                    <p class="text-3xl font-black text-white font-sans">
+                      {winner.time}
+                    </p>
+                  </div>
+                  <button
+                    data-videoid={winner.videoId}
+                    class="open-video-modal inline-flex items-center justify-center gap-2 bg-amarillo text-oscuro px-6 py-3 rounded-xl font-bold mt-4 hover:bg-white transition-colors"
+                  >
+                    <svg
+                      class="w-6 h-6"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                    Ver Resumen
+                  </button>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="ganador-general-masculino"
+      class="bg-gradient-to-r from-celeste to-oscuro py-20"
+      aria-labelledby="general-title-masculino"
+    >
+      <div class="max-w-4xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="general-title-masculino"
+            class="font-display font-black text-5xl text-amarillo mb-4 uppercase"
+          >
+            Ganador de la General
+          </h2>
+          <p class="text-xl text-white font-semibold">
+            El campeón de la edición 88 (Masculino)
+          </p>
+        </header>
+        <article class="bg-rosa p-2 md:p-3 rounded-3xl shadow-2xl">
+          <div
+            class="bg-white rounded-2xl md:flex md:items-center md:gap-8 p-6 text-center md:text-left"
+          >
+            <img
+              src={overallWinner_MASCULINO.photo}
+              alt={`Foto de ${overallWinner_MASCULINO.name}`}
+              width="600"
+              height="600"
+              class="w-48 h-48 md:w-60 md:h-60 object-cover rounded-full mx-auto md:mx-0 border-4 border-white shadow-lg"
+            />
+            <div class="mt-6 md:mt-0 flex-1">
+              <h3 class="text-4xl font-bold text-celeste">
+                {overallWinner_MASCULINO.name}
+              </h3>
+              <p class="font-semibold text-oscuro text-lg mt-1">
+                {overallWinner_MASCULINO.team}
+              </p>
+              <div class="mt-4 bg-grisclaro rounded-xl p-4">
+                <span class="text-md uppercase font-bold text-oscuro/60"
+                  >Tiempo Final</span
+                >
+                <p class="text-5xl font-black text-oscuro font-sans">
+                  {overallWinner_MASCULINO.time}
+                </p>
+              </div>
+              <div class="mt-6 text-center md:text-left">
+                <button
+                  data-videoid={overallWinner_MASCULINO.videoId}
+                  class="open-video-modal inline-flex items-center gap-2 bg-celeste text-white px-6 py-3 rounded-xl font-bold hover:bg-rosa transition-colors"
+                >
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"
+                    ><path
+                      d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                    ></path></svg
+                  >
+                  Ver Highlights
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="py-10 bg-gradient-to-b from-grisclaro to-rosa/10"></div>
+
+    <section
+      id="edicion-femenina"
+      class="bg-rosa/10 pt-20"
+      aria-labelledby="etapas-title-femenina"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="etapas-title-femenina"
+            class="font-display font-black text-5xl text-rosa mb-4 uppercase"
+          >
+            EDICIÓN 2
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Recorrido y Ganadoras - Rama Femenina
+          </p>
+        </header>
+        <div class="relative max-w-3xl mx-auto">
+          <div
+            class="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-rosa/30"
+            aria-hidden="true"
+          >
+          </div>
+          <div class="timeline-item mb-12">
+            <div class="timeline-icon bg-amarillo text-oscuro">1</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-amarillo"
+            >
+              <h3 class="text-2xl font-bold text-rosa my-2">
+                Etapa 1 Femenina
+              </h3><p class="text-oscuro/80">
+                Descripción de la etapa 1 femenina.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item mb-12">
+            <div class="timeline-icon bg-celeste text-white">2</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-celeste"
+            >
+              <h3 class="text-2xl font-bold text-rosa my-2">
+                Etapa 2 Femenina
+              </h3><p class="text-oscuro/80">
+                Descripción de la etapa 2 femenina.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item mb-12">
+            <div class="timeline-icon bg-amarillo text-oscuro">3</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-amarillo"
+            >
+              <h3 class="text-2xl font-bold text-rosa my-2">
+                Etapa 3 Femenina
+              </h3><p class="text-oscuro/80">
+                Descripción de la etapa 3 femenina.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon bg-celeste text-white">4</div><div
+              class="timeline-content bg-white p-6 rounded-2xl shadow-lg border-l-4 border-celeste"
+            >
+              <h3 class="text-2xl font-bold text-rosa my-2">
+                Etapa 4 Femenina
+              </h3><p class="text-oscuro/80">
+                Descripción de la etapa 4 femenina.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="mapas-interactivos-femenino"
+      class="bg-oscuro py-20"
+      aria-labelledby="mapas-title-femenino"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="mapas-title-femenino"
+            class="font-display font-black text-5xl text-white mb-4 uppercase"
+          >
+            Mapas Interactivos
+          </h2>
+          <p class="text-xl text-amarillo font-semibold">
+            Seleccioná una etapa para explorar el recorrido (Femenino)
+          </p>
+        </header>
+        <div>
+          <div
+            class="flex flex-wrap justify-center border-b border-white/20 mb-8"
+            id="map-tabs-femenino"
+          >
+            <button data-tab="1" class="tab-button active">Etapa 1</button>
+            <button data-tab="2" class="tab-button">Etapa 2</button>
+            <button data-tab="3" class="tab-button">Etapa 3</button>
+            <button data-tab="4" class="tab-button">Etapa 4</button>
+          </div>
+          <div id="map-panels-femenino">
+            <div id="tab-panel-1-femenino" class="tab-panel active">
+              <RouteMap
+                title="Etapa 1 Femenina"
+                gpx="/routes/etapa-1-fem.gpx"
+                tabIndex="6"
+              />
+            </div>
+            <div id="tab-panel-2-femenino" class="tab-panel">
+              <RouteMap
+                title="Etapa 2 Femenina"
+                gpx="/routes/etapa-2-fem.gpx"
+                tabIndex="7"
+              />
+            </div>
+            <div id="tab-panel-3-femenino" class="tab-panel">
+              <RouteMap
+                title="Etapa 3 Femenina"
+                gpx="/routes/etapa-3-fem.gpx"
+                tabIndex="8"
+              />
+            </div>
+            <div id="tab-panel-4-femenino" class="tab-panel">
+              <RouteMap
+                title="Etapa 4 Femenina"
+                gpx="/routes/etapa-4-fem.gpx"
+                tabIndex="9"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="ganadoras-etapa-femenino"
+      class="bg-white py-20"
+      aria-labelledby="ganadoras-title-femenino"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="ganadoras-title-femenino"
+            class="font-display font-black text-5xl text-rosa mb-4 uppercase"
+          >
+            Ganadoras de Etapa
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Las protagonistas de cada jornada (Femenino)
+          </p>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            stageWinners_FEMENINO.map((winner) => (
+              <article class="bg-gradient-to-br from-rosa to-celeste rounded-3xl overflow-hidden shadow-lg text-center transition-transform hover:-translate-y-2 flex flex-col">
+                <img
+                  src={winner.photo}
+                  alt={`Foto de ${winner.name}`}
+                  width="400"
+                  height="400"
+                  class="w-full h-64 object-cover object-top"
+                />
+                <div class="p-6 flex flex-col flex-grow">
+                  <span class="font-display font-black text-2xl text-amarillo">
+                    ETAPA {winner.stage}
+                  </span>
+                  <h3 class="text-2xl font-bold text-white mt-2">
+                    {winner.name}
+                  </h3>
+                  <p class="font-semibold text-white/80 mt-1">{winner.team}</p>
+                  <div class="mt-4 bg-black/20 rounded-xl p-3 flex-grow flex flex-col justify-center">
+                    <span class="text-sm uppercase font-bold text-white/60">
+                      Tiempo
+                    </span>
+                    <p class="text-3xl font-black text-white font-sans">
+                      {winner.time}
+                    </p>
+                  </div>
+                  <button
+                    data-videoid={winner.videoId}
+                    class="open-video-modal inline-flex items-center justify-center gap-2 bg-amarillo text-oscuro px-6 py-3 rounded-xl font-bold mt-4 hover:bg-white transition-colors"
+                  >
+                    <svg
+                      class="w-6 h-6"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                    Ver Resumen
+                  </button>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="ganadora-general-femenino"
+      class="bg-gradient-to-r from-celeste to-rosa py-20"
+      aria-labelledby="general-title-femenino"
+    >
+      <div class="max-w-4xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="general-title-femenino"
+            class="font-display font-black text-5xl text-amarillo mb-4 uppercase"
+          >
+            Ganadora de la General
+          </h2>
+          <p class="text-xl text-white font-semibold">
+            La campeona de la edición 2 (Femenino)
+          </p>
+        </header>
+        <article class="bg-rosa p-2 md:p-3 rounded-3xl shadow-2xl">
+          <div
+            class="bg-white rounded-2xl md:flex md:items-center md:gap-12 p-8 text-center md:text-left"
+          >
+            <img
+              src={overallWinner_FEMENINO.photo}
+              alt={`Foto de ${overallWinner_FEMENINO.name}`}
+              width="600"
+              height="600"
+              class="w-48 h-48 md:w-60 md:h-60 object-cover rounded-full mx-auto md:mx-0 border-4 border-white shadow-lg"
+            />
+            <div class="mt-6 md:mt-0 flex-1">
+              <h3 class="text-4xl font-bold text-rosa">
+                {overallWinner_FEMENINO.name}
+              </h3>
+              <p class="font-semibold text-oscuro text-lg mt-1">
+                {overallWinner_FEMENINO.team}
+              </p>
+              <div class="mt-4 bg-grisclaro rounded-xl p-4">
+                <span class="text-md uppercase font-bold text-oscuro/60"
+                  >Tiempo Final</span
+                >
+                <p class="text-5xl font-black text-oscuro font-sans">
+                  {overallWinner_FEMENINO.time}
+                </p>
+              </div>
+              <div class="mt-6 text-center md:text-left">
+                <button
+                  data-videoid={overallWinner_FEMENINO.videoId}
+                  class="open-video-modal inline-flex items-center gap-2 bg-celeste text-white px-6 py-3 rounded-xl font-bold hover:bg-rosa transition-colors"
+                >
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"
+                    ><path
+                      d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                    ></path></svg
+                  >
+                  Ver Highlights
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <div id="video-modal" class="video-modal-overlay hidden">
+    <div class="video-modal-content">
+      <button id="close-video-modal" class="video-modal-close-button"
+        >&times;</button
+      >
+      <div class="aspect-video">
+        <iframe
+          id="youtube-iframe"
+          width="560"
+          height="315"
+          src=""
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .timeline-item {
+    position: relative;
+    padding-left: 3rem;
+  }
+  .timeline-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    z-index: 10;
+  }
+  @media (min-width: 768px) {
+    .timeline-item {
+      padding-left: 0;
+      width: 50%;
+      margin-bottom: 3rem !important;
+    }
+    .timeline-item:nth-child(odd) {
+      align-self: flex-end;
+      padding-left: 3rem;
+    }
+    .timeline-item:nth-child(even) {
+      align-self: flex-start;
+      padding-right: 3rem;
+    }
+    .timeline-item:nth-child(odd) .timeline-content {
+      text-align: left;
+    }
+    .timeline-item:nth-child(even) .timeline-content {
+      text-align: right;
+    }
+    .timeline-item:nth-child(odd) .timeline-icon {
+      left: -1.25rem;
+    }
+    .timeline-item:nth-child(even) .timeline-icon {
+      right: -1.25rem;
+      left: auto;
+    }
+    .relative.max-w-3xl.mx-auto {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .tab-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    opacity: 0.7;
+  }
+  .tab-button:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .tab-button.active {
+    opacity: 1;
+    border-bottom-color: var(--yellow, #f8e300);
+    color: var(--yellow, #f8e300);
+  }
+  .tab-panel {
+    display: none;
+  }
+  .tab-panel.active {
+    display: block;
+  }
+  .video-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(16, 14, 67, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+  }
+  .video-modal-content {
+    position: relative;
+    background-color: var(--dark, #161443);
+    border: 2px solid var(--amarillo, #f8e300);
+    border-radius: 16px;
+    padding: 1rem;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  .video-modal-close-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background-color: var(--amarillo, #f8e300);
+    color: var(--dark, #161443);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  .aspect-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+  }
+  .aspect-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+  }
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // --- Lógica para los TABS ---
+    function setupTabs(tabContainerId, panelContainerId, tabIndexOffset = 0) {
+      const tabsContainer = document.getElementById(tabContainerId);
+      const panelsContainer = document.getElementById(panelContainerId);
+      if (!tabsContainer || !panelsContainer) return;
+
+      // Inicializar el primer mapa del grupo
+      setTimeout(() => {
+        const firstMapFunctionName = `init_map-etapa-${1 + tabIndexOffset}`;
+        if (typeof window[firstMapFunctionName] === "function") {
+          window[firstMapFunctionName]();
+        }
+      }, 100);
+
+      tabsContainer.addEventListener("click", (e) => {
+        if (e.target.matches(".tab-button")) {
+          const tabNumber = e.target.dataset.tab;
+
+          tabsContainer
+            .querySelectorAll(".tab-button")
+            .forEach((btn) => btn.classList.remove("active"));
+          panelsContainer
+            .querySelectorAll(".tab-panel")
+            .forEach((panel) => panel.classList.remove("active"));
+
+          e.target.classList.add("active");
+          const targetPanel = panelsContainer.querySelector(
+            `#tab-panel-${tabNumber}-${tabContainerId.split("-")[2]}`
+          );
+
+          if (targetPanel) {
+            targetPanel.classList.add("active");
+            const mapFunctionName = `init_map-etapa-${parseInt(tabNumber) + tabIndexOffset}`;
+            if (typeof window[mapFunctionName] === "function") {
+              window[mapFunctionName]();
+            }
+          }
+        }
+      });
+    }
+
+    setupTabs("map-tabs-masculino", "map-panels-masculino", 0);
+    setupTabs("map-tabs-femenino", "map-panels-femenino", 5); // Offset de 5 para que los tabIndex no colisionen (1-5 masc, 6+ fem)
+
+    // --- Lógica para el modal de video ---
+    const videoModal = document.getElementById("video-modal");
+    const iframe = document.getElementById("youtube-iframe");
+    const openModalButtons = document.querySelectorAll(".open-video-modal");
+    const closeModalButton = document.getElementById("close-video-modal");
+
+    function openModal(videoId) {
+      if (
+        !videoModal ||
+        !iframe ||
+        !videoId ||
+        videoId === "PENDIENTE_VIDEO_FEMENINO"
+      )
+        return;
+
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      videoModal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      if (!videoModal || !iframe) return;
+      iframe.src = "";
+      videoModal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    openModalButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const videoId = button.dataset.videoid;
+        if (videoId) openModal(videoId);
+      });
+    });
+
+    if (closeModalButton)
+      closeModalButton.addEventListener("click", closeModal);
+
+    if (videoModal)
+      videoModal.addEventListener("click", (event) => {
+        if (event.target === videoModal) closeModal();
+      });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !videoModal.classList.contains("hidden"))
+        closeModal();
+    });
+  });
+</script>

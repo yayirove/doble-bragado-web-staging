@@ -1,0 +1,306 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// SEO y datos
+const pageTitle = "Palmarés Histórico - La Doble Bragado";
+const pageDescription =
+  "104 años de historia del ciclismo argentino. El timeline de campeones de La Doble Bragado desde 1922 hasta la actualidad.";
+const url = Astro.url;
+const showModal = url.searchParams.has("timeline");
+
+// Datos estructurados para el timeline visual y el modal
+const campeonesData = [
+  { año: 1922, nombre: "Eugenio Gret", era: "pionera" },
+  { año: 1923, nombre: "Eugenio Gret", era: "pionera" },
+  { año: 1924, nombre: "Cosme Saavedra", era: "pionera" },
+  { año: 1925, nombre: "Cosme Saavedra", era: "pionera" },
+  { año: 1927, nombre: "Cosme Saavedra", era: "pionera" },
+  { año: 1928, nombre: "Cosme Saavedra", era: "pionera" },
+  { año: 1929, nombre: "Cosme Saavedra", era: "pionera" },
+  { año: 1930, nombre: "Cosme Saavedra", era: "pionera" },
+  { año: 1931, nombre: "Francisco Rodríguez", era: "rivalidad" },
+  { año: 1932, nombre: "Remigio Saavedra", era: "rivalidad" },
+  { año: 1933, nombre: "Mario Stefani", era: "rivalidad" },
+  { año: 1934, nombre: "Remigio Saavedra", era: "rivalidad" },
+  { año: 1935, nombre: "Mario Mathieu", era: "rivalidad" },
+  { año: 1936, nombre: "Mario Mathieu", era: "rivalidad" },
+  { año: 1937, nombre: "José González", era: "rivalidad" },
+  { año: 1938, nombre: "Mario Mathieu", era: "rivalidad" },
+  { año: 1939, nombre: "Mario Stefani", era: "rivalidad" },
+  { año: 1940, nombre: "Mario Mathieu", era: "rivalidad" },
+  { año: 1942, nombre: "Mario Mathieu", era: "rivalidad" },
+  { año: 1947, nombre: "Óscar Giacché", era: "renacimiento" },
+  { año: 1948, nombre: "Miguel Sevillano", era: "renacimiento" },
+  { año: 1949, nombre: "Ceferino Perone", era: "renacimiento" },
+  { año: 1950, nombre: "Óscar Muleiro", era: "renacimiento" },
+  { año: 1951, nombre: "Saúl Crispin", era: "renacimiento" },
+  { año: 1952, nombre: "Dante Benvenuti", era: "renacimiento" },
+  { año: 1953, nombre: "Alfredo Figgini", era: "renacimiento" },
+  { año: 1954, nombre: "Humberto Varisco", era: "renacimiento" },
+  { año: 1956, nombre: "Rodolfo Caccavo", era: "renacimiento" },
+  { año: 1957, nombre: "Carlos Vázquez", era: "renacimiento" },
+  { año: 1958, nombre: "Ricardo Senn", era: "renacimiento" },
+  { año: 1959, nombre: "Duilio Biganzoli", era: "renacimiento" },
+  { año: 1960, nombre: "Carlos Vázquez", era: "renacimiento" },
+  { año: 1961, nombre: "Marcos Spaggiari", era: "transicion" },
+  { año: 1964, nombre: "Carlos Álvarez", era: "transicion" },
+  { año: 1965, nombre: "Carlos Álvarez", era: "transicion" },
+  { año: 1966, nombre: "Eduardo Sánchez", era: "transicion" },
+  { año: 1967, nombre: "Héctor Gómez", era: "transicion" },
+  { año: 1968, nombre: "Saúl Alcántara", era: "transicion" },
+  { año: 1969, nombre: "Raúl Gómez", era: "transicion" },
+  { año: 1970, nombre: "Rodolfo Taddeo", era: "transicion" },
+  { año: 1971, nombre: "Raúl Gómez", era: "transicion" },
+  { año: 1972, nombre: "Ismael Torres", era: "transicion" },
+  { año: 1973, nombre: "Osvaldo Benvenuti", era: "transicion" },
+  { año: 1974, nombre: "Ricardo Jurado", era: "transicion" },
+  { año: 1975, nombre: "Oswaldo Frossasco", era: "transicion" },
+  { año: 1980, nombre: "Ricardo Jurado", era: "transicion" },
+  { año: 1981, nombre: "Omar Richeze", era: "transicion" },
+  { año: 1982, nombre: "Juan Carlos Ruarte", era: "transicion" },
+  { año: 1984, nombre: "Luis Moyano", era: "profesional" },
+  { año: 1985, nombre: "Carlos Bodei", era: "profesional" },
+  { año: 1986, nombre: "Armando Robledo", era: "profesional" },
+  { año: 1987, nombre: "Alejandro Carrusca", era: "profesional" },
+  { año: 1988, nombre: "Marcelo Alexandre", era: "profesional" },
+  { año: 1989, nombre: "Jorge Sebastía", era: "profesional" },
+  { año: 1990, nombre: "Adrián García", era: "profesional" },
+  { año: 1991, nombre: "Marcelo Alexandre", era: "profesional" },
+  { año: 1992, nombre: "Luis Biera", era: "profesional" },
+  { año: 1993, nombre: "Pablo Pérez", era: "profesional" },
+  { año: 1994, nombre: "Rubén Priede", era: "profesional" },
+  { año: 1995, nombre: "Rubén Pegorín", era: "profesional" },
+  { año: 1996, nombre: "Gustavo Artacho", era: "profesional" },
+  { año: 1997, nombre: "Juan Curuchet", era: "profesional" },
+  { año: 1998, nombre: "Juan Curuchet", era: "profesional" },
+  { año: 1999, nombre: "Walter Pérez", era: "profesional" },
+  { año: 2000, nombre: "Juan Curuchet", era: "profesional" },
+  { año: 2001, nombre: "Edgardo Simon", era: "profesional" },
+  { año: 2002, nombre: "Ángel Darío Colla", era: "profesional" },
+  { año: 2003, nombre: "Juan Curuchet", era: "profesional" },
+  { año: 2004, nombre: "Alejandro González", era: "profesional" },
+  { año: 2005, nombre: "Pedro Prieto", era: "profesional" },
+  { año: 2006, nombre: "Matías Médici", era: "profesional" },
+  { año: 2007, nombre: "Ángel Darío Colla", era: "profesional" },
+  { año: 2008, nombre: "Gerardo Fernández", era: "profesional" },
+  { año: 2009, nombre: "Daniel Díaz", era: "profesional" },
+  { año: 2010, nombre: "Román Mastrángelo", era: "contemporanea" },
+  { año: 2011, nombre: "Leandro Messineo", era: "contemporanea" },
+  { año: 2012, nombre: "Laureano Rosas", era: "contemporanea" },
+  { año: 2013, nombre: "Fernando Antogna", era: "contemporanea" },
+  { año: 2014, nombre: "Laureano Rosas", era: "contemporanea" },
+  { año: 2015, nombre: "Juan Melivilo", era: "contemporanea" },
+  { año: 2016, nombre: "Laureano Rosas", era: "contemporanea" },
+  { año: 2017, nombre: "Román Mastrángelo", era: "contemporanea" },
+  { año: 2018, nombre: "Julián Barrientos", era: "contemporanea" },
+  { año: 2019, nombre: "Aníbal Borrajo", era: "contemporanea" },
+  { año: 2022, nombre: "Elbio Alborzen", era: "contemporanea" },
+  { año: 2023, nombre: "Sergio Fredes", era: "contemporanea" },
+  { año: 2024, nombre: "Omar Salim Azzem", era: "contemporanea" },
+  { año: 2025, nombre: "Nicolás Traico", era: "contemporanea" },
+];
+
+const erasConfig = {
+  pionera: {
+    name: "Génesis",
+    period: "1922-1930",
+    summary: "Cosme Saavedra establece el récord histórico.",
+  },
+  rivalidad: {
+    name: "Rivalidad",
+    period: "1931-1942",
+    summary: "Mathieu vs Stefani dominan la década.",
+  },
+  renacimiento: {
+    name: "Renacimiento",
+    period: "1947-1960",
+    summary: "La posguerra trae nuevos protagonistas.",
+  },
+  transicion: {
+    name: "Transición",
+    period: "1961-1983",
+    summary: "Años de inestabilidad y cambios profundos.",
+  },
+  profesional: {
+    name: "Profesionalización",
+    period: "1984-2009",
+    summary: "Juan Curuchet marca la era del ciclismo moderno.",
+  },
+  contemporanea: {
+    name: "Contemporánea",
+    period: "2010-2025",
+    summary: "Laureano Rosas y la nueva generación.",
+  },
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <main>
+    <section
+      class="bg-gradient-to-br from-celeste to-oscuro text-white text-center py-24 sm:py-32 px-4"
+    >
+      <h1
+        class="font-display text-5xl md:text-7xl font-black text-amarillo uppercase tracking-wider"
+      >
+        104 Años de Gloria
+      </h1>
+      <p class="mt-4 text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+        El palmarés completo de La Doble Bragado desde 1922
+      </p>
+      <div class="mt-12 grid grid-cols-3 gap-8 max-w-xl mx-auto">
+        <div>
+          <span class="block font-display text-5xl font-bold text-amarillo"
+            >88</span
+          >
+          <span
+            class="block mt-1 text-sm uppercase tracking-widest text-white/80"
+            >Ediciones</span
+          >
+        </div>
+        <div>
+          <span class="block font-display text-5xl font-bold text-amarillo"
+            >75</span
+          >
+          <span
+            class="block mt-1 text-sm uppercase tracking-widest text-white/80"
+            >Campeones</span
+          >
+        </div>
+        <div>
+          <span class="block font-display text-5xl font-bold text-amarillo"
+            >6</span
+          >
+          <span
+            class="block mt-1 text-sm uppercase tracking-widest text-white/80"
+            >Récord</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-grisclaro py-20 px-4">
+      <div class="max-w-5xl mx-auto relative">
+        <div
+          class="absolute left-1/2 top-0 -bottom-16 w-1 bg-gradient-to-b from-celeste to-rosa rounded-full transform -translate-x-1/2 hidden md:block"
+          aria-hidden="true"
+        >
+        </div>
+        {
+          Object.entries(erasConfig).map(([key, era], index) => (
+            <article
+              class:list={[
+                "era-item mb-16 md:flex items-center",
+                { "md:flex-row-reverse": index % 2 !== 0 },
+              ]}
+            >
+              <div class="md:w-5/12">
+                <div
+                  class:list={[
+                    "text-center md:text-left",
+                    { "md:text-right": index % 2 === 0 },
+                  ]}
+                >
+                  <span class="bg-amarillo text-oscuro text-xs font-bold px-3 py-1 rounded-full">
+                    {era.period}
+                  </span>
+                  <h2 class="font-display text-3xl font-bold text-celeste uppercase mt-2">
+                    {era.name}
+                  </h2>
+                  <p class="text-oscuro/70 text-base italic mt-1">
+                    {era.summary}
+                  </p>
+                </div>
+              </div>
+              <div class="md:w-1/12" />
+              <div class="md:w-6/12 mt-4 md:mt-0">
+                <div class="bg-white rounded-lg p-4 shadow-md border-t-2 border-celeste/50">
+                  <div class="grid grid-cols-2 gap-x-3 gap-y-1.5">
+                    {campeonesData
+                      .filter((c) => c.era === key)
+                      .map((champ) => (
+                        <div class="text-sm">
+                          <span class="font-bold text-celeste/80 mr-2 text-xs w-8 inline-block">
+                            {champ.año}
+                          </span>
+                          {champ.nombre}
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <div class="text-center mt-16">
+        <button
+          id="openTimelineBtn"
+          class="bg-oscuro text-white px-8 py-4 rounded-full font-bold text-lg hover:-translate-y-1 hover:shadow-lg hover:bg-celeste transition-all duration-300"
+        >
+          Ver Lista Completa y Filtrar
+        </button>
+      </div>
+    </section>
+
+    <div
+      id="timelineModal"
+      class={`fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${showModal ? "opacity-100 visible" : "opacity-0 invisible"}`}
+    >
+      <div
+        class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] shadow-2xl flex flex-col"
+      >
+        <header
+          class="bg-oscuro p-4 text-white flex justify-between items-center flex-shrink-0"
+        >
+          <h2 class="font-display text-xl font-black tracking-wider">
+            TIMELINE COMPLETO
+          </h2>
+          <button
+            id="closeTimelineModal"
+            class="text-white hover:text-amarillo text-3xl font-bold transition-colors"
+            aria-label="Cerrar">&times;</button
+          >
+        </header>
+        <div class="p-3 border-b bg-grisclaro flex-shrink-0">
+          <div class="flex flex-wrap gap-2 justify-center">
+            <button class="filter-btn" data-era="all">Todas</button>
+            {
+              Object.keys(erasConfig).map((key) => (
+                <button class="filter-btn" data-era={key}>
+                  {erasConfig[key].name}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+        <div class="p-4 overflow-y-auto">
+          <div class="space-y-1">
+            {
+              campeonesData.map((c) => (
+                <div
+                  class="timeline-item-modal flex items-center p-2 rounded-md hover:bg-amarillo/20"
+                  data-era={c.era}
+                >
+                  <span class="font-bold text-xs text-celeste w-10">
+                    {c.año}
+                  </span>
+                  <span class="font-semibold text-sm text-oscuro">
+                    {c.nombre}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .filter-btn {
+    @apply bg-white text-celeste px-3 py-1.5 rounded-full font-sans text-xs font-semibold hover:bg-celeste hover:text-white transition-colors border border-celeste/20;
+  }
+</style>
+
+<script type="module" src="../scripts/timeline-modal.ts"></script>

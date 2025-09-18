@@ -1,0 +1,988 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// SEO optimizado para Inscripciones
+const pageTitle = "Inscripciones - La Doble Bragado 2025 | Carrera de Ciclismo";
+const pageDescription =
+  "¡Inscribite a La Doble Bragado 2025! 3° edición femenina - 21 de noviembre. Requisitos, categorías, costos y formulario de inscripción. ¡500km de puro desafío!";
+const pageKeywords =
+  "inscripciones doble bragado 2025, carrera ciclismo argentina, inscripcion ciclismo, 21 noviembre 2025, edicion femenina, requisitos inscripcion";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  ogImage="/images/inscripciones-hero.jpg"
+>
+  <!-- Header Navigation - IGUAL AL INDEX.ASTRO -->
+  <header
+    class="fixed top-0 w-full bg-celeste/90 backdrop-blur-lg z-50 border-b-2 border-amarillo"
+    role="banner"
+  >
+    <nav
+      class="max-w-7xl mx-auto flex justify-between items-center py-4 px-8"
+      role="navigation"
+      aria-label="Navegación principal"
+    >
+      <!-- Logo -->
+      <a
+        href="/"
+        class="flex items-center"
+        aria-label="Ir a inicio de La Doble Bragado"
+      >
+        <img
+          src="/images/ldb-logo-v2.svg"
+          alt="Logo La Doble Bragado - Carrera de Ciclismo Histórica"
+          class="h-12 w-auto"
+          width="48"
+          height="48"
+        />
+      </a>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden lg:flex space-x-8">
+        <li>
+          <a
+            href="/"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ir a página principal"
+          >
+            Inicio
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/historia"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Conocé la historia de La Doble Bragado"
+          >
+            Historia
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/inscripciones"
+            class="text-amarillo font-semibold text-lg relative bg-amarillo/30 px-4 py-2 rounded-2xl"
+            aria-label="Inscripciones - Página actual"
+          >
+            Inscripciones
+            <span
+              class="absolute bottom-[-5px] left-4 w-[calc(100%-2rem)] h-0.5 bg-amarillo"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/recorrido"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ver el recorrido completo"
+          >
+            Recorrido
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/campeones"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ver todos los campeones"
+          >
+            Campeones
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/#contacto"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ir a formulario de contacto"
+          >
+            Contacto
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-button"
+        class="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 group"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span
+          class="w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo transform group-data-[state=open]:rotate-45 group-data-[state=open]:translate-y-2"
+          aria-hidden="true"></span>
+        <span
+          class="w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo group-data-[state=open]:opacity-0"
+          aria-hidden="true"></span>
+        <span
+          class="w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo transform group-data-[state=open]:-rotate-45 group-data-[state=open]:-translate-y-2"
+          aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="lg:hidden fixed inset-0 bg-celeste/95 backdrop-blur-lg transform translate-x-full transition-transform duration-300 ease-in-out z-40"
+      aria-hidden="true"
+    >
+      <div class="flex flex-col h-full pt-24 px-8">
+        <nav
+          class="flex-1 flex flex-col space-y-8"
+          role="navigation"
+          aria-label="Navegación móvil"
+        >
+          <a
+            href="/"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-4"
+            aria-label="Ir a página principal"
+          >
+            Inicio
+          </a>
+          <a
+            href="/historia"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-4"
+            aria-label="Conocé la historia de La Doble Bragado"
+          >
+            Historia
+          </a>
+          <a
+            href="/inscripciones"
+            class="text-amarillo text-2xl font-bold bg-amarillo/30 px-6 py-4 rounded-2xl border-b border-white/20 pb-4"
+            aria-label="Inscripciones - Página actual"
+          >
+            🚴‍♀️ Inscripciones
+          </a>
+          <a
+            href="/recorrido"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-4"
+            aria-label="Ver el recorrido completo"
+          >
+            Recorrido
+          </a>
+          <a
+            href="/campeones"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-4"
+            aria-label="Ver todos los campeones"
+          >
+            Campeones
+          </a>
+          <a
+            href="/#contacto"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300"
+            aria-label="Ir a formulario de contacto"
+          >
+            Contacto
+          </a>
+        </nav>
+
+        <!-- Mobile Social Links -->
+        <div class="py-8 border-t border-white/20">
+          <p class="text-white/80 text-sm mb-4">Seguinos en:</p>
+          <div class="flex space-x-4">
+            <a
+              href="https://youtube.com/@ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-rosa rounded-2xl flex items-center justify-center text-white hover:bg-amarillo hover:text-oscuro transition-colors duration-300"
+              aria-label="YouTube"
+            >
+              📺
+            </a>
+            <a
+              href="https://instagram.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-rosa rounded-2xl flex items-center justify-center text-white hover:bg-amarillo hover:text-oscuro transition-colors duration-300"
+              aria-label="Instagram"
+            >
+              📷
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main role="main">
+    <!-- Hero Section Inscripciones -->
+    <section
+      id="inscripciones"
+      class="h-screen flex items-center justify-center relative text-center"
+      aria-labelledby="inscripciones-title"
+    >
+      <!-- Background Image -->
+      <div
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('/images/inscripciones-hero.jpg');"
+        role="img"
+        aria-label="Ciclistas en la largada de La Doble Bragado"
+      >
+      </div>
+      <!-- Overlay for better text readability -->
+      <div class="absolute inset-0 bg-black/70" aria-hidden="true"></div>
+
+      <div class="text-white z-10 max-w-5xl px-8">
+        <h1
+          id="inscripciones-title"
+          class="font-display font-black text-6xl md:text-7xl lg:text-8xl mb-6 leading-tight text-amarillo"
+        >
+          UNITE AL<br />DESAFÍO
+        </h1>
+        <p
+          class="text-xl md:text-3xl mb-8 opacity-90 font-semibold max-w-4xl mx-auto"
+        >
+          La Doble Bragado 2025 - 3° Edición Femenina
+        </p>
+        <div class="text-lg md:text-xl opacity-80 max-w-3xl mx-auto mb-8">
+          <time datetime="2025-11-21" class="text-amarillo font-bold"
+            >21 de Noviembre 2025</time
+          > - 500km de puro desafío ciclístico
+        </div>
+        <a
+          href="#formulario"
+          class="inline-block bg-gradient-to-r from-rosa to-amarillo hover:from-amarillo hover:to-rosa text-oscuro px-12 py-6 rounded-3xl font-bold text-xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+          aria-label="Ir al formulario de inscripción"
+        >
+          ¡Inscribite Ahora! 🚴‍♀️
+        </a>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="bg-white py-20" aria-labelledby="info-title">
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="info-title"
+            class="font-display font-black text-5xl md:text-5xl text-oscuro mb-4 uppercase"
+          >
+            Información de la Carrera
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Todo lo que necesitás saber para participar
+          </p>
+        </header>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Fecha y Hora -->
+          <article
+            class="bg-gradient-to-br from-celeste to-rosa p-8 rounded-3xl text-white text-center shadow-xl hover:-translate-y-2 transition-transform duration-300"
+          >
+            <div class="text-5xl mb-4" aria-hidden="true">📅</div>
+            <h3 class="text-2xl font-bold mb-4 uppercase">Fecha & Hora</h3>
+            <p class="text-lg leading-relaxed">
+              <time datetime="2025-11-21T06:00"
+                >Viernes 21 de Noviembre 2025<br />
+                Largada: 6:00 AM</time
+              >
+            </p>
+          </article>
+
+          <!-- Distancia -->
+          <article
+            class="bg-gradient-to-br from-amarillo to-rosa p-8 rounded-3xl text-white text-center shadow-xl hover:-translate-y-2 transition-transform duration-300"
+          >
+            <div class="text-5xl mb-4" aria-hidden="true">🚴‍♀️</div>
+            <h3 class="text-2xl font-bold mb-4 uppercase">Distancia</h3>
+            <p class="text-lg leading-relaxed">
+              <strong>500 Kilómetros</strong><br />
+              Bragado - Chivilcoy - Chacabuco<br />
+              - 25 de Mayo - Bragado
+            </p>
+          </article>
+
+          <!-- Categorías -->
+          <article
+            class="bg-gradient-to-br from-rosa to-celeste p-8 rounded-3xl text-white text-center shadow-xl hover:-translate-y-2 transition-transform duration-300"
+          >
+            <div class="text-5xl mb-4" aria-hidden="true">🏆</div>
+            <h3 class="text-2xl font-bold mb-4 uppercase">Categorías</h3>
+            <p class="text-lg leading-relaxed">
+              • Femenina Elite<br />
+              • Masculina Elite<br />
+              • Femenina Sub-23<br />
+              • Masculina Sub-23
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requisitos Section -->
+    <section class="bg-grisclaro py-20" aria-labelledby="requisitos-title">
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="requisitos-title"
+            class="font-display font-black text-5xl md:text-5xl text-oscuro mb-4 uppercase"
+          >
+            Requisitos
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Todo lo que necesitás para inscribirte
+          </p>
+        </header>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+          <!-- Documentación -->
+          <div class="bg-white p-8 rounded-3xl shadow-xl">
+            <h3 class="text-2xl font-bold text-celeste mb-6 flex items-center">
+              <span class="text-3xl mr-4" aria-hidden="true">📋</span>
+              Documentación
+            </h3>
+            <ul class="space-y-4 text-lg">
+              <li class="flex items-start">
+                <span class="text-2xl mr-3 text-amarillo" aria-hidden="true"
+                  >✓</span
+                >
+                <span>DNI argentino o documento extranjero válido</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-2xl mr-3 text-amarillo" aria-hidden="true"
+                  >✓</span
+                >
+                <span>Certificado médico deportivo (no mayor a 6 meses)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-2xl mr-3 text-amarillo" aria-hidden="true"
+                  >✓</span
+                >
+                <span>Seguro de vida y/o accidentes personales</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-2xl mr-3 text-amarillo" aria-hidden="true"
+                  >✓</span
+                >
+                <span>Licencia de ciclismo (FAC o federación extranjera)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Equipamiento -->
+          <div class="bg-white p-8 rounded-3xl shadow-xl">
+            <h3 class="text-2xl font-bold text-rosa mb-6 flex items-center">
+              <span class="text-3xl mr-4" aria-hidden="true">🚴‍♀️</span>
+              Equipamiento
+            </h3>
+            <ul class="space-y-4 text-lg">
+              <li class="flex items-start">
+                <span class="text-2xl mr-3 text-amarillo" aria-hidden="true"
+                  >✓</span
+                >
+                <span>Bicicleta de ruta en perfectas condiciones</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-2xl mr-3 text-amarillo" aria-hidden="true"
+                  >✓</span
+                >
+                <span>Casco homologado (obligatorio en todo momento)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-2xl mr-3 text-amarillo" aria-hidden="true"
+                  >✓</span
+                >
+                <span>Luces delanteras y traseras (para tramos nocturnos)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-2xl mr-3 text-amarillo" aria-hidden="true"
+                  >✓</span
+                >
+                <span>Kit de reparaciones básico</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Costos -->
+        <div
+          class="mt-16 bg-gradient-to-r from-celeste to-rosa p-12 rounded-3xl text-center text-white"
+        >
+          <h3 class="text-3xl font-bold mb-8 uppercase">
+            Costos de Inscripción
+          </h3>
+          <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="bg-white/20 backdrop-blur-sm p-8 rounded-2xl">
+              <h4 class="text-2xl font-bold mb-4">Inscripción Temprana</h4>
+              <p class="text-sm mb-4">Hasta el 30 de Septiembre 2025</p>
+              <span
+                class="text-4xl font-black"
+                style="font-family: 'Audiowide', sans-serif;">$25.000</span
+              >
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm p-8 rounded-2xl">
+              <h4 class="text-2xl font-bold mb-4">Inscripción Regular</h4>
+              <p class="text-sm mb-4">Hasta el 15 de Noviembre 2025</p>
+              <span
+                class="text-4xl font-black"
+                style="font-family: 'Audiowide', sans-serif;">$35.000</span
+              >
+            </div>
+          </div>
+          <p class="mt-8 text-lg opacity-90">
+            * Incluye: Kit de carrera, avituallamiento, asistencia técnica y
+            médica
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulario de Inscripción -->
+    <section
+      id="formulario"
+      class="bg-white py-20"
+      aria-labelledby="formulario-title"
+    >
+      <div class="max-w-5xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="formulario-title"
+            class="font-display font-black text-5xl md:text-5xl text-oscuro mb-4 uppercase"
+          >
+            Formulario de Inscripción
+          </h2>
+          <p class="text-xl text-celeste font-semibold">
+            Completá todos los campos para confirmar tu participación
+          </p>
+        </header>
+
+        <div class="bg-grisclaro p-12 rounded-3xl">
+          <form
+            class="space-y-8"
+            aria-label="Formulario de inscripción a La Doble Bragado"
+          >
+            <!-- Datos Personales -->
+            <fieldset class="space-y-6">
+              <legend class="text-2xl font-bold text-oscuro mb-6"
+                >📋 Datos Personales</legend
+              >
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="nombre" class="block font-bold mb-2 text-oscuro"
+                    >Nombre Completo *</label
+                  >
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                    class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                    placeholder="Tu nombre completo"
+                  />
+                </div>
+                <div>
+                  <label for="dni" class="block font-bold mb-2 text-oscuro"
+                    >DNI/Documento *</label
+                  >
+                  <input
+                    type="text"
+                    id="dni"
+                    name="dni"
+                    required
+                    class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                    placeholder="Número de documento"
+                  />
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="email" class="block font-bold mb-2 text-oscuro"
+                    >Email *</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                    placeholder="tu@email.com"
+                  />
+                </div>
+                <div>
+                  <label for="telefono" class="block font-bold mb-2 text-oscuro"
+                    >Teléfono *</label
+                  >
+                  <input
+                    type="tel"
+                    id="telefono"
+                    name="telefono"
+                    required
+                    class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                    placeholder="+54 9 11 1234-5678"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="fecha-nacimiento"
+                  class="block font-bold mb-2 text-oscuro"
+                  >Fecha de Nacimiento *</label
+                >
+                <input
+                  type="date"
+                  id="fecha-nacimiento"
+                  name="fecha-nacimiento"
+                  required
+                  class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                />
+              </div>
+            </fieldset>
+
+            <!-- Categoría -->
+            <fieldset class="space-y-6">
+              <legend class="text-2xl font-bold text-oscuro mb-6"
+                >🏆 Categoría</legend
+              >
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="categoria"
+                    class="block font-bold mb-2 text-oscuro">Categoría *</label
+                  >
+                  <select
+                    id="categoria"
+                    name="categoria"
+                    required
+                    class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                  >
+                    <option value="">Seleccionar categoría</option>
+                    <option value="femenina-elite">Femenina Elite</option>
+                    <option value="masculina-elite">Masculina Elite</option>
+                    <option value="femenina-sub23">Femenina Sub-23</option>
+                    <option value="masculina-sub23">Masculina Sub-23</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="equipo" class="block font-bold mb-2 text-oscuro"
+                    >Equipo/Club</label
+                  >
+                  <input
+                    type="text"
+                    id="equipo"
+                    name="equipo"
+                    class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                    placeholder="Nombre del equipo o club"
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Experiencia -->
+            <fieldset class="space-y-6">
+              <legend class="text-2xl font-bold text-oscuro mb-6"
+                >🚴‍♀️ Experiencia Ciclística</legend
+              >
+
+              <div>
+                <label
+                  for="experiencia"
+                  class="block font-bold mb-2 text-oscuro"
+                  >Contanos sobre tu experiencia *</label
+                >
+                <textarea
+                  id="experiencia"
+                  name="experiencia"
+                  required
+                  rows="4"
+                  class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20 resize-y"
+                  placeholder="¿Cuál es tu experiencia en ciclismo de ruta? ¿Participaste en otras carreras largas? ¿Cuál es tu mejor marca en distancias similares?"
+                ></textarea>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="licencia" class="block font-bold mb-2 text-oscuro"
+                    >N° Licencia FAC *</label
+                  >
+                  <input
+                    type="text"
+                    id="licencia"
+                    name="licencia"
+                    required
+                    class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                    placeholder="Número de licencia"
+                  />
+                </div>
+                <div>
+                  <label for="seguro" class="block font-bold mb-2 text-oscuro"
+                    >Compañía de Seguro *</label
+                  >
+                  <input
+                    type="text"
+                    id="seguro"
+                    name="seguro"
+                    required
+                    class="w-full p-4 border-2 border-white rounded-2xl text-base transition-all duration-300 bg-white focus:border-celeste focus:outline-none focus:ring-2 focus:ring-celeste/20"
+                    placeholder="Nombre de la aseguradora"
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Términos y Condiciones -->
+            <fieldset class="space-y-6">
+              <legend class="text-2xl font-bold text-oscuro mb-6"
+                >📝 Términos y Condiciones</legend
+              >
+
+              <div class="bg-white p-6 rounded-2xl border-2 border-celeste/20">
+                <div class="space-y-4">
+                  <label class="flex items-start space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      required
+                      class="mt-1 w-5 h-5 text-celeste border-2 border-celeste/50 rounded focus:ring-celeste focus:ring-2"
+                    />
+                    <span class="text-sm">
+                      Acepto participar bajo mi propio riesgo y libero de
+                      responsabilidad a los organizadores de La Doble Bragado
+                      por cualquier lesión o daño que pueda sufrir durante la
+                      carrera. *
+                    </span>
+                  </label>
+
+                  <label class="flex items-start space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      required
+                      class="mt-1 w-5 h-5 text-celeste border-2 border-celeste/50 rounded focus:ring-celeste focus:ring-2"
+                    />
+                    <span class="text-sm">
+                      Confirmo que cumplo con todos los requisitos médicos y de
+                      equipamiento necesarios para participar en esta carrera de
+                      larga distancia. *
+                    </span>
+                  </label>
+
+                  <label class="flex items-start space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      class="mt-1 w-5 h-5 text-celeste border-2 border-celeste/50 rounded focus:ring-celeste focus:ring-2"
+                    />
+                    <span class="text-sm">
+                      Autorizo el uso de mi imagen en fotografías y videos
+                      tomados durante el evento para fines promocionales de La
+                      Doble Bragado.
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Botón de Envío -->
+            <div class="text-center pt-8">
+              <button
+                type="submit"
+                class="bg-gradient-to-r from-rosa to-celeste hover:from-celeste hover:to-rosa text-white px-16 py-6 rounded-3xl font-bold text-xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-celeste/20"
+              >
+                🚴‍♀️ Confirmar Inscripción
+              </button>
+              <p class="text-sm text-oscuro/60 mt-6 max-w-2xl mx-auto">
+                Al enviar este formulario, recibirás un email de confirmación
+                con las instrucciones de pago y documentación adicional
+                requerida.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section
+      class="bg-gradient-to-r from-celeste to-rosa py-20"
+      aria-labelledby="cta-title"
+    >
+      <div class="max-w-4xl mx-auto px-8 text-center">
+        <h2
+          id="cta-title"
+          class="font-display font-black text-4xl md:text-5xl text-white mb-6 uppercase"
+        >
+          ¿Tenés Dudas?
+        </h2>
+        <p class="text-xl text-white/90 mb-8 leading-relaxed">
+          Nuestro equipo está disponible para ayudarte con cualquier consulta
+          sobre la inscripción o la carrera.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href="/#contacto"
+            class="bg-white text-celeste px-8 py-4 rounded-3xl font-bold text-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+            aria-label="Contactar para resolver dudas"
+          >
+            💬 Contactanos
+          </a>
+          <a
+            href="https://youtube.com/@ladoblebragado"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border-2 border-white text-white px-8 py-4 rounded-3xl font-bold text-lg hover:bg-white hover:text-celeste transition-all duration-300"
+            aria-label="Ver videos informativos en YouTube"
+          >
+            📺 Ver Videos
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer
+    class="bg-oscuro text-white py-12 text-center border-t-4 border-amarillo"
+    role="contentinfo"
+  >
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid md:grid-cols-3 gap-12 mb-8">
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold">La Doble Bragado</h3>
+          <p>
+            Más de 100 años conectando ciclistas con el desafío más extremo de
+            Argentina.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold">Enlaces Rápidos</h3>
+          <nav aria-label="Enlaces de pie de página">
+            <ul class="space-y-2">
+              <li>
+                <a href="/" class="hover:text-amarillo transition-colors"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/historia"
+                  class="hover:text-amarillo transition-colors">Historia</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/inscripciones"
+                  class="hover:text-amarillo transition-colors">Inscripciones</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/campeones"
+                  class="hover:text-amarillo transition-colors">Campeones</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold">Seguinos</h3>
+          <div
+            class="flex justify-center gap-4 mt-8"
+            role="list"
+            aria-label="Redes sociales"
+          >
+            <a
+              href="https://facebook.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Seguinos en Facebook"
+              role="listitem">📘</a
+            >
+            <a
+              href="https://instagram.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Seguinos en Instagram"
+              role="listitem">📷</a
+            >
+            <a
+              href="https://twitter.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Seguinos en Twitter"
+              role="listitem">🐦</a
+            >
+            <a
+              href="https://youtube.com/@ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Suscribite a nuestro canal de YouTube"
+              role="listitem">📺</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/20 pt-8">
+        <p>&copy; 2025 La Doble Bragado. Todos los derechos reservados.</p>
+        <p class="text-sm text-white/60 mt-2">
+          Desarrollado con ❤️ para la comunidad ciclística argentina
+        </p>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* Animación para el hamburger menu */
+  #mobile-menu-button[data-state="open"] span:first-child {
+    transform: rotate(45deg) translateY(8px);
+  }
+
+  #mobile-menu-button[data-state="open"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #mobile-menu-button[data-state="open"] span:last-child {
+    transform: rotate(-45deg) translateY(-8px);
+  }
+
+  /* Mejora accesibilidad para motion reducida */
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-menu {
+      transition: none !important;
+    }
+
+    #mobile-menu-button span {
+      transition: none !important;
+    }
+
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Mejora contraste para usuarios con alta sensibilidad */
+  @media (prefers-contrast: high) {
+    .text-amarillo {
+      color: #ffd700 !important;
+    }
+    .bg-celeste {
+      background-color: #1e40af !important;
+    }
+  }
+</style>
+
+<script>
+  // JavaScript para el menú móvil
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener("click", function () {
+        const isOpen = mobileMenuButton.getAttribute("data-state") === "open";
+
+        if (isOpen) {
+          // Cerrar menú
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        } else {
+          // Abrir menú
+          mobileMenuButton.setAttribute("data-state", "open");
+          mobileMenuButton.setAttribute("aria-expanded", "true");
+          mobileMenu.setAttribute("aria-hidden", "false");
+          mobileMenu.classList.remove("translate-x-full");
+          document.body.style.overflow = "hidden";
+        }
+      });
+
+      // Cerrar menú al hacer clic en un enlace
+      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        });
+      });
+
+      // Cerrar menú con ESC
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "Escape" &&
+          mobileMenuButton.getAttribute("data-state") === "open"
+        ) {
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+
+    // Smooth scroll para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          const headerOffset = 80; // Altura del header fijo
+          const elementPosition = target.offsetTop;
+          const offsetPosition = elementPosition - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+
+    // Validación del formulario
+    const form = document.querySelector(
+      'form[aria-label="Formulario de inscripción a La Doble Bragado"]'
+    );
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Aquí iría la lógica de envío del formulario
+        // Por ahora mostramos un mensaje de confirmación
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+
+        submitBtn.innerHTML = "⏳ Procesando...";
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          alert(
+            "¡Inscripción enviada correctamente! Recibirás un email de confirmación en breve."
+          );
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+          form.reset();
+        }, 2000);
+      });
+    }
+  });
+</script>

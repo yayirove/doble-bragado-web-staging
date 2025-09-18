@@ -1,0 +1,578 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CampeonModal from "../components/CampeonModal.astro";
+import PalmaresModal from "../components/PalmaresModal.astro";
+
+const pageTitle =
+  "Historia - La Doble Bragado | 100+ Años de Ciclismo Argentino";
+const pageDescription =
+  "Descubre más de 100 años de historia ciclística. La evolución de La Doble Bragado desde 1922 hasta hoy.";
+const pageKeywords =
+  "historia ciclismo argentina, doble bragado historia, juan curuchet, cosme saavedra, dario colla";
+
+// JSON-LD: AboutPage + BreadcrumbList (no afecta diseño)
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: Astro.site ? new URL("/historia", Astro.site).toString() : undefined,
+    about: {
+      "@type": "SportsEvent",
+      name: "La Doble Bragado",
+      sport: "Cycling",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: Astro.site ? new URL("/", Astro.site).toString() : "/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Historia",
+        item: Astro.site
+          ? new URL("/historia", Astro.site).toString()
+          : "/historia",
+      },
+    ],
+  },
+];
+
+// === Data de Campeones Históricos (placeholders clonando a Gret) ===
+const baseGret = {
+  foto: "/images/fotos-historicas/Eugenio-Gret.jpg",
+  ficha: {
+    nacimiento: "9 de agosto de 1901, Buenos Aires (CABA).",
+    residencia:
+      'Porteño; ligado al Club Ciclista Nación (entonces "Nacional"). Protagonista habitual de crónicas y pruebas en Buenos Aires.',
+    inicios:
+      "Registros desde al menos 1919; victorias en el Critérium de Apertura (también llamado Apertura CC La Nación).",
+    hito: "Integrante de la Selección Argentina en los Juegos Olímpicos de París 1924 (pista: sprint y 50 km).",
+  },
+  cronica: [
+    "PLACEHOLDER — Texto provisorio (copiado del modal de Gret) a reemplazar.",
+    "PLACEHOLDER — Párrafo 2.",
+  ],
+};
+
+const campeonesData = {
+  // Original (Gret) — queda como está
+  gret1922: {
+    id: "gret-1922",
+    foto: "/images/fotos-historicas/Eugenio-Gret.jpg",
+    nombre: "Eugenio R. Gret",
+    titulo: "El día que todo empezó",
+    ficha: {
+      nacimiento: "9 de agosto de 1901, Buenos Aires (CABA).",
+      residencia:
+        'Porteño; ligado al Club Ciclista Nación (entonces "Nacional"). Protagonista habitual de crónicas y pruebas en Buenos Aires.',
+      inicios:
+        "Registros desde al menos 1919; victorias en el Critérium de Apertura (también llamado Apertura CC La Nación).",
+      hito: "Integrante de la Selección Argentina en los Juegos Olímpicos de París 1924 (pista: sprint y 50 km).",
+    },
+    cronica: [
+`La mañana de 1922 huele a ripio húmedo y a tren madrugador. La caravana sale de Buenos Aires rumbo a Mercedes: ciclistas de remeras multicolores, bicicletas de acero, autos ruidosos abriendo paso entre el polvo. La provincia despierta y la gente se arrima a las cunetas para ver pasar un sueño nuevo: una ida y vuelta que ya se siente leyenda. En ese llano sin concesiones, el viento pampero es juez, y cada relevo es un pacto de ruta. De esa primera promesa nace la “Doble Mercedes”, la semilla de la Clásica del Oeste.`,
+`Al frente, un joven de rostro calmo y pedal firme escribe la primera firma del libro: Eugenio Gret. Su silueta se recorta delante del pelotón como si adivinara que, para fundar una tradición, no alcanza con llegar: hay que abrir camino. Cruza primero y, con ese gesto, convierte a una carrera joven en una historia que vuelve cada verano por los mismos pueblos. La ruta queda atrás, pero el sonido de las bicicletas resuena todo el año: habrá revancha, habrá nombres, habrá epopeyas. La Doble ya tiene su punto de partida y un campeón para recordarlo.`
+    ],
+  },
+
+  // Nuevos (placeholders = baseGret)
+  saavedra_1924_1930: {
+    id: "saavedra-1924-1930",
+        foto: "/images/fotos-historicas/Cosme-Saavedra.jpg",
+    nombre: "Cosme Saavedra",
+    titulo: "Era Saavedra (1924–1930)",
+    ficha: {
+      nacimiento: "27 de Septiemnre de 1901, Godoy Cruz, Mendoza.",
+      inicios:
+        "Se curtió en clásicas nacionales y rápidamente escaló: fue tercero en la Doble en 1923 y al año siguiente logró su primer título (1924), iniciando una racha que lo transformaría en referente.",
+      hito: "Integró la selección argentina en los Juegos Olímpicos París 1924 y Ámsterdam 1928.",
+    },
+    cronica: [
+  `Verano en Buenos Aires: el aire vibra, el horizonte tiembla de calor y la calzada levanta un polvo fino que se pega a la lengua. A los costados, alambrados, eucaliptos de sombra breve y estaciones de tren que asoman como oasis. Entre bocinas y gritos de aliento, un muchacho avanza con cadencia pareja, sin gestos de más. Se llama Cosme Saavedra y, mientras la caravana va y vuelve de Mercedes, su mirada apunta más lejos: cada kilómetro es un peldaño hacia París 1924.`,
+  `El verano anterior le había dejado una lección precisa: tercero en 1923. Aprender a respirar el calor, a economizar agua, a esconderse de un viento que a veces corta de costado y a elegir el instante que separa paciencia de ataque. Al año siguiente, la misma recta parece otra cosa: una cuerda tensa que, si se pulsa en el momento justo, abre un hueco mínimo. Cosme acelera cuando el soplido afloja, la rueda muerde mejor el suelo, y el zumbido de la cadena se vuelve una promesa cumplida: primer título en 1924.`,
+  `Lo que sigue es una constelación paciente: 1924, 1925, 1927, 1928, 1929 y 1930. Seis conquistas que no cierran una historia: la vuelven a empezar. En la última, el apellido se duplica en la llegada -Remigio segundo- y el aplauso suena a familia. Desde entonces, cada edición repite el gesto de Cosme: mirar la línea que se borra en el calor, mojar la gorra, calcular el silencio del viento y creer que el próximo verano abre otra puerta.`
+    ],
+  },
+  curuchet_1997_2003: {
+    id: "curuchet-1997-2003",
+    foto: "/images/fotos-historicas/Juan-Curuchet.jpg",
+    nombre: "Juan Curuchet",
+    titulo: "Leyenda Moderna (1997–2003)",
+ficha: {
+      nacimiento: "4 de febrero de 1965. Mar del Plata ,Buenos Aires, Argentina.",
+      inicios:
+        "Proyección nacional en los años 80 y debut olímpico en 1984 (Los Ángeles) con 19 años. Desde entonces alternó pista y ruta, consolidándose como referente en ambas.",
+      hito: "Campeón olímpico en Beijing 2008 (Madison) junto a Walter Pérez; campeón del mundo 2004 (Madison) con el mismo compañero. Participó en seis Juegos Olímpicos (1984, 1988, 1996, 2000, 2004 y 2008).",
+    },
+    cronica: [
+`El Laoshan velódromo tenía luz de mediodía aunque fuera de noche. En LA MADISON, Curuchet y Perez se entendían a la distancia: un gesto breve, la mano que lanza, el siguiente que entra limpio. Cada relevo acomodaba el tablero de a poco.`, 
+`Pero antes de Beijing hubo Oeste. Hubo 1997 y 1998 con vientos cruzados entre Chivilcoy y Bragado. En 2000, paciencia para esperar la hendija justa; en 2003, el tetracampeón levantando la vista en el podio, con tierra pegada al maillot y nombres de pueblos en la memoria.`,
+`El kilómetro cero fue Mar del Plata: la brisa del puerto, el rumor de las lanchas, las tardes largas. Dos hermanos—Juan y Gabriel—y esas salidas de barrio a hacer los mandados en bicicleta, una bolsa de pan colgando del manubrio y la sensación de que el mundo empezaba en la esquina. Después, el oficio afilado con el equipo Toledo y una contrarreloj pulida en pista para rascar segundos en el llano.`,
+`Cuando sonó la campana final en Beijing, no fue irrupción: fue continuidad. La mano con Walter cerró un círculo iniciado en las calles de su infancia y en las rutas bonaerenses. El oro no apareció de repente; llegó como llegan las cosas que se trabajan todos los días: por acumulación de vueltas, de confianza y de silencios compartidos.`
+
+    ],
+  },
+  colla_2002_2007: {
+    id: "colla-2002-2007",
+    foto: "/images/fotos-historicas/Dario-Colla-Matador.jpg",
+    nombre: "Ángel Darío Colla",
+    titulo: "Legado Eterno (2002–2007)",
+ficha: {
+      nacimiento: "8 de septiembre de 1973. Buenos Aires.",
+      inicios:
+        "Debutó muy joven en Juegos Olímpicos: Barcelona 1992 y Atlanta 1996. En el calendario local se afirmó como velocista y ya en 2000 ganaba etapas de la Doble Bragado; en 2002 firmó el célebre triplete de etapas y se llevó la general.",
+      hito: "Doble subcampeón mundial de scratch (Bordeaux 2006 y Pruszków 2009); llegó a ser Nº1 del ranking UCI en scratch; y fue campeón panamericano de scratch (2004, 2005 y 2008), entre otros podios",
+    },
+    cronica: [
+`Cae una lluvia fina que pule la calle y borra los bordes. Capuchas en las veredas, banderines pegados a los postes, el pelotón respirando vapor. 2002 arranca así, mojado, y Darío Colla no negocia: acelera una, dos, tres veces seguidas. La cuarta etapa ni se larga por el temporal; el triplete ya está tatuado en la memoria.`,
+`Pergamino, Cuatro Avenidas. El piso brilla y el final parece angosto. Colla se guarda hasta que la recta se abre un centímetro: baja un piñón, se acomoda a rueda, se mete por donde nadie imaginaba. No hace gestos: calcula, respira, entra. Ese día se entiende por qué lo llaman El Matador. Las voces empujan, los bombos marcan el pulso, y la línea negra en el asfalto se rinde ante una proclama: En el Oeste está el agite.`,
+`Aquel 2002 fue prólogo de todo: bicampeón de la general más tarde y récord absoluto de victorias de etapa —29— que todavía pesa. Tras cada bandera a cuadros vuelve el ritual mínimo: casco sobre la mesa, un sorbo de bidón, las piernas que zumban solas. Afuera, la caravana sigue de fiesta; adentro, El Matador cierra los ojos un segundo. No hay épica declamada: hay oficio, aguante y un velocista que, incluso bajo agua, siempre encuentra la salida justa.`
+    ],
+  },
+  traico_2025: {
+    id: "traico-2025",
+    foto: "/images/fotos-historicas/traico-v2.jpg",
+    nombre: "Nicolás Traico",
+    titulo: "Nueva Era (2025)",
+ficha: {
+      nacimiento: "22 de mayo de 1992. Allen, Río Negro, Argentina.",
+      inicios:
+        "Formado en el semillero del Alto Valle (Allen), se destacó pronto en pruebas regionales: podio en la Vuelta al Valle 2019. En 2021 dio un salto de visibilidad con el SEP San Juan al ganar la Vuelta del Este en el Circuito San Juan Villicum.",
+      hito: "Campeón de las 500 Millas del Norte (Artigas, Uruguay) en 2025.",
+    },
+    cronica: [
+`El cielo estaba cargado, pero seco. Durante toda la semana, Cobarrubia había ido tallando la carrera a golpe de llegadas; cada festejo suyo pesaba en las piernas ajenas. El equipo GB Bicicletas leyó eso y eligió otro camino: no discutir cada pancarta, sino administrar. Cerrar huecos cuando convenía, ordenar la fila en las curvas, enfriar la cabeza donde otros se encendían. Traico en el centro del plan, sin alardes.`,
+`Entonces sonó el campanazo. Y, pegado al metal, un trueno le puso grave a la última vuelta. El SEP San Juan olió la línea y aceleró como manda el oficio; el equipo comandado por Germán Broggi sostuvo la geometría, cosió cortes, guardó cada segundo. No se trataba de lucirse: se trataba de llegar con la cuenta intacta.`,
+`La bandera bajó y, unos latidos después, las primeras gotas. Luego, la cortina. Bragado estalló en agua cuando la historia ya estaba contada: Cobarrubia con los brazos en alto en la jornada, Traico campeón de la 88ª. Sin estridencia, con método. Una victoria coral que se escribió en lo invisible, vuelta a vuelta, hasta ese campanazo con trueno que anunció, más que la lluvia, el cierre de un plan perfecto.`
+    ],
+  },
+  aguirre_2023: {
+    id: "aguirre-2023",
+    foto: "/images/fotos-historicas/Maribel-Aguirre-v2.jpg",
+    nombre: "Maribel Aguirre",
+    titulo: "Revolución Femenina (2023)",
+ficha: {
+      nacimiento: "15 de mayo de 1999, San Juan (Argentina).",
+      inicios:
+        "Formada en el semillero sanjuanino: a los 12 años ganó el Argentino de Ruta (Paraná) y ya sumaba títulos infanto-juveniles y múltiples coronas provinciales en pista y ruta.",
+      hito: "Bronce en ómnium en el Campeonato Panamericano de Pista 2019 (Cochabamba). Logró su primera victoria en Europa en 2022, Trofeo Tafalla – España).",
+    },
+    cronica: [
+`La caravana toma aire en Chivilcoy y dobla hacia Moquehuá como quien abre un libro nuevo. En la curva del pueblo chico, Rower ordena filas: una entra, otra sale. El pulso es compartido y deja un mensaje sencillo: venimos a hacer historia. El primer capítulo lo escribe el equipo: Cristina Greve acelera de lejos y se queda con la Etapa 1. La cinta inaugura un tono; no es estruendo, es método: liderar sin gastar de más, pensar en la película y no en la foto.`,
+`Al día siguiente, la historia encuentra su bisagra. En Bragado, la CRI corta el ruido y deja sólo cadena y respiración. Maribel Aguirre firma el mejor tiempo y la clasificación empieza a hablar con su voz. Desde ese segundo ganado y bien aprovechado, todo lo demás se vuelve gestión inteligente del esfuerzo.`,
+`El cierre confirma la intuición del comienzo: la 1ª Doble Bragado Femenina es para Maribel Aguirre (Team Rower). La sanjuanina levanta el trofeo y la edición inaugural ya no es promesa: es un título en la vitrina y una puerta abierta para las que vienen detrás.`,
+`Epílogo breve: un año después, la carrera volvió y Aguirre repitió la general. Lo que en 2023 fue un acto fundacional, en 2024 se volvió continuidad: la tradición empezó a rodar.`
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  structuredData={structuredData}
+>
+  <a href="#contenido" class="sr-only focus:not-sr-only">Saltar al contenido</a>
+
+  <main id="contenido" role="main" tabindex="-1">
+    <!-- HERO (LCP optimizado con <img>) -->
+    <section
+      id="historia"
+      class="h-screen flex items-center justify-center relative text-center"
+      aria-labelledby="historia-title">
+      <img
+        src="/images/hero-historia-golden-v2.jpg"
+        alt="Darío Colla compitiendo en La Doble Bragado"
+        fetchpriority="high"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-black/25" aria-hidden="true"></div>
+
+      <div class="text-white z-10 max-w-5xl px-8">
+        <h1
+          id="historia-title"
+          class="font-display font-black text-6xl md:text-7xl lg:text-8xl mb-6 leading-tight text-amarillo">
+          HISTORIA<br />VIVA
+        </h1>
+        <p
+          class="text-xl md:text-3xl mb-8 opacity-90 font-semibold max-w-4xl mx-auto">
+          Más de 100 años forjando leyendas del ciclismo
+        </p>
+        <div class="text-lg md:text-xl opacity-80 max-w-4xl mx-auto"></div>
+      </div>
+    </section>
+
+    <!-- TIMELINE (EL PULSO DE UN SIGLO) — CTA en cada caja abre CampeonModal -->
+    <section
+      class="bg-oscuro py-20 border-t-0 border-amarillo border-b-0 border-rosa"
+      aria-labelledby="timeline-title">
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="timeline-title"
+            class="font-display font-black text-5xl md:text-5xl text-white mb-4 uppercase">
+            Historia Viva
+          </h2>
+          <p class="text-xl text-amarillo font-semibold">
+            Los momentos que definieron 100 años de ciclismo
+          </p>
+        </header>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <!-- Modales (placeholders listos) -->
+          <CampeonModal {...campeonesData.gret1922} />
+          <CampeonModal {...campeonesData.saavedra_1924_1930} />
+          <CampeonModal {...campeonesData.curuchet_1997_2003} />
+          <CampeonModal {...campeonesData.colla_2002_2007} />
+          <CampeonModal {...campeonesData.traico_2025} />
+          <CampeonModal {...campeonesData.aguirre_2023} />
+
+          <!-- 1) El Nacimiento -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-rosa hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group motion-reduce:transition-none motion-reduce:transform-none">
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 motion-reduce:transition-none motion-reduce:transform-none">
+              22
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              El Nacimiento
+            </h3>
+            <p class="text-grisclaro leading-relaxed">
+              <strong class="text-white">1922:</strong> Primera edición como “Doble
+              Mercedes”.
+              <strong class="text-amarillo">Eugenio Gret</strong> se convierte en
+              el primer campeón.
+            </p>
+
+            <!-- CTA -->
+            <button
+              data-modal="gret-1922"
+              aria-expanded="false"
+              aria-controls="modal-gret-1922"
+              class="mt-6 px-6 py-3 bg-amarillo/20 hover:bg-amarillo/30 border border-amarillo/40 rounded-full text-amarillo font-bold text-sm uppercase tracking-wider transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-amarillo/50 hover:scale-105">
+              <span class="flex items-center gap-2 justify-center">
+                <span>Leer historia completa</span>
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </button>
+          </article>
+
+          <!-- 2) Era Saavedra -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-rosa hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group motion-reduce:transition-none motion-reduce:transform-none">
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 motion-reduce:transition-none motion-reduce:transform-none">
+              6
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              Era Saavedra
+            </h3>
+            <p class="text-grisclaro leading-relaxed">
+              <strong class="text-white">1924–1930:</strong>
+              <strong class="text-amarillo">Cosme Saavedra</strong> domina con 6
+              títulos convirtiéndose en la primera leyenda.
+            </p>
+
+            <!-- CTA -->
+            <button
+              data-modal="saavedra-1924-1930"
+              aria-expanded="false"
+              aria-controls="modal-saavedra-1924-1930"
+              class="mt-6 px-6 py-3 bg-amarillo/20 hover:bg-amarillo/30 border border-amarillo/40 rounded-full text-amarillo font-bold text-sm uppercase tracking-wider transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-amarillo/50 hover:scale-105">
+              <span class="flex items-center gap-2 justify-center">
+                <span>Leer historia completa</span>
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </button>
+          </article>
+
+          <!-- 3) Leyenda Moderna -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-rosa hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group motion-reduce:transition-none motion-reduce:transform-none">
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 motion-reduce:transition-none motion-reduce:transform-none">
+              4
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              Leyenda Moderna
+            </h3>
+            <p class="text-grisclaro leading-relaxed">
+              <strong class="text-white">1997–2003:</strong>
+              <strong class="text-amarillo">Juan Curuchet</strong> gana 4 títulos.
+              Luego sería campeón olímpico en Beijing 2008.
+            </p>
+
+            <!-- CTA -->
+            <button
+              data-modal="curuchet-1997-2003"
+              aria-expanded="false"
+              aria-controls="modal-curuchet-1997-2003"
+              class="mt-6 px-6 py-3 bg-amarillo/20 hover:bg-amarillo/30 border border-amarillo/40 rounded-full text-amarillo font-bold text-sm uppercase tracking-wider transition-all duración-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-amarillo/50 hover:scale-105">
+              <span class="flex items-center gap-2 justify-center">
+                <span>Leer historia completa</span>
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </button>
+          </article>
+
+          <!-- 4) Legado Eterno -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-rosa hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group motion-reduce:transition-none motion-reduce:transform-none">
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 motion-reduce:transition-none motion-reduce:transform-none">
+              ∞
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              Legado Eterno
+            </h3>
+            <p class="text-grisclaro leading-relaxed">
+              <strong class="text-white">Darío Colla:</strong> Bicampeón
+              <strong class="text-amarillo">(2002–2007)</strong> que marcó una época
+              dorada del ciclismo argentino profesional.
+            </p>
+
+            <!-- CTA -->
+            <button
+              data-modal="colla-2002-2007"
+              aria-expanded="false"
+              aria-controls="modal-colla-2002-2007"
+              class="mt-6 px-6 py-3 bg-amarillo/20 hover:bg-amarillo/30 border border-amarillo/40 rounded-full text-amarillo font-bold text-sm uppercase tracking-wider transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-amarillo/50 hover:scale-105">
+              <span class="flex items-center gap-2 justify-center">
+                <span>Leer historia completa</span>
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </button>
+          </article>
+
+          <!-- 5) Nueva Era -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-rosa hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group motion-reduce:transition-none motion-reduce:transform-none">
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 motion-reduce:transition-none motion-reduce:transform-none">
+              25
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              Nueva Era
+            </h3>
+            <p class="text-grisclaro leading-relaxed">
+              <strong class="text-white">2025:</strong>
+              <strong class="text-amarillo">Nicolás Traico</strong> inaugura una
+              nueva década de gloria escribiendo el futuro.
+            </p>
+
+            <!-- CTA -->
+            <button
+              data-modal="traico-2025"
+              aria-expanded="false"
+              aria-controls="modal-traico-2025"
+              class="mt-6 px-6 py-3 bg-amarillo/20 hover:bg-amarillo/30 border border-amarillo/40 rounded-full text-amarillo font-bold text-sm uppercase tracking-wider transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-amarillo/50 hover:scale-105">
+              <span class="flex items-center gap-2 justify-center">
+                <span>Leer historia completa</span>
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </button>
+          </article>
+
+          <!-- 6) Revolución Femenina (card con gradiente) -->
+          <article
+            class="bg-gradient-to-r from-celeste to-rosa rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group motion-reduce:transition-none motion-reduce:transform-none">
+            <div
+              class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-celeste text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 motion-reduce:transition-none motion-reduce:transform-none">
+              23
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4 uppercase">
+              Revolución Femenina
+            </h3>
+            <p class="text-white leading-relaxed">
+              <strong class="text-white">2023:</strong> Primera edición femenina
+              después de 101 años.
+              <strong class="text-white">Maribel Aguirre</strong> hace historia.
+            </p>
+
+            <!-- CTA (adaptado a gradiente) -->
+            <button
+              data-modal="aguirre-2023"
+              aria-expanded="false"
+              aria-controls="modal-aguirre-2023"
+              class="mt-6 px-6 py-3 bg-white/20 hover:bg-white/30 border border-white/40 rounded-full text-white font-bold text-sm uppercase tracking-wider transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-white/60 hover:scale-105">
+              <span class="flex items-center gap-2 justify-center">
+                <span>Leer historia completa</span>
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA PALMARÉS (abre modal, sin navegación) -->
+    <section
+      class="relative bg-gradient-to-r from-amarillo to-rosa py-20
+             before:content-[''] before:absolute before:inset-x-0 before:top-0 before:h-0 before:bg-rosa
+             after:content-[''] after:absolute after:inset-x-0 after:bottom-0 after:h-0 after:bg-amarillo"
+      aria-labelledby="campeones-section-title">
+      <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-rosa to-transparent"></div>
+      <div class="max-w-7xl mx-auto px-8 text-center">
+        <header class="mb-12">
+          <h2
+            id="campeones-section-title"
+            class="font-display font-black text-5xl md:text-5xl text-oscuro mb-6 uppercase">
+            CAMPEONES
+          </h2>
+          <p
+            class="text-xl md:text-2xl text-oscuro/80 font-semibold max-w-4xl mx-auto mb-8">
+            104 años de gloria. 88 ediciones masculinas. 75 campeones únicos.
+            Explora el palmarés histórico completo.
+          </p>
+        </header>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+          <button
+            data-open-palmares
+            class="relative bg-celeste text-white px-12 py-6 rounded-3xl font-bold text-xl md:text-2xl hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2"
+            aria-label="Ver palmarés histórico completo">
+            Ver palmarés completo
+          </button>
+          <noscript>
+            <a href="/campeones?timeline=true" class="inline-block bg-celeste text-white px-8 py-4 rounded-2xl font-bold">Ver palmarés (sin JS)</a>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL REUTILIZABLE PALMARÉS -->
+    <PalmaresModal />
+  </main>
+</BaseLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Botones que abren modales individuales (CampeonModal)
+    const buttons = document.querySelectorAll("[data-modal]");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const modalId = button.dataset.modal;
+        const modal = document.getElementById(`modal-${modalId}`);
+
+        if (modal) {
+          // Abrir modal
+          modal.classList.remove("hidden");
+          document.body.classList.add("modal-open");
+
+          // Focus management
+          const closeBtn = modal.querySelector("[data-close-modal]");
+          if (closeBtn) closeBtn.focus();
+        }
+      });
+    });
+
+    // Cerrar modal con X
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("[data-close-modal]")) {
+        const modal = e.target.closest(".modal-overlay");
+        closeModal(modal);
+      }
+    });
+
+    // Cerrar modal clickeando el backdrop
+    document.addEventListener("click", (e) => {
+      if (e.target.hasAttribute("data-modal-backdrop")) {
+        const modal = e.target.closest(".modal-overlay");
+        closeModal(modal);
+      }
+    });
+
+    // Cerrar con ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        const openModal = document.querySelector(".modal-overlay:not(.hidden)");
+        if (openModal) closeModal(openModal);
+      }
+    });
+
+    function closeModal(modal) {
+      if (modal) {
+        modal.classList.add("hidden");
+        document.body.classList.remove("modal-open");
+      }
+    }
+  });
+</script>

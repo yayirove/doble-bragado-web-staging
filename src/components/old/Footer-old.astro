@@ -1,0 +1,105 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-oscuro text-white py-12 border-t-4 border-amarillo" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-8">
+    <!-- GRID: mobile 1 col / desktop 3 cols (misma fila) -->
+    <div class="grid md:grid-cols-3 gap-12 mb-10">
+      <!-- Contacto (desktop: col 3, fila 1, alineado a la derecha) -->
+      <section aria-labelledby="footer-contacto-title"
+               class="md:col-start-3 md:row-start-1 md:justify-self-end md:text-right">
+        <h3 id="footer-contacto-title" class="text-amarillo mb-4 font-bold text-xl">Contacto directo</h3>
+        <ul class="space-y-3">
+          <li class="flex items-center justify-center md:justify-end">
+            <svg class="w-5 h-5 text-amarillo mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
+            </svg>
+            <a href="mailto:info@ladoblebragado.com.ar" class="text-white hover:text-amarillo transition-colors">
+              info@ladoblebragado.com.ar
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Newsletter (desktop: col 2, fila 1) -->
+      <section aria-labelledby="footer-newsletter-title"
+               class="md:col-start-2 md:row-start-1">
+        <h3 id="footer-newsletter-title" class="text-amarillo mb-4 font-bold text-xl">Newsletter</h3>
+        <p class="text-grisclaro text-sm mb-4">Recibí las últimas noticias y actualizaciones.</p>
+        <form class="flex" action="#" method="post" novalidate aria-describedby="newsletter-status">
+          <label for="newsletter-email" class="sr-only">Email</label>
+          <input
+            id="newsletter-email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="tu@email.com"
+            required
+            class="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-l-lg text-white placeholder-white/60
+                   focus:outline-none focus:ring-2 focus:ring-amarillo"
+          />
+          <button
+            type="submit"
+            class="bg-amarillo text-oscuro px-4 py-2 rounded-r-lg hover:bg-white transition-colors font-semibold focus:outline-none focus:ring-2 focus:ring-amarillo"
+          >
+            OK
+          </button>
+        </form>
+        <p id="newsletter-status" class="mt-2 text-sm text-white/70" aria-live="polite"></p>
+      </section>
+
+      <!-- Seguinos (desktop: col 1, fila 1, alineado a la izquierda) -->
+      <section aria-labelledby="footer-redes-title"
+               class="w-full text-left md:col-start-1 md:row-start-1 md:justify-self-start">
+        <h3 id="footer-redes-title" class="text-amarillo mb-4 font-bold text-xl">Seguinos</h3>
+        <div class="flex justify-start gap-4">
+          <a
+            href="https://instagram.com/ladoblebragado"
+            target="_blank" rel="noopener noreferrer"
+            class="w-12 h-12 bg-celeste rounded-2xl grid place-content-center text-white
+                   hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-amarillo"
+            aria-label="Instagram de La Doble Bragado (se abre en otra pestaña)"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0 2.5A3.5 3.5 0 1 0 12 16a3.5 3.5 0 0 0 0-7.5ZM18 6.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/>
+            </svg>
+          </a>
+          <a
+            href="https://youtube.com/@ladoblebragado"
+            target="_blank" rel="noopener noreferrer"
+            class="w-12 h-12 bg-celeste rounded-2xl grid place-content-center text-white
+                   hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duración-300 focus:outline-none focus:ring-2 focus:ring-amarillo"
+            aria-label="YouTube de La Doble Bragado (se abre en otra pestaña)"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.5 15.6V8.4L15.8 12 9.5 15.6Z"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Franja inferior -->
+<div class="border-t border-white/20 pt-6">
+  <div class="flex items-center justify-between gap-6">
+    <!-- Izquierda: copyright (tamaño original) -->
+    <p class="text-sm text-white/80">
+      &copy; {currentYear} El Mariachi — Desarrollado con autorización del Club Ciclista Nación.
+    </p>
+
+    <!-- Derecha: logo Nación en caja blanca y +20% tamaño -->
+    <div class="bg-white/95 rounded-xl shadow-md ring-1 ring-black/5 px-3 py-1.5">
+      <img
+        src="/images/ldb-logo-nacion-v2.svg"
+        alt="Club Ciclista Nación"
+        class="h-[2.4rem] md:h-[3rem] w-auto"
+        loading="lazy" decoding="async"
+      />
+    </div>
+  </div>
+</div>
+
+</footer>

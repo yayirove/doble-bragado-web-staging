@@ -1,0 +1,723 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// SEO optimizado para Historia
+const pageTitle =
+  "Historia - La Doble Bragado | 100+ Años de Ciclismo Argentino";
+const pageDescription =
+  "Descubre más de 100 años de historia ciclística. La evolución de La Doble Bragado desde 1922 hasta hoy. Leyendas, campeones y momentos históricos del ciclismo argentino.";
+const pageKeywords =
+  "historia ciclismo argentina, doble bragado historia, juan curuchet, cosme saavedra, maribel aguirre, ciclismo 1922, carreras históricas argentina";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  ogImage="/images/historia-hero-bg.jpg"
+>
+  <!-- Header Navigation - IGUAL AL INDEX.ASTRO -->
+  <header
+    class="fixed top-0 w-full bg-celeste/90 backdrop-blur-lg z-50 border-b-2 border-amarillo"
+    role="banner"
+  >
+    <nav
+      class="max-w-7xl mx-auto flex justify-between items-center py-4 px-8"
+      role="navigation"
+      aria-label="Navegación principal"
+    >
+      <!-- Logo -->
+      <a
+        href="/"
+        class="flex items-center"
+        aria-label="Ir a inicio de La Doble Bragado"
+      >
+        <img
+          src="/images/ldb-logo-v2.svg"
+          alt="Logo La Doble Bragado - Carrera de Ciclismo Histórica"
+          class="h-12 w-auto"
+          width="48"
+          height="48"
+        />
+      </a>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden lg:flex space-x-8">
+        <li>
+          <a
+            href="/"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ir a página principal"
+          >
+            Inicio
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/historia"
+            class="text-amarillo font-semibold text-lg relative"
+            aria-label="Historia de La Doble Bragado - Página actual"
+          >
+            Historia
+            <span
+              class="absolute bottom-[-5px] left-0 w-full h-0.5 bg-amarillo"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/inscripciones"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group bg-amarillo/20 px-4 py-2 rounded-2xl hover:bg-amarillo/30"
+            aria-label="Inscribite a La Doble Bragado 2025"
+          >
+            Inscripciones
+            <span
+              class="absolute bottom-[-5px] left-4 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-[calc(100%-2rem)]"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/recorrido"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ver el recorrido completo"
+          >
+            Recorrido
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/campeones"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ver todos los campeones"
+          >
+            Campeones
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/#contacto"
+            class="text-white font-semibold text-lg relative hover:text-amarillo transition-colors duration-300 group"
+            aria-label="Ir a formulario de contacto"
+          >
+            Contacto
+            <span
+              class="absolute bottom-[-5px] left-0 w-0 h-0.5 bg-amarillo transition-all duration-300 group-hover:w-full"
+              aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-button"
+        class="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 group"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span
+          class="w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo transform group-data-[state=open]:rotate-45 group-data-[state=open]:translate-y-2"
+          aria-hidden="true"></span>
+        <span
+          class="w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo group-data-[state=open]:opacity-0"
+          aria-hidden="true"></span>
+        <span
+          class="w-6 h-0.5 bg-white transition-all duration-300 group-hover:bg-amarillo transform group-data-[state=open]:-rotate-45 group-data-[state=open]:-translate-y-2"
+          aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="lg:hidden fixed inset-0 bg-celeste/95 backdrop-blur-lg transform translate-x-full transition-transform duration-300 ease-in-out z-40"
+      aria-hidden="true"
+    >
+      <div class="flex flex-col h-full pt-24 px-8">
+        <nav
+          class="flex-1 flex flex-col space-y-8"
+          role="navigation"
+          aria-label="Navegación móvil"
+        >
+          <a
+            href="/"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-4"
+            aria-label="Ir a página principal"
+          >
+            Inicio
+          </a>
+          <a
+            href="/historia"
+            class="text-amarillo text-2xl font-bold border-b border-white/20 pb-4"
+            aria-label="Historia de La Doble Bragado - Página actual"
+          >
+            📚 Historia
+          </a>
+          <a
+            href="/inscripciones"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300 bg-amarillo/20 px-6 py-4 rounded-2xl hover:bg-amarillo/30 border-b border-white/20 pb-4"
+            aria-label="Inscribite a La Doble Bragado 2025"
+          >
+            🚴‍♀️ Inscripciones
+          </a>
+          <a
+            href="/recorrido"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-4"
+            aria-label="Ver el recorrido completo"
+          >
+            Recorrido
+          </a>
+          <a
+            href="/campeones"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300 border-b border-white/20 pb-4"
+            aria-label="Ver todos los campeones"
+          >
+            Campeones
+          </a>
+          <a
+            href="/#contacto"
+            class="text-white text-2xl font-semibold hover:text-amarillo transition-colors duration-300"
+            aria-label="Ir a formulario de contacto"
+          >
+            Contacto
+          </a>
+        </nav>
+
+        <!-- Mobile Social Links -->
+        <div class="py-8 border-t border-white/20">
+          <p class="text-white/80 text-sm mb-4">Seguinos en:</p>
+          <div class="flex space-x-4">
+            <a
+              href="https://youtube.com/@ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-rosa rounded-2xl flex items-center justify-center text-white hover:bg-amarillo hover:text-oscuro transition-colors duration-300"
+              aria-label="YouTube"
+            >
+              📺
+            </a>
+            <a
+              href="https://instagram.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-rosa rounded-2xl flex items-center justify-center text-white hover:bg-amarillo hover:text-oscuro transition-colors duration-300"
+              aria-label="Instagram"
+            >
+              📷
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main role="main">
+    <!-- Hero Section Historia -->
+    <section
+      id="historia"
+      class="h-screen flex items-center justify-center relative text-center"
+      aria-labelledby="historia-title"
+    >
+      <!-- Background Image -->
+      <div
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('/images/historia-hero-bg.jpg');"
+        role="img"
+        aria-label="Ciclistas históricos de La Doble Bragado"
+      >
+      </div>
+      <!-- Overlay for better text readability -->
+      <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
+
+      <div class="text-white z-10 max-w-5xl px-8">
+        <h1
+          id="historia-title"
+          class="font-display font-black text-6xl md:text-7xl lg:text-8xl mb-6 leading-tight text-amarillo"
+        >
+          HISTORIA<br />VIVA
+        </h1>
+        <p
+          class="text-xl md:text-3xl mb-8 opacity-90 font-semibold max-w-4xl mx-auto"
+        >
+          Más de 100 años forjando leyendas del ciclismo
+        </p>
+        <div class="text-lg md:text-xl opacity-80 max-w-3xl mx-auto">
+          Desde 1922, La Doble Bragado ha sido testigo de la evolución del
+          ciclismo argentino, creando campeones y escribiendo páginas doradas en
+          la historia del deporte.
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section
+      class="bg-oscuro py-20 border-t-4 border-amarillo border-b-4 border-rosa"
+      aria-labelledby="timeline-title"
+    >
+      <div class="max-w-7xl mx-auto px-8">
+        <header class="text-center mb-16">
+          <h2
+            id="timeline-title"
+            class="font-display font-black text-5xl md:text-5xl text-white mb-4 uppercase"
+          >
+            Historia Viva
+          </h2>
+          <p class="text-xl text-amarillo font-semibold">
+            Los momentos que definieron 100 años de ciclismo
+          </p>
+        </header>
+
+        <!-- Timeline Cards -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <!-- 1922 - Inicio -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-amarillo hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group timeline-item opacity-0 translate-y-12"
+          >
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-hidden="true"
+            >
+              22
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              El Nacimiento
+            </h3>
+            <p class="text-grisclaro leading-relaxed mb-4">
+              <strong class="text-white">1922:</strong> Primera edición como "Doble
+              Mercedes".
+              <strong class="text-amarillo">Eugenio Gret</strong> se convierte en
+              el primer campeón de la historia.
+            </p>
+            <div class="text-amarillo text-4xl" aria-hidden="true">🏁</div>
+          </article>
+
+          <!-- Era Saavedra -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-amarillo hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group timeline-item opacity-0 translate-y-12"
+          >
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-hidden="true"
+            >
+              8
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              Era Saavedra
+            </h3>
+            <p class="text-grisclaro leading-relaxed mb-4">
+              <strong class="text-white">1924-1930:</strong>
+              <strong class="text-amarillo">Cosme Saavedra</strong>
+              domina con 8 títulos convirtiéndose en la primera leyenda.
+            </p>
+            <div class="text-amarillo text-4xl" aria-hidden="true">👑</div>
+          </article>
+
+          <!-- Identidad Definitiva -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-amarillo hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group timeline-item opacity-0 translate-y-12"
+          >
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-hidden="true"
+            >
+              65
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              Identidad Definitiva
+            </h3>
+            <p class="text-grisclaro leading-relaxed mb-4">
+              <strong class="text-white">1965:</strong> Se adopta el nombre definitivo
+              <strong class="text-amarillo">"Doble Bragado"</strong> que perdura
+              hasta hoy.
+            </p>
+            <div class="text-amarillo text-4xl" aria-hidden="true">⚡</div>
+          </article>
+
+          <!-- Era Curuchet - Leyenda Moderna -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-amarillo hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group timeline-item opacity-0 translate-y-12"
+          >
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-hidden="true"
+            >
+              4
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              Leyenda Moderna
+            </h3>
+            <p class="text-grisclaro leading-relaxed mb-4">
+              <strong class="text-white">1997-2003:</strong>
+              <strong class="text-amarillo">Juan Curuchet</strong>
+              gana 4 títulos. Luego sería campeón olímpico en Beijing 2008.
+            </p>
+            <div class="text-amarillo text-4xl" aria-hidden="true">🥇</div>
+          </article>
+
+          <!-- El Matador - Darío Colla -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-amarillo hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group timeline-item opacity-0 translate-y-12"
+          >
+            <div
+              class="w-16 h-16 bg-amarillo rounded-full flex items-center justify-center text-oscuro text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-hidden="true"
+            >
+              29
+            </div>
+            <h3 class="text-2xl font-bold text-amarillo mb-4 uppercase">
+              El Matador
+            </h3>
+            <p class="text-grisclaro leading-relaxed mb-4">
+              <strong class="text-white">Record histórico:</strong>
+              <strong class="text-amarillo">Darío Colla</strong>
+              ostenta el récord absoluto con 29 victorias de etapa, siendo el máximo
+              ganador en la historia de La Doble.
+            </p>
+            <div class="text-amarillo text-4xl" aria-hidden="true">⚔️</div>
+          </article>
+
+          <!-- Revolución Femenina -->
+          <article
+            class="bg-grisclaro/10 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border-2 border-transparent hover:border-rosa hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group timeline-item opacity-0 translate-y-12"
+          >
+            <div
+              class="w-16 h-16 bg-rosa rounded-full flex items-center justify-center text-white text-2xl font-black mb-6 mx-auto group-hover:scale-110 transition-transform duration-300"
+              style="font-family: 'Audiowide', sans-serif;"
+              aria-hidden="true"
+            >
+              23
+            </div>
+            <h3 class="text-2xl font-bold text-rosa mb-4 uppercase">
+              Revolución Femenina
+            </h3>
+            <p class="text-grisclaro leading-relaxed mb-4">
+              <strong class="text-white">2023:</strong> Primera edición femenina
+              después de 101 años.
+              <strong class="text-rosa">Maribel Aguirre</strong> hace historia.
+            </p>
+            <div class="text-rosa text-4xl" aria-hidden="true">🚴‍♀️</div>
+          </article>
+        </div>
+
+        <!-- Stats Final -->
+        <div
+          class="bg-gradient-to-r from-celeste to-rosa p-12 rounded-3xl text-center"
+          role="region"
+          aria-labelledby="stats-title"
+        >
+          <h3 id="stats-title" class="sr-only">Estadísticas históricas</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-white">
+              <span
+                class="font-black text-4xl md:text-5xl block mb-2"
+                style="font-family: 'Audiowide', sans-serif;"
+                aria-label="100+ años de historia">100+</span
+              >
+              <span class="text-lg font-semibold uppercase tracking-wider"
+                >Años de Historia</span
+              >
+            </div>
+            <div class="text-white">
+              <span
+                class="font-black text-4xl md:text-5xl block mb-2"
+                style="font-family: 'Audiowide', sans-serif;"
+                aria-label="Más de 85 ediciones">88</span
+              >
+              <span class="text-lg font-semibold uppercase tracking-wider"
+                >Ediciones<br />masculinas<br /></span
+              >
+            </div>
+            <div class="text-white">
+              <span
+                class="font-black text-4xl md:text-5xl block mb-2"
+                style="font-family: 'Audiowide', sans-serif;"
+                aria-label="2 ediciones femeninas">2</span
+              >
+              <span class="text-lg font-semibold uppercase tracking-wider"
+                >Ediciones<br />femeninas</span
+              >
+            </div>
+            <div class="text-white">
+              <span
+                class="font-black text-4xl md:text-5xl block mb-2"
+                style="font-family: 'Audiowide', sans-serif;"
+                aria-label="Mas de 70.000KM recorridos">70K+</span
+              >
+              <span class="text-lg font-semibold uppercase tracking-wider"
+                >kilómetros recorridos</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section
+      class="bg-gradient-to-r from-celeste to-rosa py-20"
+      aria-labelledby="cta-title"
+    >
+      <div class="max-w-4xl mx-auto px-8 text-center">
+        <h2
+          id="cta-title"
+          class="font-display font-black text-4xl md:text-5xl text-white mb-6 uppercase"
+        >
+          Sé Parte de la Historia
+        </h2>
+        <p class="text-xl text-white/90 mb-8 leading-relaxed">
+          La próxima edición te espera. Únete a más de 100 años de tradición
+          ciclística y escribe tu propio capítulo en La Doble Bragado.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href="/#countdown"
+            class="bg-white text-celeste px-8 py-4 rounded-3xl font-bold text-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+            aria-label="Ver información de la próxima edición"
+          >
+            Ver Próxima Edición
+          </a>
+          <a
+            href="/#contacto"
+            class="border-2 border-white text-white px-8 py-4 rounded-3xl font-bold text-lg hover:bg-white hover:text-celeste transition-all duration-300"
+            aria-label="Contactar para más información"
+          >
+            Contactar
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer
+    class="bg-oscuro text-white py-12 text-center border-t-4 border-amarillo"
+    role="contentinfo"
+  >
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid md:grid-cols-3 gap-12 mb-8">
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold">La Doble Bragado</h3>
+          <p>
+            25 años conectando ciclistas con el desafío más extremo de
+            Argentina.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold">Enlaces Rápidos</h3>
+          <nav aria-label="Enlaces de pie de página">
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="/reglamento"
+                  class="hover:text-amarillo transition-colors">Reglamento</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/inscripciones"
+                  class="hover:text-amarillo transition-colors">Inscripciones</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/recorrido"
+                  class="hover:text-amarillo transition-colors">Recorrido</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/resultados"
+                  class="hover:text-amarillo transition-colors">Resultados</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <h3 class="text-amarillo mb-4 font-bold">Seguinos</h3>
+          <div
+            class="flex justify-center gap-4 mt-8"
+            role="list"
+            aria-label="Redes sociales"
+          >
+            <a
+              href="https://facebook.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Seguinos en Facebook"
+              role="listitem">📘</a
+            >
+            <a
+              href="https://instagram.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Seguinos en Instagram"
+              role="listitem">📷</a
+            >
+            <a
+              href="https://twitter.com/ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Seguinos en Twitter"
+              role="listitem">🐦</a
+            >
+            <a
+              href="https://youtube.com/@ladoblebragado"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-celeste rounded-2xl flex items-center justify-center text-white hover:-translate-y-2 hover:bg-amarillo hover:text-oscuro transition-all duration-300"
+              aria-label="Suscribite a nuestro canal de YouTube"
+              role="listitem">📺</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/20 pt-8">
+        <p>&copy; 2025 desarrollado por El Mariachi.</p>
+        <p class="text-sm text-white/60 mt-2">Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* Animación para el hamburger menu */
+  #mobile-menu-button[data-state="open"] span:first-child {
+    transform: rotate(45deg) translateY(8px);
+  }
+
+  #mobile-menu-button[data-state="open"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #mobile-menu-button[data-state="open"] span:last-child {
+    transform: rotate(-45deg) translateY(-8px);
+  }
+
+  /* Mejora accesibilidad para motion reducida */
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-menu {
+      transition: none !important;
+    }
+
+    #mobile-menu-button span {
+      transition: none !important;
+    }
+
+    .timeline-item {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  // JavaScript para el menú móvil
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener("click", function () {
+        const isOpen = mobileMenuButton.getAttribute("data-state") === "open";
+
+        if (isOpen) {
+          // Cerrar menú
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        } else {
+          // Abrir menú
+          mobileMenuButton.setAttribute("data-state", "open");
+          mobileMenuButton.setAttribute("aria-expanded", "true");
+          mobileMenu.setAttribute("aria-hidden", "false");
+          mobileMenu.classList.remove("translate-x-full");
+          document.body.style.overflow = "hidden";
+        }
+      });
+
+      // Cerrar menú al hacer clic en un enlace
+      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        });
+      });
+
+      // Cerrar menú con ESC
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "Escape" &&
+          mobileMenuButton.getAttribute("data-state") === "open"
+        ) {
+          mobileMenuButton.setAttribute("data-state", "closed");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          mobileMenu.classList.add("translate-x-full");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+
+    // Animación de aparición suave al hacer scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("opacity-0", "translate-y-12");
+            entry.target.classList.add("opacity-100", "translate-y-0");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".timeline-item").forEach((item) => {
+      observer.observe(item);
+    });
+
+    // Smooth scroll para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          const headerOffset = 80; // Altura del header fijo
+          const elementPosition = target.offsetTop;
+          const offsetPosition = elementPosition - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+  });
+</script>

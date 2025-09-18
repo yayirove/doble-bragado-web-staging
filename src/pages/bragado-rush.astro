@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BragadoRush from "../components/games/BragadoRush.astro";
+
+const meta = {
+  title: "Bragado Rush — Jugar ahora",
+  description:
+    "MVP del juego Bragado Rush para navegadores. Probalo y contanos qué te parece.",
+  ogImage: "/images/og-bragado-rush.jpg",
+  noindex: true, // <-- AÑADIDO: Instrucción para no indexar en buscadores
+  structuredData: {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    name: "Bragado Rush",
+    applicationCategory: "Game",
+    operatingSystem: "Web",
+    genre: ["Arcade", "Casual"],
+    url: Astro.url?.toString(),
+  },
+};
+
+const REPLIT_PUBLIC_URL =
+  "https://2464b0a0-6110-48d5-aff7-4f2d45ae63e3-00-yaxseej5xncp.riker.replit.dev/";
+---
+
+<BaseLayout {...meta}>
+  <section class="bg-grisclaro py-16">
+    <div class="mx-auto max-w-6xl px-4 py-12 text-center">
+      <h1
+        class="font-display text-5xl md:text-6xl font-black text-oscuro uppercase"
+      >
+        Bragado Rush
+      </h1>
+      <p class="mt-4 text-lg text-celeste max-w-2xl mx-auto">
+        Versión MVP (¡en desarrollo!). Funciona en desktop y mobile. Si no carga
+        el juego embebido, podés abrirlo en una pestaña nueva.
+      </p>
+    </div>
+
+    <BragadoRush src={REPLIT_PUBLIC_URL} />
+  </section>
+</BaseLayout>

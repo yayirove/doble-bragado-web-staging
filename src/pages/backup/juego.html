@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Circus Mini</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html,body{margin:0;background:#111;color:#eee;font-family:system-ui}
+    #ui{position:fixed;top:10px;left:10px;font-weight:600}
+    canvas{display:block;margin:0 auto;background:#1b1b1b}
+  </style>
+</head>
+<body>
+<div id="ui">Puntos: <span id="score">0</span> · Vidas: <span id="lives">3</span></div>
+<canvas id="game" width="960" height="540"></canvas>
+<script>
+const cvs = document.getElementById('game');
+const ctx = cvs.getContext('2d');
+const uiScore = document.getElementById('score');
+const uiLives = document.getElementById('lives');
+
+// Mundo
+const GROUND_Y = 420;
+let running = true;
+let t = 0;
+let score = 0;
+let lives = 3;
+let speed = 4;          // velocidad base del mundo
+let spawnEvery = 90;    // frames entre obstáculos
+
+// Jugador
+const player = {
+  x: 120, y: GROUND_Y, w: 48, h: 60,
+  vy: 0, onGround: true, jumpPower: 13, gravity: 0.7
+};
+
+// Obstáculos
+const obstacles = []; // {x,y,w,h,type}
+
+// Input
+const keys = new Set();
+window.addEventListener('keydown', e => { keys.add(e.code); });
+window.addEventListener('keyup',   e => { keys.delete(e.code); });
+
+// Utils
+function rect(a,b){ return !(a.x+a.w<b.x || a.x>b.x+b.w || a.y+a.h<b.y || a.y>b.y+b.h); }
+function spawnObstacle(){
+  const type = Math.random() < 0.5 ? 'fuego' : 'barril';
+  const w = type==='fuego'? 40:50;
+  const h = type==='fuego'? 40:50;
+  const y = GROUND_Y + (type==='fuego'? 20:10) - h; // pequeño offset visual
+  obstacles.push({x:cvs.width+20, y, w, h, type});
+}
+
+// Juego
+function update(){
+  t++;
+  // dificultad progresiva
+  if (t % (60*10) === 0){ // cada 10s
+    speed += 0.5;
+    spawnEvery = Math.max(45, spawnEvery - 5);
+  }
+
+  // input salto (una o dos alturas con Shift)
+  const wantJump = keys.has('Space') || keys.has('ArrowUp');
+  if (wantJump && player.onGround){
+    const boost = keys.has('ShiftLeft') || keys.has('ShiftRight') ? 1.25 : 1;
+    player.vy = -player.jumpPower * boost;
+    player.onGround = false;
+  }
+
+  // física
+  player.vy += player.gravity;
+  player.y += player.vy;
+
+  if (player.y + player.h >= GROUND_Y){
+    player.y = GROUND_Y - player.h;
+    player.vy = 0;
+    player.onGround = true;
+  }
+
+  // spawn obstáculos
+  if (t % spawnEvery === 0) spawnObstacle();
+
+  // mover obstáculos y chequear colisiones
+  for (let i=obstacles.length-1;i>=0;i--){
+    const o = obstacles[i];
+    o.x -= speed;
+    if (o.x + o.w < -20) obstacles.splice(i,1);
+    else {
+      if (rect({x:player.x,y:player.y,w:player.w,h:player.h}, o)){
+        hit();
+        obstacles.splice(i,1);
+      }
+    }
+  }
+
+  // puntaje por supervivencia
+  score += Math.floor(speed*0.5);
+  uiScore.textContent = score;
+}
+
+function hit(){
+  lives--;
+  uiLives.textContent = lives;
+  // pequeño “knockback”
+  player.vy = -10;
+  if (lives <= 0){
+    running = false;
+  }
+}
+
+function draw(){
+  // fondo (pista de circo simple)
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  // cielo
+  ctx.fillStyle = '#232a3b';
+  ctx.fillRect(0,0,cvs.width,GROUND_Y-10);
+  // “graderío”
+  ctx.fillStyle = '#2f3547';
+  for (let i=0;i<20;i++){
+    ctx.fillRect(i*60, 260 + (i%2)*8, 40, 20);
+  }
+  // piso
+  ctx.fillStyle = '#3b2a1a';
+  ctx.fillRect(0,GROUND_Y-10,cvs.width,10);
+  ctx.fillStyle = '#5c4028';
+  ctx.fillRect(0,GROUND_Y,cvs.width,cvs.height-GROUND_Y);
+
+  // player (placeholder)
+  ctx.fillStyle = '#ffd54a';
+  ctx.fillRect(player.x, player.y, player.w, player.h);
+  // nariz roja :)
+  ctx.fillStyle = '#e74';
+  ctx.fillRect(player.x+player.w-10, player.y+10, 8, 8);
+
+  // obstáculos
+  obstacles.forEach(o=>{
+    ctx.fillStyle = o.type==='fuego' ? '#ff6b3d' : '#9e6d3f';
+    ctx.fillRect(o.x,o.y,o.w,o.h);
+    if (o.type==='fuego'){
+      ctx.fillStyle = '#ffc36b';
+      ctx.fillRect(o.x+6,o.y+6,o.w-12,o.h-20);
+    }
+  });
+
+  // Game Over
+  if (!running){
+    ctx.fillStyle = 'rgba(0,0,0,0.6)';
