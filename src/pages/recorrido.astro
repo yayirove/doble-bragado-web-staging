@@ -426,14 +426,34 @@ const structuredData = [
   <div class="lg:col-span-2">
     <div id="featured-video" class="relative group">
       <div class="relative aspect-video bg-oscuro rounded-2xl overflow-hidden shadow-2xl">
-        <img id="featured-thumb" src="https://img.youtube.com/vi/_sI7tTt_PvM/maxresdefault.jpg" alt="Video destacado" class="w-full h-full object-cover" />
+        <img
+          id="featured-thumb"
+          src="https://img.youtube.com/vi/_sI7tTt_PvM/maxresdefault.jpg"
+          alt="Video destacado"
+          class="w-full h-full object-cover"
+        />
+
+        <!-- Overlay de oscurecido -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
 
-        <!-- RESTAURAR ESTE BOTÓN (overlay para abrir el modal) -->
-        <button id="play-featured" class="absolute inset-0 grid place-items-center group/play">
-          <span class="sr-only">Reproducir video</span>
+        <!-- Botón/overlay para abrir el modal -->
+        <button
+          id="play-featured"
+          type="button"
+          aria-label="Reproducir video"
+          class="absolute inset-0 grid place-items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-amarillo/80"
+        >
+          <!-- Ícono Play con halo (centrado) -->
+          <div class="relative">
+            <div class="absolute inset-0 bg-white/30 rounded-full blur-xl"></div>
+            <div class="relative w-20 h-20 bg-gradient-to-r from-celeste to-violeta rounded-full grid place-items-center shadow-2xl transition-transform group-hover:scale-110">
+              <span class="material-icons text-white text-4xl ml-1">play_arrow</span>
+            </div>
+          </div>
+          <span class="sr-only">Reproducir</span>
         </button>
 
+        <!-- Textos del featured -->
         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
           <div class="flex items-center gap-2 mb-2">
             <span class="px-3 py-1 bg-celeste/80 backdrop-blur rounded-full text-xs font-semibold">EN VIVO</span>
@@ -443,8 +463,10 @@ const structuredData = [
           <p id="featured-desc" class="text-sm opacity-90">Sprint final emocionante con llegada al fotofinish</p>
         </div>
       </div>
+
+      <!-- Barra de “progreso” decorativa -->
       <div class="mt-4 bg-grisclaro rounded-full h-1 overflow-hidden">
-        <div class="h-full bg-gradient-to-r from-celeste to-violeta w-0 transition-all duration-300" id="video-progress"></div>
+        <div id="video-progress" class="h-full bg-gradient-to-r from-celeste to-violeta w-0 transition-all duration-300"></div>
       </div>
     </div>
   </div>
@@ -452,32 +474,45 @@ const structuredData = [
   <div class="lg:col-span-1">
     <div class="bg-white rounded-2xl shadow-xl p-6 h-full">
       <h3 class="font-bold text-oscuro text-lg mb-4 flex items-center gap-2">
-        <span class="material-icons text-celeste">info</span>Información de Etapa
+        <span class="material-icons text-celeste">info</span>
+        Información de Etapa
       </h3>
+
       <div class="space-y-4">
         <div class="grid grid-cols-2 gap-4">
           <div class="bg-grisclaro rounded-lg p-3">
             <p class="text-xs text-gris/80 mb-1">Distancia</p>
-            <p class="font-bold text-oscuro" id="stage-distance">120 km</p>
+            <p id="stage-distance" class="font-bold text-oscuro">120 km</p>
           </div>
           <div class="bg-grisclaro rounded-lg p-3">
             <p class="text-xs text-gris/80 mb-1">Ganador</p>
-            <p class="font-bold text-oscuro" id="stage-winner">J. Pérez</p>
+            <p id="stage-winner" class="font-bold text-oscuro">J. Pérez</p>
           </div>
         </div>
+
         <div>
           <h4 class="font-semibold text-oscuro/90 mb-2 text-sm">Momentos Clave</h4>
           <ul class="space-y-2 text-sm text-gris">
-            <li class="flex items-start gap-2"><span class="material-icons text-celeste text-base mt-0.5">sports_score</span><span>Sprint intermedio en km 45</span></li>
-            <li class="flex items-start gap-2"><span class="material-icons text-violeta text-base mt-0.5">terrain</span><span>Puerto de montaña categoría 2</span></li>
-            <li class="flex items-start gap-2"><span class="material-icons text-amarillo text-base mt-0.5">flag</span><span>Final con llegada masiva</span></li>
+            <li class="flex items-start gap-2">
+              <span class="material-icons text-celeste text-base mt-0.5">sports_score</span>
+              <span>Sprint intermedio en km 45</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-icons text-violeta text-base mt-0.5">terrain</span>
+              <span>Puerto de montaña categoría 2</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-icons text-amarillo text-base mt-0.5">flag</span>
+              <span>Final con llegada masiva</span>
+            </li>
           </ul>
         </div>
-        <!-- CTA eliminado -->
+        <!-- CTA intencionalmente eliminado -->
       </div>
     </div>
   </div>
 </div>
+
 
 
         <!-- Carrusel -->
@@ -602,82 +637,112 @@ const structuredData = [
 </script>
 
 <script is:inline>
-  // 1) Slideshow (respeta prefers-reduced-motion)
+  // 1) Slideshow (respeta prefers-reduced-motion y solo si hay 2+ slides)
   (function () {
- 
     const slides = document.querySelectorAll('#slide-1, #slide-2');
-if (!slides.length) return;
-...
-// solo animar si hay 2+ slides
-if (!reduce && slides.length > 1) {
-  setInterval(() => {
-    slides[current].style.opacity = '0';
-    current = (current + 1) % slides.length;
-    slides[current].style.opacity = '1';
-  }, 5000);
-}    let current = 0;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!slides.length) return;
 
-    slides.forEach((s, i) => {
-      s.style.transition = 'opacity
+    let current = 0;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const show = (i) => slides.forEach((s, idx) => (s.style.opacity = idx === i ? '1' : '0'));
+    // transición suave para ambos
+    slides.forEach((s) => { s.style.transition = 'opacity 1000ms ease'; });
+    show(0);
+
+    if (!reduce && slides.length > 1) {
+      setInterval(() => {
+        slides[current].style.opacity = '0';
+        current = (current + 1) % slides.length;
+        slides[current].style.opacity = '1';
+      }, 5000);
+    }
   })();
 
-  // 2) Tabs + edición — muestra/oculta paneles y revalida Leaflet al entrar a "mapas"
+  // 2) Tabs + edición — robusto (delegación + fallback a 'masc' si falta panel)
   (function () {
-    const btns = document.querySelectorAll('.tab-btn');
-    const panels = document.querySelectorAll('.tab-panel');
     let currentEdition = 'masc';
+    let currentTab = 'etapas';
+
+    const tabButtons = () => Array.from(document.querySelectorAll('.tab-btn'));
+    const editionButtons = () => Array.from(document.querySelectorAll('.edition-toggle'));
+    const panels = () => Array.from(document.querySelectorAll('.tab-panel'));
 
     function invalidateRouteMapsSoon() {
-      setTimeout(() => { window.__routeMaps?.invalidateAll?.(); }, 120);
+      setTimeout(() => { try { window.__routeMaps?.invalidateAll?.(); } catch(_) {} }, 120);
     }
 
-    function showPanel(name) {
-      btns.forEach((b) => {
-        const active = b.dataset.tab === name;
+    function applyTabStyles() {
+      tabButtons().forEach((b) => {
+        const active = b.dataset.tab === currentTab;
         b.setAttribute('aria-selected', String(active));
         b.classList.toggle('bg-celeste', active);
         b.classList.toggle('text-white', active);
         b.classList.toggle('bg-grisclaro', !active);
         b.classList.toggle('text-oscuro', !active);
       });
+    }
 
-      let found = false;
-      panels.forEach((p) => {
-        const match = p.dataset.panel === name && p.dataset.edition === currentEdition;
-        p.classList.toggle('hidden', !match);
-        if (match) found = true;
+    function applyEditionStyles() {
+      editionButtons().forEach((b) => {
+        const on = (b.dataset.edition || 'masc') === currentEdition;
+        b.setAttribute('aria-pressed', String(on));
+        b.classList.toggle('bg-celeste', on);
+        b.classList.toggle('text-white', on);
+        b.classList.toggle('bg-transparent', !on);
+        b.classList.toggle('text-oscuro', !on);
+      });
+    }
+
+    function renderPanels() {
+      let anyShown = false;
+      panels().forEach((p) => {
+        const show = p.dataset.panel === currentTab && p.dataset.edition === currentEdition;
+        p.classList.toggle('hidden', !show);
+        if (show) anyShown = true;
       });
 
-      if (!found) {
+      if (!anyShown) {
         currentEdition = 'masc';
-        showPanel(name);
+        applyEditionStyles();
+        renderPanels();
         return;
       }
 
-      if (name === 'mapas') invalidateRouteMapsSoon();
+      if (currentTab === 'mapas') invalidateRouteMapsSoon();
     }
 
-    btns.forEach((b) => b.addEventListener('click', () => showPanel(b.dataset.tab)));
-    showPanel('etapas');
+    function showTab(name) {
+      currentTab = name;
+      applyTabStyles();
+      renderPanels();
+    }
 
-    // Toggle edición
-    const edBtns = document.querySelectorAll('.edition-toggle');
-    edBtns.forEach((b) => {
-      b.addEventListener('click', () => {
-        currentEdition = b.dataset.edition || 'masc';
-        edBtns.forEach((x) => {
-          const on = x === b;
-          x.setAttribute('aria-pressed', String(on));
-          x.classList.toggle('bg-celeste', on);
-          x.classList.toggle('text-white', on);
-          x.classList.toggle('bg-transparent', !on);
-          x.classList.toggle('text-oscuro', !on);
-        });
-        const activeTab = (document.querySelector('.tab-btn[aria-selected="true"]') || btns[0])?.dataset.tab || 'etapas';
-        showPanel(activeTab);
-      });
+    // Delegación de eventos
+    document.addEventListener('click', (ev) => {
+      const tab = ev.target.closest('.tab-btn');
+      if (tab?.dataset.tab) {
+        ev.preventDefault();
+        showTab(tab.dataset.tab);
+        return;
+      }
+      const ed = ev.target.closest('.edition-toggle');
+      if (ed?.dataset.edition) {
+        ev.preventDefault();
+        currentEdition = ed.dataset.edition || 'masc';
+        applyEditionStyles();
+        renderPanels();
+      }
     });
+
+    // Init
+    (function init() {
+      currentTab = 'etapas';
+      currentEdition = 'masc';
+      applyTabStyles();
+      applyEditionStyles();
+      renderPanels();
+    })();
   })();
 
   // 3) Pop cards en timeline (Etapas)
@@ -707,7 +772,7 @@ if (!reduce && slides.length > 1) {
           regular:{ name: 'R. Const',   team: 'Team Z',     time: '120 pts',      photo: '/images/placeholder-rider.jpg', note: 'Sumó puntos en sprints intermedios y finalizó en los puestos de vanguardia.' },
           sprint: { name: 'S. Velaz',   team: 'Velox',      time: '140 pts',      photo: '/images/placeholder-rider.jpg', note: 'Explosivo en las llegadas masivas, dominó el embalaje.' }
         },
-        1: { 
+        1: {
           general: { name: 'Ganador E1', team: 'Equipo A', time: '2h 45m 37s', photo: '/images/placeholder-rider.jpg', note: 'Definición al sprint tras controlar las fugas.' },
           sub23:  { name: 'Sub23 E1',   team: 'Academia B', time: '—', photo: '/images/placeholder-rider.jpg', note: 'Gran lectura de carrera, siempre en el corte bueno.' },
           regular:{ name: 'Regular E1', team: 'Team C', time: '25 pts', photo: '/images/placeholder-rider.jpg', note: 'Acumuló puntos clave en metas volantes.' },
@@ -805,7 +870,7 @@ if (!reduce && slides.length > 1) {
     wireSelect('winners-filter-fem', 'fem');
   })();
 
-  // 5) REVIVÍ LAS ETAPAS
+  // 5) REVIVÍ LAS ETAPAS (tabs, carrousel y modal YouTube)
   (function () {
     const videoData = {
       masculina: [
@@ -827,11 +892,12 @@ if (!reduce && slides.length > 1) {
     let currentVideoIndex = 0;
 
     const mascTab = document.getElementById('revivi-tab-masc');
-    const femTab = document.getElementById('revivi-tab-fem');
+    const femTab  = document.getElementById('revivi-tab-fem');
 
     function switchCategory(cat) {
       currentCategory = cat;
       currentVideoIndex = 0;
+
       const i1 = mascTab?.querySelector('.revivi-indicator');
       const i2 = femTab?.querySelector('.revivi-indicator');
       if (cat === 'masculina') {
@@ -845,6 +911,7 @@ if (!reduce && slides.length > 1) {
         femTab?.classList.add('text-white');
         mascTab?.classList.remove('text-white');
       }
+
       loadVideos();
       updateFeatured(0);
     }
@@ -880,19 +947,20 @@ if (!reduce && slides.length > 1) {
       currentVideoIndex = index;
       const v = (videoData[currentCategory] || [])[index];
       if (!v) return;
-      const thumb = document.getElementById('featured-thumb');
-      const title = document.getElementById('featured-title');
-      const desc = document.getElementById('featured-desc');
+
+      const thumb    = document.getElementById('featured-thumb');
+      const title    = document.getElementById('featured-title');
+      const desc     = document.getElementById('featured-desc');
       const distance = document.getElementById('stage-distance');
-      const winner = document.getElementById('stage-winner');
+      const winner   = document.getElementById('stage-winner');
       const duration = document.getElementById('featured-duration');
       const progress = document.getElementById('video-progress');
 
-      if (thumb) thumb.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
-      if (title) title.textContent = v.title;
-      if (desc) desc.textContent = v.desc;
+      if (thumb)    thumb.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
+      if (title)    title.textContent = v.title;
+      if (desc)     desc.textContent = v.desc;
       if (distance) distance.textContent = v.distance;
-      if (winner) winner.textContent = v.winner;
+      if (winner)   winner.textContent = v.winner;
       if (duration) duration.textContent = v.duration + ' min';
       if (progress) {
         progress.style.width = '0%';
@@ -923,11 +991,16 @@ if (!reduce && slides.length > 1) {
       document.body.style.overflow = 'auto';
     }
 
-    document.getElementById('play-featured')?.addEventListener('click', () => {
+    // Abrir modal desde CTA o haciendo click en el player principal
+    const cta = document.getElementById('cta-featured');
+    const featured = document.getElementById('featured-video');
+    function openCurrentFeatured() {
       const v = (videoData[currentCategory] || [])[currentVideoIndex];
       if (!v) return;
       openModal(`https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`);
-    });
+    }
+    cta?.addEventListener('click', openCurrentFeatured);
+    featured?.addEventListener('click', openCurrentFeatured);
 
     document.getElementById('revivi-video-close')?.addEventListener('click', closeModal);
     document.getElementById('revivi-video-modal')?.addEventListener('click', (e) => { if (e.target.id === 'revivi-video-modal') closeModal(); });
@@ -940,6 +1013,7 @@ if (!reduce && slides.length > 1) {
     document.getElementById('revivi-tab-masc')?.addEventListener('click', () => switchCategory('masculina'));
     document.getElementById('revivi-tab-fem')?.addEventListener('click',  () => switchCategory('femenina'));
 
+    // init
     switchCategory('masculina');
   })();
 </script>
