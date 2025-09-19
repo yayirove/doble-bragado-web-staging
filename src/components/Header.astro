@@ -1,4 +1,5 @@
 ---
+// src/components/Header.astro
 import { SHOW_BRAGADO_RUSH } from "../config/flags";
 const { pathname } = Astro.url;
 
@@ -11,7 +12,7 @@ const navLinks = [
   { href: "/#contacto", label: "Contacto" },
 ];
 
-// 🔧 Normaliza rutas para comparar (trata "/" y "/pagina/" igual)
+// Normaliza rutas para comparar (trata "/" y "/pagina/" igual)
 const normalize = (p: string) => {
   if (!p) return "/";
   const cleaned = p.replace(/\/+$/, "");
@@ -20,22 +21,22 @@ const normalize = (p: string) => {
 const isActive = (href: string) => normalize(pathname) === normalize(href.split("#")[0]);
 ---
 
-<header 
-  class="fixed top-0 w-full bg-gradient-to-r from-celeste/85 via-celeste/90 to-celeste/85 backdrop-blur-xl z-50 border-b border-amarillo/20 shadow-lg shadow-celeste/20" 
+<header
+  class="fixed top-0 w-full bg-gradient-to-r from-celeste/90 via-celeste to-celeste/90 backdrop-blur-xl z-50 border-b border-amarillo/20 shadow-lg shadow-celeste/20"
   role="banner"
 >
   <!-- Línea decorativa superior -->
   <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-amarillo to-transparent"></div>
-  
+
   <nav
     class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6 relative"
     role="navigation"
     aria-label="Navegación principal"
   >
-    <!-- Logo - transparente, sin sombra ni glow -->
-    <a 
-      href="/" 
-      class="flex items-center group relative z-10 isolate" 
+    <!-- Logo -->
+    <a
+      href="/"
+      class="flex items-center group relative z-10 isolate"
       aria-label="Ir a inicio de La Doble Bragado"
       data-logo
     >
@@ -106,7 +107,7 @@ const isActive = (href: string) => normalize(pathname) === normalize(href.split(
   >
     <!-- Backdrop -->
     <div class="absolute inset-0 bg-oscuro/60 backdrop-blur-md opacity-0 transition-opacity duration-500" id="menu-backdrop"></div>
-    
+
     <!-- Menu Panel -->
     <div class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-celeste via-celeste/95 to-celeste/90 backdrop-blur-xl border-l border-amarillo/30 shadow-2xl">
       <!-- Header del menú -->
@@ -145,23 +146,23 @@ const isActive = (href: string) => normalize(pathname) === normalize(href.split(
                   {active && (
                     <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-pulse" aria-hidden="true"></span>
                   )}
-                  
+
                   {/* Icono indicador */}
                   <span class:list={[
                     "flex-shrink-0 w-2 h-2 rounded-full mr-4 transition-all duration-300",
                     active ? "bg-oscuro animate-pulse" : "bg-white/40 group-hover:bg-amarillo"
                   ]} aria-hidden="true"></span>
-                  
+
                   <span class="relative z-10">{link.label}</span>
-                  
+
                   {/* Flecha indicativa */}
-                  <svg 
+                  <svg
                     class:list={[
                       "ml-auto w-4 h-4 transition-all duration-300",
                       active ? "text-oscuro rotate-0" : "text-white/60 group-hover:text-amarillo group-hover:translate-x-1"
-                    ]} 
-                    fill="none" 
-                    stroke="currentColor" 
+                    ]}
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
@@ -203,23 +204,20 @@ const isActive = (href: string) => normalize(pathname) === normalize(href.split(
       let isOpen = false;
       let focusPrev = null;
 
-      // 🔧 Normaliza rutas (cliente)
       const normalize = (p = "") => {
         const cleaned = p.replace(/\/+$/, "");
         return cleaned === "" ? "/" : cleaned;
       };
 
-      // Maneja estados activos dinámicamente
+      // Estados activos
       const updateActiveStates = () => {
         const currentHash = window.location.hash;
         const currentPath = normalize(window.location.pathname);
-
-        // ✅ Solo enlaces de navegación (excluye el logo)
         const navLinks = document.querySelectorAll('nav a[href]:not([data-logo])');
 
         navLinks.forEach(link => {
           const href = link.getAttribute('href') || "";
-          const hrefPath = normalize(href.split("#")[0]); // ignora hash
+          const hrefPath = normalize(href.split("#")[0]);
           let active = false;
 
           if (href === "/#contacto") {
@@ -346,7 +344,7 @@ const isActive = (href: string) => normalize(pathname) === normalize(href.split(
       });
       document.addEventListener("keydown", (e) => { if (e.key === "Escape" && isOpen) toggleMenu(true); });
 
-      // Hash / navegación del historial
+      // Estados activos en navegación
       const handleActiveStates = () => updateActiveStates();
       window.addEventListener('hashchange', handleActiveStates);
       window.addEventListener('popstate', handleActiveStates);
@@ -374,33 +372,21 @@ const isActive = (href: string) => normalize(pathname) === normalize(href.split(
   </script>
 
   <style>
-    /* Animaciones CSS adicionales */
-    @keyframes slideInFromRight {
-      from { transform: translateX(100px); opacity: 0; }
-      to   { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.3); }
-      50%      { box-shadow: 0 0 30px rgba(255, 193, 7, 0.6); }
-    }
-    /* Efecto glassmorphism */
+    /* Efecto glassmorphism sutil */
     header::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%);
       pointer-events: none;
     }
     /* Focus ring */
     button:focus-visible, a:focus-visible {
-      outline: 2px solid rgba(255,193,7,0.8);
+      outline: 2px solid rgba(247, 226, 0, 0.8);
       outline-offset: 2px;
       border-radius: 12px;
     }
-    /* Hover utilitario */
-    .group:hover .group-hover\:animate-pulse {
-      animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
-    }
+    /* Util */
     @media (max-width: 1024px) {
       nav { padding-left: 1rem; padding-right: 1rem; }
     }

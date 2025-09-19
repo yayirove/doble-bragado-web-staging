@@ -11,7 +11,7 @@
   --font-display: "Inter", var(--font-sans);
   --font-clock: "Audiowide", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
-  /* Escala móvil-first con clamp (más compacta) */
+  /* Escala móvil-first con clamp */
   --step--1: clamp(0.85rem, 0.80rem + 0.30vw, 0.95rem);
   --step-0:  clamp(1.00rem, 0.95rem + 0.45vw, 1.10rem);
   --step-1:  clamp(1.15rem, 1.05rem + 0.60vw, 1.25rem);
@@ -19,34 +19,49 @@
   --step-3:  clamp(1.70rem, 1.40rem + 1.30vw, 1.95rem);
   --step-4:  clamp(2.10rem, 1.70rem + 1.90vw, 2.50rem);
 
-  /* =========================
-     TOKENS DE COLOR — MASCULINA (por defecto)
-     ========================= */
-  --color-oscuro: #171442;        /* Azul oscuro */
-  --color-celeste: #2650A1;       /* Celeste/Azul */
-  --color-amarillo: #F7E200;      /* Amarillo */
-  --color-rosa: #DA5DA1;          /* Rosa */
-  --color-gris: #333333;          /* Texto */
-  --color-grisclaro: #F1F1F2;     /* Gris claro */
+  /* ===== TOKENS HEX (masculina por defecto) ===== */
+  --color-oscuro:   #171442;
+  --color-celeste:  #2650A1;
+  --color-amarillo: #F7E200;
+  --color-rosa:     #DA5DA1;
+  --color-gris:     #333333;
+  --color-grisclaro:#F1F1F2;
 
-  /* Aliases neutrales por si hiciera falta en JS/Tailwind mapping */
+  /* ===== TOKENS RGB (para /alpha en Tailwind) ===== */
+  --rgb-oscuro:    23 20 66;     /* #171442 */
+  --rgb-celeste:   38 80 161;    /* #2650A1 */
+  --rgb-amarillo:  247 226 0;    /* #F7E200 */
+  --rgb-rosa:      218 93 161;   /* #DA5DA1 */
+  --rgb-gris:      51 51 51;     /* #333333 */
+  --rgb-grisclaro: 241 241 242;  /* #F1F1F2 */
+    --rgb-violeta:    104 44 125;  /* #682C7D */
+  --rgb-violetaosc: 54 17 99;    /* #361163 */
+
+  /* Aliases neutrales */
   --texto: var(--color-gris);
   --gris-claro: var(--color-grisclaro);
 }
 
-/* =========================
-   TOKENS DE COLOR — FEMENINA
-   Activar con: <html data-theme="fem">
-   ========================= */
+/* ===== Tema Femenina: activar con <html data-theme="fem"> ===== */
 :root[data-theme="fem"] {
-  --color-oscuro: #361163;        /* Violeta oscuro */
-  --color-celeste: #682C7D;       /* Violeta */
-  --color-amarillo: #F7E200;      /* Amarillo */
-  --color-rosa: #DA5DA1;          /* Rosa */
-  --color-gris: #333333;          /* Texto */
-  --color-grisclaro: #F1F1F2;     /* Gris claro */
+  /* HEX */
+  --color-oscuro:   #361163;   /* violeta oscuro */
+  --color-celeste:  #682C7D;   /* violeta */
+  --color-amarillo: #F7E200;
+  --color-rosa:     #DA5DA1;
+  --color-gris:     #333333;
+  --color-grisclaro:#F1F1F2;
 
-  /* Aliases */
+  /* RGB */
+  --rgb-oscuro:    54 17 99;    /* #361163 */
+  --rgb-celeste:   104 44 125;  /* #682C7D */
+  --rgb-amarillo:  247 226 0;   /* #F7E200 */
+  --rgb-rosa:      218 93 161;  /* #DA5DA1 */
+  --rgb-gris:      51 51 51;    /* #333333 */
+  --rgb-grisclaro: 241 241 242; /* #F1F1F2 */
+   --rgb-violeta:    104 44 125;  /* #682C7D */
+  --rgb-violetaosc: 54 17 99;    /* #361163 */
+
   --texto: var(--color-gris);
   --gris-claro: var(--color-grisclaro);
 }
@@ -99,45 +114,47 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
    COMPONENTES UI COMPACTOS
    ========================= */
 @layer components {
-  .card   { @apply bg-white border border-amarillo/20 rounded-2xl p-4 shadow-sm; }
+  /* Cards base */
+  .card   { @apply bg-white border rounded-2xl p-4 shadow-sm; }
+  .card   { @apply border-amarillo border-opacity-20; }
 
-  /* FIX: bg-secondary -> bg-celeste (token válido) */
+  /* Botones */
   .btn    { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium bg-celeste text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-amarillo; }
   .btn-lg { @apply px-5 py-3 text-base; }
   .btn-xl { @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-base md:px-8 md:py-4 md:text-lg font-semibold; }
   .btn-sm { @apply px-3 py-1.5 text-xs; }
 
-  .input  { @apply w-full rounded-xl border border-amarillo/40 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amarillo; }
-}
+  /* Inputs */
+  .input  { @apply w-full rounded-xl border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amarillo; }
+  .input  { @apply border-amarillo border-opacity-40; }
 
-/* Utilidad para forzar Inter en títulos si probamos otras fuentes */
-.font-display { font-family: var(--font-display); }
-
-@layer components {
-  /* ===== Toggle Edición ===== */
+  /* Toggle edición */
   .edition-toggle {
-    @apply px-4 py-2 rounded-xl font-semibold border border-celeste/40 text-white bg-celeste/20 hover:bg-celeste/30 focus:outline-none focus:ring-2 focus:ring-amarillo transition;
+    @apply px-4 py-2 rounded-xl font-semibold border text-white bg-celeste focus:outline-none focus:ring-2 focus:ring-amarillo transition;
   }
+  .edition-toggle { @apply border-celeste border-opacity-40 bg-opacity-20; }
+  .edition-toggle:hover { @apply bg-opacity-30; }
   .edition-toggle.active,
-  .edition-toggle[aria-pressed="true"] {
-    @apply bg-amarillo text-oscuro border-amarillo;
-  }
+  .edition-toggle[aria-pressed="true"] { @apply bg-amarillo text-oscuro border-amarillo; }
 
-  /* ===== Tabs (accesibles) ===== */
-  .tablist-wrapper { @apply border-b border-white/10 mb-6 overflow-x-auto; }
+  /* Tabs accesibles */
+  .tablist-wrapper { @apply border-b mb-6 overflow-x-auto; }
+  .tablist-wrapper { @apply border-white border-opacity-10; }
   .tablist { @apply flex flex-wrap gap-2; }
-  .tab-button { @apply px-4 py-2 font-semibold text-white/80 border-b-4 border-transparent rounded-t-lg transition; }
-  .tab-button:hover { @apply text-white bg-white/10; }
+  .tab-button { @apply px-4 py-2 font-semibold text-white border-b-4 border-transparent rounded-t-lg transition; }
+  .tab-button { @apply opacity-80; }
+  .tab-button:hover { @apply text-white bg-white bg-opacity-10; }
   .tab-button.active,
   .tab-button[aria-selected="true"] { @apply text-amarillo border-amarillo; }
   .tab-panel { display: block; }
   .tab-panel.hidden { display: none; }
 
-  /* ===== Timeline (vertical alternado existente) ===== */
+  /* Timeline (vertical alternado) */
   .timeline-wrapper { @apply relative max-w-3xl mx-auto flex flex-col items-stretch; }
   .timeline-wrapper::before {
     content: "";
-    @apply hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-celeste/30;
+    @apply hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-celeste;
+    opacity: .3;
   }
   .timeline-item { @apply relative pl-12; }
   .timeline-icon { @apply absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold z-10; }
@@ -149,12 +166,12 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
     .timeline-item:nth-child(even) .timeline-icon { right: -20px; left: auto; }
   }
 
-  /* ===== Cards de ganadores (tema por edición) ===== */
+  /* Cards por edición */
   .card-stage-masc { @apply bg-gradient-to-br from-celeste to-oscuro rounded-3xl overflow-hidden shadow-lg text-center transition-transform hover:-translate-y-2 flex flex-col; }
   .card-stage-fem  { @apply bg-gradient-to-br from-rosa to-celeste rounded-3xl overflow-hidden shadow-lg text-center transition-transform hover:-translate-y-2 flex flex-col; }
   .btn-video { @apply inline-flex items-center justify-center gap-2 bg-amarillo text-oscuro px-6 py-3 rounded-xl font-bold mt-4 hover:bg-white transition-colors; }
 
-  /* ===== Modal de video ===== */
+  /* Modal video */
   .video-modal-overlay {
     @apply fixed inset-0 z-[1000] p-4 flex items-center justify-center;
     background-color: hsla(242, 54%, 17%, 0.8);
@@ -165,7 +182,7 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
   .aspect-video { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; }
   .aspect-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: .5rem; }
 
-  /* ===== Utilidades A11y ===== */
+  /* Utilidades A11y */
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
     clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
@@ -174,7 +191,7 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
     position: static; width: auto; height: auto; padding: 0; margin: 0; overflow: visible; clip: auto; white-space: normal;
   }
 
-  /* ===== Motion safe ===== */
+  /* Motion safe */
   @media (prefers-reduced-motion: reduce) {
     .edition-toggle, .tab-button, .btn-video { transition: none; }
   }
@@ -186,7 +203,7 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
 .timeline-container {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: var(--color-celeste) var(--color-grisclaro); /* thumb track */
+  scrollbar-color: var(--color-celeste) var(--color-grisclaro);
 }
 .timeline-container::-webkit-scrollbar { height: 8px; }
 .timeline-container::-webkit-scrollbar-track {
@@ -198,7 +215,7 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
   border-radius: 4px;
 }
 
-/* Ítems de etapa: ancho mínimo en mobile; en desktop, que repartan */
+/* Ítems de etapa */
 .timeline-stage { min-width: 150px; }
 @media (min-width: 768px) {
   .timeline-stage { min-width: auto; flex: 1; }
@@ -215,10 +232,8 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
 
 /* Botones de Historia */
 .btn-historia {
-  @apply mt-4 px-6 py-3 bg-amarillo/20 hover:bg-amarillo/30;
-  @apply border border-amarillo/40 rounded-full;
-  @apply text-amarillo font-bold text-sm uppercase tracking-wider;
-  @apply transition-all duration-300 backdrop-blur-sm;
-  @apply focus:outline-none focus:ring-2 focus:ring-amarillo/50;
+  @apply mt-4 px-6 py-3 border border-amarillo rounded-full text-amarillo font-bold text-sm uppercase tracking-wider transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-amarillo;
 }
+.btn-historia { @apply bg-amarillo bg-opacity-20; }
+.btn-historia:hover { @apply bg-opacity-30; }
 .btn-historia[aria-expanded="true"] .btn-arrow { transform: rotate(180deg); }

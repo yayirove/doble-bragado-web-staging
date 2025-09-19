@@ -1,26 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{astro,html,js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{astro,html,js,ts,jsx,tsx,md,mdx}"],
   theme: {
     extend: {
       colors: {
-        // Paleta oficial (Masculina)
-        oscuro:   "#171442", // Azul oscuro (brand)
-        celeste:  "#2650A1", // Celeste/Azul
-        amarillo: "#F7E200",
-        rosa:     "#DA5DA1",
+        // Colores de marca con soporte de alpha (text-oscuro/40, bg-celeste/20, etc.)
+        oscuro:   "rgb(var(--rgb-oscuro) / <alpha-value>)",
+        celeste:  "rgb(var(--rgb-celeste) / <alpha-value>)",
+        amarillo: "rgb(var(--rgb-amarillo) / <alpha-value>)",
+        rosa:     "rgb(var(--rgb-rosa) / <alpha-value>)",
+        violeta:      "rgb(var(--rgb-violeta) / <alpha-value>)",
+        violetaosc:   "rgb(var(--rgb-violetaosc) / <alpha-value>)",
 
-        // Paleta oficial (Femenina)
-        violeta:        "#682C7D",
-        violetaOscuro:  "#361163",
 
         // Neutros
-        gris:      "#333333",
-        grisclaro: "#F1F1F2",
+        texto:     "rgb(var(--rgb-gris) / <alpha-value>)",
+        gris:      "rgb(var(--rgb-gris) / <alpha-value>)",
+        grisclaro: "rgb(var(--rgb-grisclaro) / <alpha-value>)",
 
-        // Aliases legacy (mantener por compatibilidad, NO usar en nuevo código)
-        primary:   "#171442", // alias de oscuro
-        secondary: "#2650A1", // alias de celeste
+        // Aliases legacy (NO usar en nuevo código)
+        primary:   "rgb(var(--rgb-oscuro) / <alpha-value>)",
+        secondary: "rgb(var(--rgb-celeste) / <alpha-value>)",
       },
       container: { center: true, padding: "1rem" },
     },
