@@ -19,20 +19,41 @@
   --step-3:  clamp(1.70rem, 1.40rem + 1.30vw, 1.95rem);
   --step-4:  clamp(2.10rem, 1.70rem + 1.90vw, 2.50rem);
 
-  /* Paleta oficial (tokens) */
-  --color-oscuro: #171442;       /* Azul oscuro */
-  --color-celeste: #2650A1;      /* Celeste/Azul */
-  --color-amarillo: #F7E200;     /* Amarillo (oficial) */
-  --color-rosa: #DA5DA1;         /* Rosa */
-  --color-violeta: #682C7D;      /* Violeta */
-  --color-violetaOscuro: #361163;/* Violeta oscuro */
-  --color-gris: #333333;         /* Texto */
-  --color-grisclaro: #F1F1F2;    /* Gris claro */
+  /* =========================
+     TOKENS DE COLOR — MASCULINA (por defecto)
+     ========================= */
+  --color-oscuro: #171442;        /* Azul oscuro */
+  --color-celeste: #2650A1;       /* Celeste/Azul */
+  --color-amarillo: #F7E200;      /* Amarillo */
+  --color-rosa: #DA5DA1;          /* Rosa */
+  --color-gris: #333333;          /* Texto */
+  --color-grisclaro: #F1F1F2;     /* Gris claro */
+
+  /* Aliases neutrales por si hiciera falta en JS/Tailwind mapping */
+  --texto: var(--color-gris);
+  --gris-claro: var(--color-grisclaro);
+}
+
+/* =========================
+   TOKENS DE COLOR — FEMENINA
+   Activar con: <html data-theme="fem">
+   ========================= */
+:root[data-theme="fem"] {
+  --color-oscuro: #361163;        /* Violeta oscuro */
+  --color-celeste: #682C7D;       /* Violeta */
+  --color-amarillo: #F7E200;      /* Amarillo */
+  --color-rosa: #DA5DA1;          /* Rosa */
+  --color-gris: #333333;          /* Texto */
+  --color-grisclaro: #F1F1F2;     /* Gris claro */
+
+  /* Aliases */
+  --texto: var(--color-gris);
+  --gris-claro: var(--color-grisclaro);
 }
 
 /* Base */
-html { font-family: var(--font-sans); scroll-behavior: smooth; }
-body { font-size: var(--step-0); line-height: 1.55; color: var(--color-gris); }
+html { font-family: var(--font-sans); scroll-behavior: smooth; color-scheme: light; }
+body { font-size: var(--step-0); line-height: 1.55; color: var(--color-gris); background: #fff; }
 
 /* Titulares */
 h1 { font-family: var(--font-display); font-size: var(--step-4); line-height: 1.1; letter-spacing: -0.01em; }
@@ -66,19 +87,27 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
 
 /* Respeta reducida animación */
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* =========================
    COMPONENTES UI COMPACTOS
    ========================= */
 @layer components {
-  .card      { @apply bg-white border border-amarillo/20 rounded-2xl p-4 shadow-sm; }
-  .btn       { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium bg-secondary text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-amarillo; }
-  .btn-lg    { @apply px-5 py-3 text-base; }
-  .btn-xl    { @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-base md:px-8 md:py-4 md:text-lg font-semibold; }
-  .btn-sm    { @apply px-3 py-1.5 text-xs; }
-  .input     { @apply w-full rounded-xl border border-amarillo/40 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amarillo; }
+  .card   { @apply bg-white border border-amarillo/20 rounded-2xl p-4 shadow-sm; }
+
+  /* FIX: bg-secondary -> bg-celeste (token válido) */
+  .btn    { @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium bg-celeste text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-amarillo; }
+  .btn-lg { @apply px-5 py-3 text-base; }
+  .btn-xl { @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-base md:px-8 md:py-4 md:text-lg font-semibold; }
+  .btn-sm { @apply px-3 py-1.5 text-xs; }
+
+  .input  { @apply w-full rounded-xl border border-amarillo/40 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amarillo; }
 }
 
 /* Utilidad para forzar Inter en títulos si probamos otras fuentes */
@@ -97,15 +126,12 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
   /* ===== Tabs (accesibles) ===== */
   .tablist-wrapper { @apply border-b border-white/10 mb-6 overflow-x-auto; }
   .tablist { @apply flex flex-wrap gap-2; }
-  .tab-button {
-    @apply px-4 py-2 font-semibold text-white/80 border-b-4 border-transparent rounded-t-lg transition;
-  }
+  .tab-button { @apply px-4 py-2 font-semibold text-white/80 border-b-4 border-transparent rounded-t-lg transition; }
   .tab-button:hover { @apply text-white bg-white/10; }
   .tab-button.active,
   .tab-button[aria-selected="true"] { @apply text-amarillo border-amarillo; }
-.tab-panel { display: block; }
-.tab-panel.hidden { display: none; }
-
+  .tab-panel { display: block; }
+  .tab-panel.hidden { display: none; }
 
   /* ===== Timeline (vertical alternado existente) ===== */
   .timeline-wrapper { @apply relative max-w-3xl mx-auto flex flex-col items-stretch; }
@@ -114,9 +140,7 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
     @apply hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-celeste/30;
   }
   .timeline-item { @apply relative pl-12; }
-  .timeline-icon {
-    @apply absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold z-10;
-  }
+  .timeline-icon { @apply absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold z-10; }
   @media (min-width: 768px) {
     .timeline-item { @apply pl-0 w-1/2 mb-12; }
     .timeline-item:nth-child(odd) { @apply self-end pl-12 text-left; }
@@ -159,7 +183,6 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
 /* =========================
    TIMELINE HORIZONTAL (Recorrido)
    ========================= */
-/* Contenedor con scroll horizontal suave y scrollbar estilizado */
 .timeline-container {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin; /* Firefox */
@@ -184,21 +207,11 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
 /* =========================
    FICHA PARA HISTORIAS
    ========================= */
-
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out;
-}
+.animate-fadeIn { animation: fadeIn 0.3s ease-out; }
 
 /* Botones de Historia */
 .btn-historia {
@@ -208,7 +221,4 @@ h3 { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.
   @apply transition-all duration-300 backdrop-blur-sm;
   @apply focus:outline-none focus:ring-2 focus:ring-amarillo/50;
 }
-
-.btn-historia[aria-expanded="true"] .btn-arrow {
-  transform: rotate(180deg);
-}
+.btn-historia[aria-expanded="true"] .btn-arrow { transform: rotate(180deg); }
